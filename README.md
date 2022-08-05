@@ -11,10 +11,13 @@ does a lot for you, so you can focus on actual code and not boilerplate
 
 we'll insert a code example here when we actually code it
 
-## Why would I use this and not [serenity](https://github.com/serenity-rs/serenity) or [twilight](https://github.com/twilight-rs/twilight)?
+## Why would I use this and not [serenity] or [twilight]?
 
-Both are great libraries, they just have different opinions than us, you can see below
-for what makes daybreak different!
+[serenity]: https://github.com/serenity-rs/serenity
+[twilight]: https://github.com/twilight-rs/twilight
+
+Both are great libraries, they just have different opinions than us, you can see
+below for what makes daybreak different!
 
 ## Performance is overrated
 
@@ -30,8 +33,9 @@ we know this is unorthodox but bare with us, cause we have our reasons:
 
 in the real-world, your only bottleneck will be the ram usage, and ram is
 expensive, but do you really need it to be on ram? the io overhead won't matter
-and you probably already need a persistent database for guild configs and all. 
-In the future we might have different options for caching, but for now disk caching seems suitable.
+and you probably already need a persistent database for guild configs and all.
+In the future we might have different options for caching, but for now disk
+caching seems suitable.
 
 #### You can just cache everything
 
