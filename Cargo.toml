@@ -1,0 +1,11 @@
+[package]
+name = "daybreak"
+description = "A sophisticated framework for the Discord API"
+repository = "https://github.com/gaybreak/daybreak"
+keywords = ["api", "discord", "discord-api", "framework"]
+categories = ["api-bindings"]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
