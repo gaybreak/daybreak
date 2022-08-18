@@ -2,6 +2,7 @@ use bitflags::bitflags;
 
 use super::{teams::Team, user::User, Id};
 
+#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/application
     #application-object-application-structure"
@@ -46,6 +47,7 @@ bitflags! {
     }
 }
 
+#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/application
     #install-params-object-install-params-structure"

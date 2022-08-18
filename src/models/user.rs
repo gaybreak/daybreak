@@ -2,6 +2,7 @@ use bitflags::bitflags;
 
 use super::Id;
 
+#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-user-structure"
 )]
@@ -45,6 +46,7 @@ bitflags! {
     }
 }
 
+#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-premium-types"
 )]

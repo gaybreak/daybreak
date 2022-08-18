@@ -20,6 +20,7 @@ use time::OffsetDateTime;
 
 use crate::{discord_url, InternalResult};
 
+#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
 pub struct Id(u64);
 
