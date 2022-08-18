@@ -8,6 +8,8 @@
     clippy::missing_docs_in_private_items
 )]
 
+#[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
+pub mod application;
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
 pub struct Id(u64);
 

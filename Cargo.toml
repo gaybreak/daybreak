@@ -13,3 +13,4 @@ git = "https://github.com/laralove143/anyhow"
 
 [dependencies]
 time = "0.3"
+bitflags = "1.3"
