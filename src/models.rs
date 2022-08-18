@@ -10,6 +10,9 @@
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/teams")]
+pub mod teams;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 use anyhow::IntoResult;
 use time::OffsetDateTime;
 
