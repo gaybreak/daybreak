@@ -22,7 +22,7 @@ use crate::{discord_url, InternalResult};
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
-pub struct Id(u64);
+pub struct Id(pub u64);
 
 impl Id {
     /// The unix timestamp of the ID
