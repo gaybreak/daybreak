@@ -16,7 +16,7 @@ pub mod teams;
 pub mod user;
 
 use anyhow::IntoResult;
-use time::OffsetDateTime;
+use time::{Duration, OffsetDateTime};
 
 use crate::{discord_url, InternalResult};
 
@@ -32,11 +32,30 @@ impl Id {
     )]
     pub fn timestamp(self) -> InternalResult<OffsetDateTime> {
         Ok(OffsetDateTime::from_unix_timestamp(
-            ((self.0.checked_shr(22))
-                .ok()?
-                .checked_add(1_420_070_400_000))
-            .ok()?
-            .try_into()?,
+            Duration::milliseconds(
+                (self.0.checked_shr(22))
+                    .ok()?
+                    .checked_add(1_420_070_400_000)
+                    .ok()?
+                    .try_into()?,
+            )
+            .whole_seconds(),
         )?)
+    }
+}
+
+#[allow(clippy::unwrap_used)]
+#[cfg(test)]
+mod tests {
+    use time::OffsetDateTime;
+
+    use super::Id;
+
+    #[test]
+    fn id_timestamp() {
+        assert_eq!(
+            Id(258_568_289_746_288_641).timestamp().unwrap(),
+            OffsetDateTime::from_unix_timestamp(1_481_717_884).unwrap()
+        );
     }
 }
