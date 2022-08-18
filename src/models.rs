@@ -10,6 +10,11 @@
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+use anyhow::IntoResult;
+use time::OffsetDateTime;
+
+use crate::{discord_url, InternalResult};
+
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
 pub struct Id(u64);
 
