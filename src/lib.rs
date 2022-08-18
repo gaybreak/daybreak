@@ -23,6 +23,8 @@ macro_rules! discord_url {
 
 use discord_url;
 
+pub mod models;
+
 /// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)
 /// if it is
 ///
