@@ -5,7 +5,8 @@
     clippy::integer_arithmetic,
     clippy::integer_arithmetic,
     clippy::default_numeric_fallback,
-    clippy::missing_docs_in_private_items
+    clippy::missing_docs_in_private_items,
+    missing_docs
 )]
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
