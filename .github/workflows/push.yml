@@ -1,5 +1,3 @@
-name: Rust
-
 on:
   - push
   - workflow_dispatch
@@ -23,13 +21,13 @@ jobs:
 
     - name: Build
       run: cargo build
-            
+
     - name: Check Format
       run: |
         rustup toolchain install nightly
         rustup component add rustfmt --toolchain nightly
         cargo +nightly fmt --check
-      
+
     - name: Lint with Rustc
       run: cargo check
       
