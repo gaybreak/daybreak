@@ -26,6 +26,7 @@ jobs:
             
     - name: Check Format
       run: |
+        rustup toolchain install nightly
         rustup component add rustfmt --toolchain nightly
         cargo +nightly fmt --check
       
