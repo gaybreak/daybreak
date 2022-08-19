@@ -1,0 +1,37 @@
+name: Rust
+
+on:
+  - push
+  - workflow_dispatch
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check Links
+      uses: lycheeverse/lychee-action@v1.5.1
+      with:
+        fail: true
+        args: --verbose --exclude "https://github.com/gaybreak/*"
+       
+    - name: Build
+      run: cargo build
+      
+    - name: Check Format
+      run: cargo +nightly fmt --check
+      
+    - name: Lint with Rustc
+      run: cargo check
+      
+    - name: Lint with Clippy
+      run: cargo clippy
+      
+    - name: Run tests
+      run: cargo test
