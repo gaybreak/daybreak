@@ -23,15 +23,17 @@ jobs:
 
     - name: Build
       run: cargo build
-      
+            
     - name: Check Format
-      run: cargo +nightly fmt --check
+      run: |
+        rustup component add rustfmt --toolchain nightly
+        cargo +nightly fmt --check
       
     - name: Lint with Rustc
       run: cargo check
       
     - name: Lint with Clippy
       run: cargo clippy
-      
+
     - name: Run tests
       run: cargo test
