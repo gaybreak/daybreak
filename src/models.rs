@@ -27,7 +27,7 @@ pub struct Id(pub u64);
 impl Id {
     /// The unix timestamp of the ID
     #[doc = discord_url!(
-        "https://discord.com/developers/docs/reference
+        "https://discord.com/developers/docs/reference\
         #snowflakes-snowflake-id-format-structure-left-to-right"
     )]
     pub fn timestamp(self) -> InternalResult<OffsetDateTime> {

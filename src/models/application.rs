@@ -4,7 +4,7 @@ use super::{teams::Team, user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application
+    "https://discord.com/developers/docs/resources/application\
     #application-object-application-structure"
 )]
 pub struct Application {
@@ -32,7 +32,7 @@ pub struct Application {
 
 bitflags! {
     #[doc = discord_url!(
-        "https://discord.com/developers/docs/resources/application
+        "https://discord.com/developers/docs/resources/application\
         #application-object-application-flags"
     )]
     pub struct ApplicationFlags: u32 {
@@ -49,7 +49,7 @@ bitflags! {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application
+    "https://discord.com/developers/docs/resources/application\
     #install-params-object-install-params-structure"
 )]
 pub struct InstallParams {
