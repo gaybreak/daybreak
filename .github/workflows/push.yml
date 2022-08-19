@@ -19,7 +19,7 @@ jobs:
       uses: lycheeverse/lychee-action@v1
       with:
         fail: true
-        args: --verbose --exclude "https://github.com/gaybreak/*" 'README.md' 'src/**/*'
+        args: "--verbose --no-progress --exclude 'https://github.com/gaybreak/*' './README.md' './src/**/*'"
        
     - name: Build
       run: cargo build
