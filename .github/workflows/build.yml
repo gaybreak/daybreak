@@ -9,7 +9,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -17,17 +16,6 @@ jobs:
     
     - name: Build
       run: cargo build
-      
-    - name: Document
-      run: cargo doc --no-deps
-
-    - name: Check Links
-      uses: lycheeverse/lychee-action@v1
-      with:
-        fail: true
-        args: "'./README.md' './target/doc/daybreak/**/*.html' --verbose"
-      env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Check Format
       run: |
