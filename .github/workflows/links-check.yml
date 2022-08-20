@@ -1,0 +1,19 @@
+name: links checker
+on:
+  push:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - run: cargo doc --no-deps
+
+    - uses: lycheeverse/lychee-action@v1
+      with:
+        fail: true
+        args: "'./README.md' './target/doc/daybreak/**/*.html' --verbose"
+      env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
