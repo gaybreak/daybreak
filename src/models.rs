@@ -15,6 +15,8 @@ pub mod application;
 pub mod teams;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
+pub mod message;
 
 use anyhow::IntoResult;
 use time::{Duration, OffsetDateTime};
