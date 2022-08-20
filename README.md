@@ -2,6 +2,7 @@
 [![security audit](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml)
 [![links checker](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml)
 [![codecov](https://codecov.io/gh/gaybreak/daybreak/branch/main/graph/badge.svg?token=9RGNQ7T3KJ)](https://codecov.io/gh/gaybreak/daybreak)
+![lines of code](https://img.shields.io/tokei/lines/github/gaybreak/daybreak)
 
 # Daybreak (WIP)
 
