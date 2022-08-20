@@ -1,0 +1,14 @@
+name: Codecov
+on: push
+
+jobs:
+  codecov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions-rs/tarpaulin@v0.1
+
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v3
