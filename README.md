@@ -1,3 +1,5 @@
+[![build](https://github.com/gaybreak/daybreak/actions/workflows/build.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/build.yml)
+
 # Daybreak (WIP)
 
 <!-- add crates.io, docs.rs and discord server invite buttons here -->
