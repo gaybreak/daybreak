@@ -21,9 +21,9 @@ below for what makes daybreak different!
 
 ## Performance is overrated
 
-Your code's overhead will be like 1-5% of the overhead of network *(unless you're
-doing fancy stuff like image processing)*, this means we can be spoiled and put
-convenience over performance, how long it takes to code the thing matters too
+The framework's overhead will be like 1-5% of the overhead of network, this means
+we can be spoiled and put convenience over performance, how long it takes to code
+the thing matters too
 
 ### Caching on disk? really??
 
