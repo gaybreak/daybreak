@@ -13,14 +13,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Build
+      run: cargo build
+      
+    - name: Document
+      run: cargo doc --no-deps
+
     - name: Check Links
       uses: lycheeverse/lychee-action@v1
       with:
         fail: true
-        args: "'./README.md' './src/**/*' --verbose --no-progress --exclude 'https://github.com/gaybreak/*'"
-
-    - name: Build
-      run: cargo build
+        args: "'./README.md' './target/doc/daybreak/**/*.html' --verbose"
+      env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Check Format
       run: |
