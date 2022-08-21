@@ -1,5 +1,5 @@
+use super::{channel::Channel, user::User, Id};
 use crate::models::application::Application;
-use super::{user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -29,13 +29,13 @@ pub struct Message {
     pub application_id: Option<Id>,
     pub message_reference: Option<MessageReference>,
     pub flags: u32,
-    pub referenced_message: Option<Message>,
+    pub referenced_message: Option<Message>, // only returned for 19 (REPLY) and 21 (THREAD_STARTER_MESSAGE)
     pub interaction: Option<T>,
-    pub thread: Option<T>,
+    pub thread: Option<Channel>,
     pub components: Option<Vec<T>>,
     pub sticker_items: Option<Vec<T>>,
     pub stickers: Option<T>,
-    pub position: Option<u32>
+    pub position: Option<u32>,
 }
 
 pub struct MessageReference {
@@ -45,7 +45,7 @@ pub struct MessageReference {
     pub message_id: Option<Id>, // ID of original message
     pub channel_id: Option<Id>, // Channel id is only optional when creating a reply
     pub guild_id: Option<Id>,
-    pub fail_if_not_exists: Option<bool>
+    pub fail_if_not_exists: Option<bool>,
 }
 
 pub struct MessageActivity {
@@ -53,7 +53,7 @@ pub struct MessageActivity {
     "https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure"
     )]
     pub message_activity_type: u32,
-    pub party_id: Option<String> //party id from rich presence event
+    pub party_id: Option<String>, //party id from rich presence event
 }
 
 pub enum MessageActivityType {
@@ -63,7 +63,7 @@ pub enum MessageActivityType {
     Join,
     Spectate,
     Listen,
-    JoinRequest
+    JoinRequest,
 }
 
 pub enum MessageType {
@@ -94,5 +94,5 @@ pub enum MessageType {
     ThreadStarterMessage,
     GuildInviteReminder,
     ContextMenuCommand,
-    AutoModerationAction
+    AutoModerationAction,
 }
