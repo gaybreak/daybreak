@@ -1,76 +1,80 @@
-use crate::models::application::Application;
+use time::OffsetDateTime;
+
 use super::{user::User, Id};
+use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
    "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
 )]
-
-pub struct Message {
+pub struct Message<T> {
     pub id: Id,
     pub channel_id: Id,
     pub author: User,
     pub content: String,
-    pub created_at: DateTime,
-    pub edited_at: Option<DateTime>,
+    pub created_at: OffsetDateTime,
+    pub edited_at: Option<OffsetDateTime>,
     pub tts: bool,
     pub mention_everyone: bool,
     pub mentions: Vec<User>,
-    pub mention_roles: Vec<T>,
+    pub mention_roles: Vec<Id>,
     pub attachments: Vec<T>,
     pub embeds: Vec<T>,
     pub reactions: Option<Vec<T>>,
-    pub nonce: Option<u32>,
+    pub nonce: Option<String>,
     pub pinned: bool,
     pub webhook_id: Option<Id>,
-    pub message_type: u32,
+    pub message_type: T,
     pub activity: Option<MessageActivity>,
     pub application: Option<Application>,
     pub application_id: Option<Id>,
     pub message_reference: Option<MessageReference>,
-    pub flags: u32,
-    pub referenced_message: Option<Message>,
+    pub flags: T,
+    pub referenced_message: Option<Box<Message<T>>>,
     pub interaction: Option<T>,
     pub thread: Option<T>,
     pub components: Option<Vec<T>>,
     pub sticker_items: Option<Vec<T>>,
-    pub stickers: Option<T>,
-    pub position: Option<u32>
+    pub stickers: Option<Vec<T>>,
+    pub position: Option<u64>,
 }
 
-pub struct MessageReference {
-    #[doc = discord_url!(
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-reference-object"
-    )]
-    pub message_id: Option<Id>, // ID of original message
-    pub channel_id: Option<Id>, // Channel id is only optional when creating a reply
+)]
+pub struct MessageReference {
+    pub message_id: Option<Id>,
+    pub channel_id: Option<Id>,
     pub guild_id: Option<Id>,
-    pub fail_if_not_exists: Option<bool>
+    pub fail_if_not_exists: Option<bool>,
 }
 
-pub struct MessageActivity {
-    #[doc = discord_url!(
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure"
-    )]
-    pub message_activity_type: u32,
-    pub party_id: Option<String> //party id from rich presence event
+)]
+pub struct MessageActivity {
+    pub message_activity_type: MessageActivityType,
+    pub party_id: Option<String>,
 }
 
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
+)]
 pub enum MessageActivityType {
-    #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
-    )]
     Join,
     Spectate,
     Listen,
-    JoinRequest
+    JoinRequest,
 }
 
-pub enum MessageType {
-    #[doc = discord_url!(
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-types"
-    )]
-    // actually painful
+)]
+pub enum MessageType {
     Default,
     RecipientAdd,
     RecipientRemove,
@@ -94,5 +98,5 @@ pub enum MessageType {
     ThreadStarterMessage,
     GuildInviteReminder,
     ContextMenuCommand,
-    AutoModerationAction
+    AutoModerationAction,
 }

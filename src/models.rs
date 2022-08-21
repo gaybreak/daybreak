@@ -6,17 +6,18 @@
     clippy::integer_arithmetic,
     clippy::default_numeric_fallback,
     clippy::missing_docs_in_private_items,
+    clippy::module_name_repetitions,
     missing_docs
 )]
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
+pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/teams")]
 pub mod teams;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
-#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
-pub mod message;
 
 use anyhow::IntoResult;
 use time::{Duration, OffsetDateTime};
