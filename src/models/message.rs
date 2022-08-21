@@ -52,7 +52,8 @@ pub struct MessageReference {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure"
+    "https://discord.com/developers/docs/resources/channel
+    #message-object-message-activity-structure"
 )]
 pub struct MessageActivity {
     pub message_activity_type: MessageActivityType,
@@ -61,13 +62,13 @@ pub struct MessageActivity {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
+    "https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
 )]
 pub enum MessageActivityType {
-    Join,
-    Spectate,
-    Listen,
-    JoinRequest,
+    Join = 1,
+    Spectate = 2,
+    Listen = 3,
+    JoinRequest = 5,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -75,28 +76,28 @@ pub enum MessageActivityType {
     "https://discord.com/developers/docs/resources/channel#message-object-message-types"
 )]
 pub enum MessageType {
-    Default,
-    RecipientAdd,
-    RecipientRemove,
-    Call,
-    ChannelNameChange,
-    ChannelIconChange,
-    ChannelPinnedMessage,
-    UserJoin,
-    GuildBoost,
-    GuildBoostTier1,
-    GuildBoostTier2,
-    GuildBoostTier3,
-    ChannelFollowAdd,
-    GuildDiscoveryDisqualified,
-    GuildDiscoveryRequalified,
-    GuildDiscoveryGracePeriodInitialWarning,
-    GuildDiscoveryGracePeriodFinalWarning,
-    ThreadCreated,
-    Reply,
-    ChatInputCommand,
-    ThreadStarterMessage,
-    GuildInviteReminder,
-    ContextMenuCommand,
-    AutoModerationAction,
+    Default = 0,
+    RecipientAdd = 1,
+    RecipientRemove = 2,
+    Call = 3,
+    ChannelNameChange = 4,
+    ChannelIconChange = 5,
+    ChannelPinnedMessage = 6,
+    UserJoin = 7,
+    GuildBoost = 8,
+    GuildBoostTier1 = 9,
+    GuildBoostTier2 = 10,
+    GuildBoostTier3 = 11,
+    ChannelFollowAdd = 12,
+    GuildDiscoveryDisqualified = 14,
+    GuildDiscoveryRequalified = 15,
+    GuildDiscoveryGracePeriodInitialWarning = 16,
+    GuildDiscoveryGracePeriodFinalWarning = 17,
+    ThreadCreated = 18,
+    Reply = 19,
+    ChatInputCommand = 20,
+    ThreadStarterMessage = 21,
+    GuildInviteReminder = 22,
+    ContextMenuCommand = 23,
+    AutoModerationAction = 24,
 }
