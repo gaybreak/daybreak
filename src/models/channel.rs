@@ -1,7 +1,7 @@
 use super::{user::User, Id};
 
 
-#[derive!(Clone, Debug)]
+#[derive(Clone, Debug)]
 #[doc = discord_url!(
 "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
