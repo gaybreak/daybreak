@@ -1,0 +1,13 @@
+{
+    "language": "en-US",
+    "caseSensitive": true,
+    "minWordLength": 0,
+    "dictionaries": ["companies", "softwareTerms"],
+        "words": [
+        "rustup",
+        "rustfmt",
+        "Rustc",
+        "Clippy",
+        "clippy"
+    ]
+}
