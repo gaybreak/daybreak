@@ -1,11 +1,12 @@
-use super::{user::User, Id};
+use time::OffsetDateTime;
 
+use super::{user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
 "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
-pub struct Channel {
+pub struct Channel<T> {
     pub id: Id,
     pub channel_type: u32,
     pub guild_id: Option<Id>,
@@ -22,7 +23,7 @@ pub struct Channel {
     pub owner_id: Option<Id>,
     pub application_id: Option<Id>,
     pub parent_id: Option<Id>,
-    pub last_pin_timestamp: Option<DateTime>,
+    pub last_pin_timestamp: Option<OffsetDateTime>,
     pub rtc_region: Option<String>,
     pub video_quality_mode: Option<u32>,
     pub message_count: Option<u32>,
@@ -32,7 +33,7 @@ pub struct Channel {
     pub default_auto_archive_duration: Option<u32>,
     pub permissions: Option<String>,
     pub flags: Option<u32>,
-    pub total_message_sent: Option<u32>
+    pub total_message_sent: Option<u32>,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -51,5 +52,5 @@ pub enum ChannelType {
     GuildPrivateThread = 12,
     GuildStageVoice = 13,
     GuildDirectory = 14,
-    GuildForum = 15
+    GuildForum = 15,
 }
