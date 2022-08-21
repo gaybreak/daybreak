@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{channel::Channel, user::User, Id};
+use super::{channel::Channel, channel::Embed, user::User, Id};
 use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
@@ -19,7 +19,7 @@ pub struct Message<T> {
     pub mentions: Vec<User>,
     pub mention_roles: Vec<Id>,
     pub attachments: Vec<T>,
-    pub embeds: Vec<T>,
+    pub embeds: Vec<Embed>,
     pub reactions: Option<Vec<T>>,
     pub nonce: Option<String>,
     pub pinned: bool,
@@ -29,7 +29,7 @@ pub struct Message<T> {
     pub application: Option<Application>,
     pub application_id: Option<Id>,
     pub message_reference: Option<MessageReference>,
-    pub flags: T,
+    pub flags: Option<MessageFlags>,
     pub referenced_message: Option<Box<Message<T>>>,
     pub interaction: Option<T>,
     pub thread: Option<T>,
@@ -69,6 +69,23 @@ pub enum MessageActivityType {
     Spectate = 2,
     Listen = 3,
     JoinRequest = 5,
+}
+
+bitflags! {
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/resources/channel#message-object-message-flags"
+    )]
+    pub struct MessageFlags: u32 {
+        const CROSSPOSTED = 1 << 0;
+        const IS_CROSSPOST = 1 << 1;
+        const SUPPRESS_EMBEDS = 1 << 2;
+        const SOURCE_MESSAGE_DELETED = 1 << 3;
+        const URGENT = 1 << 4;
+        const HAS_THREAD = 1 << 5;
+        const EPHEMERAL = 1 << 6;
+        const LOADING = 1 << 7; // for interaction responses
+        const FAILED_TO_MENTION_SOME_ROLES_IN_THREAD = 1 << 8;
+    }
 }
 
 #[derive(Clone, Copy, Debug)]
