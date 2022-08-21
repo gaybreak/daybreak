@@ -40,16 +40,16 @@ pub struct Channel {
 "https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
 )]
 pub enum ChannelType {
-    GuildText,
-    DM,
-    GuildVoice,
-    GroupDM,
-    GuildCategory,
-    GuildNews,
-    GuildNewsThread,
-    GuildPublicThread,
-    GuildPrivateThread,
-    GuildStageVoice,
-    GuildDirectory,
-    GuildForum // !!
+    GuildText = 0,
+    DM = 1,
+    GuildVoice = 2,
+    GroupDM = 3,
+    GuildCategory = 4,
+    GuildNews = 5,
+    GuildNewsThread = 10,
+    GuildPublicThread = 11,
+    GuildPrivateThread = 12,
+    GuildStageVoice = 13,
+    GuildDirectory = 14,
+    GuildForum = 15
 }
