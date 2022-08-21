@@ -2,14 +2,15 @@
     "language": "en-US",
     "caseSensitive": true,
     "minWordLength": 0,
-    "dictionaries": ["companies", "softwareTerms"],
-        "words": [
-        "rustup",
-        "rustfmt",
-        "Rustc",
-        "Clippy",
+    "words": [
         "clippy",
+        "Clippy",
         "codecov",
+        "ok",
+        "Ok",
+        "Rustc",
+        "rustfmt",
+        "rustup",
         "WIP"
     ]
 }
