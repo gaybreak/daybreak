@@ -8,7 +8,6 @@
     clippy::pedantic,
     clippy::restriction,
     absolute_paths_not_starting_with_crate,
-    box_pointers,
     elided_lifetimes_in_paths,
     explicit_outlives_requirements,
     keyword_idents,

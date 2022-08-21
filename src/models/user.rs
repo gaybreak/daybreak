@@ -51,7 +51,7 @@ bitflags! {
     "https://discord.com/developers/docs/resources/user#user-object-premium-types"
 )]
 pub enum PremiumType {
-    None,
-    NitroClassic,
-    Nitro,
+    None = 0,
+    NitroClassic = 1,
+    Nitro = 2,
 }

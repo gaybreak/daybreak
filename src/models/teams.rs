@@ -25,6 +25,6 @@ pub struct TeamMember {
     "https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum"
 )]
 pub enum MemberState {
-    Invited,
-    Accepted,
+    Invited = 1,
+    Accepted = 2,
 }
