@@ -1,6 +1,7 @@
+use bitflags::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Channel, channel::Embed, user::User, Id};
+use super::{channel::Embed, user::User, Id};
 use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
@@ -24,7 +25,7 @@ pub struct Message<T> {
     pub nonce: Option<String>,
     pub pinned: bool,
     pub webhook_id: Option<Id>,
-    pub message_type: T,
+    pub message_type: u32,
     pub activity: Option<MessageActivity>,
     pub application: Option<Application>,
     pub application_id: Option<Id>,

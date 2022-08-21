@@ -55,6 +55,10 @@ pub enum ChannelType {
     GuildForum = 15,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-structure"
+)]
 pub struct Embed {
     pub title: Option<String>,
     pub embed_type: Option<String>,
@@ -71,6 +75,10 @@ pub struct Embed {
     pub fields: Option<Vec<EmbedField>>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
+)]
 pub struct EmbedThumbnail {
     pub url: String,
     pub proxy_url: Option<String>,
@@ -78,6 +86,10 @@ pub struct EmbedThumbnail {
     pub width: Option<u32>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
+)]
 pub struct EmbedVideo {
     pub url: Option<String>,
     pub proxy_url: Option<String>,
@@ -85,6 +97,10 @@ pub struct EmbedVideo {
     pub width: Option<u32>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
+)]
 pub struct EmbedImage {
     pub url: String,
     pub proxy_url: Option<String>,
@@ -92,11 +108,19 @@ pub struct EmbedImage {
     pub width: Option<u32>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure"
+)]
 pub struct EmbedProvider {
     pub name: Option<String>,
     pub url: Option<String>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure"
+)]
 pub struct EmbedAuthor {
     pub name: String,
     pub url: Option<String>,
@@ -104,12 +128,20 @@ pub struct EmbedAuthor {
     pub proxy_icon_url: Option<String>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
+)]
 pub struct EmbedFooter {
     pub text: String,
     pub icon_url: Option<String>,
     pub proxy_icon_url: Option<String>,
 }
 
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure"
+)]
 pub struct EmbedField {
     pub name: String,
     pub value: String,
