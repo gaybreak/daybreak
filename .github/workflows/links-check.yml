@@ -1,6 +1,9 @@
 name: links checker
 on:
   push:
+    paths:
+      - "src/**"
+      - "README.md"
   schedule:
     - cron: "0 0 * * *"
 

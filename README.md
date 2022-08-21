@@ -1,10 +1,11 @@
+# Daybreak (WIP)
+
 [![build](https://github.com/gaybreak/daybreak/actions/workflows/build.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/build.yml)
 [![security audit](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml)
 [![links checker](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml)
+[![cspell](https://github.com/gaybreak/daybreak/actions/workflows/cspell.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/cspell.yml)
 [![codecov](https://codecov.io/gh/gaybreak/daybreak/branch/main/graph/badge.svg?token=9RGNQ7T3KJ)](https://codecov.io/gh/gaybreak/daybreak)
 [![total lines](https://tokei.rs/b1/github/gaybreak/daybreak)](https://github.com/gaybreak/daybreak)
-
-# Daybreak (WIP)
 
 <!-- add crates.io, docs.rs and discord server invite buttons here -->
 
@@ -35,7 +36,7 @@ the thing matters too
 
 We know this is unorthodox but bare with us, cause we have our reasons:
 
-#### No more ram bottleneck
+#### No more RAM bottleneck
 
 In the real-world, your only bottleneck will be the RAM usage, and RAM is
 expensive, but do you really need it to be on RAM? the IO overhead won't matter
