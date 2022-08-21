@@ -3,24 +3,22 @@
 #![allow(
     clippy::default_numeric_fallback,
     clippy::integer_arithmetic,
-    clippy::integer_arithmetic,
-    clippy::default_numeric_fallback,
     clippy::missing_docs_in_private_items,
+    clippy::module_name_repetitions,
     missing_docs
 )]
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
+pub mod channel;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
+pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/teams")]
 pub mod teams;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
-#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
-pub mod message;
-#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
-pub mod channel;
 
-use anyhow::IntoResult;
 use time::{Duration, OffsetDateTime};
 
 use crate::{discord_url, InternalResult};
@@ -35,16 +33,14 @@ impl Id {
         "https://discord.com/developers/docs/reference\
         #snowflakes-snowflake-id-format-structure-left-to-right"
     )]
+    #[allow(
+        clippy::integer_arithmetic,
+        clippy::cast_possible_wrap,
+        clippy::as_conversions
+    )]
     pub fn timestamp(self) -> InternalResult<OffsetDateTime> {
         Ok(OffsetDateTime::from_unix_timestamp(
-            Duration::milliseconds(
-                (self.0.checked_shr(22))
-                    .ok()?
-                    .checked_add(1_420_070_400_000)
-                    .ok()?
-                    .try_into()?,
-            )
-            .whole_seconds(),
+            Duration::milliseconds(((self.0 >> 22) + 1_420_070_400_000) as i64).whole_seconds(),
         )?)
     }
 }
