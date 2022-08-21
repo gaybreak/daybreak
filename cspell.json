@@ -9,9 +9,11 @@
         "ok",
         "Ok",
         "Requalified",
+        "rpc",
         "Rustc",
         "rustfmt",
         "rustup",
+        "sku",
         "tts",
         "Vec",
         "WIP"
