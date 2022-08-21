@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{user::User, channel::Channel, Id};
+use super::{channel::Channel, user::User, Id};
 use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
