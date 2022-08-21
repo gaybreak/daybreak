@@ -24,6 +24,8 @@
         "sku",
         "tts",
         "Vec",
-        "WIP"
+        "WIP",
+        "CROSSPOST",
+        "CROSSPOSTED"
     ]
 }
