@@ -35,7 +35,7 @@ the thing matters too
 
 We know this is unorthodox but bare with us, cause we have our reasons:
 
-#### No more ram bottleneck
+#### No more RAM bottleneck
 
 In the real-world, your only bottleneck will be the RAM usage, and RAM is
 expensive, but do you really need it to be on RAM? the IO overhead won't matter
