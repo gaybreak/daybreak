@@ -9,7 +9,7 @@
         "Rustc",
         "Clippy",
         "clippy",
-        "codecov,
+        "codecov",
         "WIP"
     ]
 }
