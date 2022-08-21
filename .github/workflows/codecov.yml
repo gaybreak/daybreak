@@ -1,5 +1,8 @@
 name: codecov
-on: push
+on:
+  push:
+    paths:
+      - "src/**"
 
 jobs:
   codecov:
