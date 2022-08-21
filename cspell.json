@@ -3,9 +3,13 @@
     "caseSensitive": true,
     "minWordLength": 0,
     "words": [
+        "ascii",
+        "bitflags",
         "clippy",
         "Clippy",
         "codecov",
+        "HYPESQUAD",
+        "idents",
         "ok",
         "Ok",
         "Requalified",
