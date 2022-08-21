@@ -8,6 +8,8 @@
         "rustfmt",
         "Rustc",
         "Clippy",
-        "clippy"
+        "clippy",
+        "codecov,
+        "WIP"
     ]
 }
