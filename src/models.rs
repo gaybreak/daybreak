@@ -22,6 +22,10 @@ pub mod channel;
 pub mod command;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#embed-object")]
 pub mod embed;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#connecting-and-resuming")]
+pub mod gateway;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
+pub mod guild;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
 pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/teams")]
