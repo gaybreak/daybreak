@@ -89,3 +89,15 @@ pub struct ChannelPinsUpdate {
     pub channel_id: Id,
     pub last_pin_timestamp: Option<OffsetDateTime>,
 }
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway
+    #thread-list-sync-thread-list-sync-event-fields"
+)]
+pub struct ThreadSync<T> {
+    pub guild_id: Id,
+    pub channel_ids: Option<Vec<Id>>,
+    pub threads: Vec<Channel<T>>,
+    pub members: Vec<T>,
+}
