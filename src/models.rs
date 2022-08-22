@@ -10,8 +10,12 @@
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#attachment-object")]
+pub mod attachment;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
 pub mod channel;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#embed-object")]
+pub mod embed;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
 pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/teams")]
