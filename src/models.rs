@@ -14,6 +14,8 @@ pub mod application;
 pub mod attachment;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
 pub mod channel;
+#[doc = discord_url!("https://discord.com/developers/docs/interactions/application-commands")]
+pub mod commands;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#embed-object")]
 pub mod embed;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
