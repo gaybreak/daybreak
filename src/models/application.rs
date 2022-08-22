@@ -1,4 +1,4 @@
-use bitflags::bitflags;
+use enumflags2::bitflags;
 
 use super::{teams::Team, user::User, Id};
 
@@ -30,21 +30,22 @@ pub struct Application {
     pub custom_install_url: Option<String>,
 }
 
-bitflags! {
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/resources/application\
-        #application-object-application-flags"
-    )]
-    pub struct ApplicationFlags: u32 {
-        const GATEWAY_PRESENCE = 1 << 12;
-        const GATEWAY_PRESENCE_LIMITED  = 1 << 13;
-        const GATEWAY_GUILD_MEMBERS = 1 << 14;
-        const GATEWAY_GUILD_MEMBERS_LIMITED = 1 << 15;
-        const VERIFICATION_PENDING_GUILD_LIMIT = 1 << 16;
-        const EMBEDDED = 1 << 17;
-        const GATEWAY_MESSAGE_CONTENT = 1 << 18;
-        const GATEWAY_MESSAGE_CONTENT_LIMITED= 1 << 19;
-    }
+#[bitflags]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u32)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/application\
+    #application-object-application-flags"
+)]
+pub enum ApplicationFlags {
+    GatewayPresence = 1 << 12,
+    GatewayPresenceLimited = 1 << 13,
+    GatewayGuildMembers = 1 << 14,
+    GatewayGuildMembersLimited = 1 << 15,
+    VerificationPendingGuildLimit = 1 << 16,
+    Embedded = 1 << 17,
+    GatewayMessageContent = 1 << 18,
+    GatewayMessageContentLimited = 1 << 19,
 }
 
 #[derive(Clone, Debug)]

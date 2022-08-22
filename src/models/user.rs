@@ -1,4 +1,4 @@
-use bitflags::bitflags;
+use enumflags2::bitflags;
 
 use super::Id;
 
@@ -24,26 +24,27 @@ pub struct User {
     pub public_flags: Option<UserFlags>,
 }
 
-bitflags! {
-    #[doc = discord_url!(
+#[bitflags]
+#[repr(u32)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[doc = discord_url!(
         "https://discord.com/developers/docs/resources/user#user-object-user-flags"
     )]
-    pub struct UserFlags: u32 {
-        const STAFF = 1 << 0;
-        const PARTNER = 1 << 1;
-        const HYPESQUAD = 1 << 2;
-        const BUG_HUNTER_LEVEL_1 = 1 << 3;
-        const HYPESQUAD_ONLINE_HOUSE_1 = 1 << 6;
-        const HYPESQUAD_ONLINE_HOUSE_2 = 1 << 7;
-        const HYPESQUAD_ONLINE_HOUSE_3 = 1 << 8;
-        const PREMIUM_EARLY_SUPPORTER = 1 << 9;
-        const TEAM_PSEUDO_USER = 1 << 10;
-        const BUG_HUNTER_LEVEL_2 =  1 <<14;
-        const VERIFIED_BOT = 1 << 16;
-        const VERIFIED_DEVELOPER = 1 << 17;
-        const CERTIFIED_MODERATOR = 1 << 18;
-        const BOT_HTTP_INTERACTIONS =  1 <<19;
-    }
+pub enum UserFlags {
+    STAFF = 1 << 0,
+    PARTNER = 1 << 1,
+    HYPESQUAD = 1 << 2,
+    BugHunterLevel1 = 1 << 3,
+    HypesquadOnlineHouse1 = 1 << 6,
+    HypesquadOnlineHouse2 = 1 << 7,
+    HypesquadOnlineHouse3 = 1 << 8,
+    PremiumEarlySupporter = 1 << 9,
+    TeamPseudoUser = 1 << 10,
+    BugHunterLevel2 = 1 << 14,
+    VerifiedBot = 1 << 16,
+    VerifiedDeveloper = 1 << 17,
+    CertifiedModerator = 1 << 18,
+    BotHttpInteractions = 1 << 19,
 }
 
 #[derive(Clone, Copy, Debug)]
