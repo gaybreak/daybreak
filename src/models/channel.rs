@@ -78,3 +78,14 @@ pub struct ThreadMetadata {
     pub invitable: Option<bool>,
     pub create_timestamp: Option<OffsetDateTime>,
 }
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway
+    #channel-pins-update-channel-pins-update-event-fields"
+)]
+pub struct ChannelPinsUpdate {
+    pub guild_id: Option<Id>,
+    pub channel_id: Id,
+    pub last_pin_timestamp: Option<OffsetDateTime>,
+}
