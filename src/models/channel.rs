@@ -180,8 +180,8 @@ pub struct Reaction<T> {
 "https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure"
 )]
 pub struct AllowedMentions {
-    parse: Vec<str>,
-    roles: Vec<Id>,
-    users: Vec<Id>,
-    replied_user: bool,
+    pub parse: Vec<String>,
+    pub roles: Vec<Id>,
+    pub users: Vec<Id>,
+    pub replied_user: bool,
 }
