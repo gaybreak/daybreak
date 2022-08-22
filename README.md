@@ -7,11 +7,9 @@
 [![codecov](https://codecov.io/gh/gaybreak/daybreak/branch/main/graph/badge.svg?token=9RGNQ7T3KJ)](https://codecov.io/gh/gaybreak/daybreak)
 [![total lines](https://tokei.rs/b1/github/gaybreak/daybreak)](https://github.com/gaybreak/daybreak)
 
-<!-- add crates.io, docs.rs and discord server invite buttons here -->
-
 ## What's this?
 
-A framework for (mainly) discord bots that includes most stuff you'd need and
+A framework for (mainly) Discord bots that includes most stuff you'd need and
 does a lot for you, so you can focus on actual code and not boilerplate
 
 ## How's this more convenient?
@@ -24,7 +22,7 @@ We'll insert a code example here when we actually code it
 [Twilight]: https://github.com/twilight-rs/twilight
 
 Both are great libraries, they just have different opinions than us, you can see
-below for what makes daybreak different!
+below for what makes Daybreak different!
 
 ## Performance is overrated
 
@@ -32,7 +30,7 @@ The framework's overhead will be like 1-5% of the overhead of network, this mean
 we can be spoiled and put convenience over performance, how long it takes to code
 the thing matters too
 
-### Caching on disk? really??
+### Caching on disk? Really??
 
 We know this is unorthodox but bare with us, cause we have our reasons:
 
@@ -59,7 +57,7 @@ The database is another process, meaning you can:
 3. Count on data-safety guarantees of the database backend
 4. Interop the program easily
 5. Use backend's powerful statistics/analyzes easily
-6. Encrypt everything by default, being ready to be verified by discord
+6. Encrypt everything by default, being ready to be verified by Discord
 7. Manually query the database and check it out at runtime
 8. And more
 
