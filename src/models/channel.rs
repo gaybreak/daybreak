@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{message::MessageFlags, user::User, Id};
+use super::{member::ThreadMember, message::MessageFlags, user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -30,7 +30,7 @@ pub struct Channel<T> {
     pub message_count: Option<u32>,
     pub member_count: Option<u8>,
     pub thread_metadata: Option<ThreadMetadata>,
-    pub member: Option<T>,
+    pub member: Option<ThreadMember>,
     pub default_auto_archive_duration: Option<u16>,
     pub permissions: Option<T>,
     pub flags: Option<MessageFlags>,
@@ -99,5 +99,5 @@ pub struct ThreadSync<T> {
     pub guild_id: Id,
     pub channel_ids: Option<Vec<Id>>,
     pub threads: Vec<Channel<T>>,
-    pub members: Vec<T>,
+    pub members: Vec<ThreadMember>,
 }
