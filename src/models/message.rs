@@ -6,7 +6,7 @@ use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#message-object-message-structure"
+    "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
 )]
 pub struct Message<T> {
     pub id: Id,
@@ -42,7 +42,7 @@ pub struct Message<T> {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#message-reference-object"
+    "https://discord.com/developers/docs/resources/channel#message-reference-object"
 )]
 pub struct MessageReference {
     pub message_id: Option<Id>,
@@ -53,7 +53,7 @@ pub struct MessageReference {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel
     #message-object-message-activity-structure"
 )]
 pub struct MessageActivity {
@@ -63,7 +63,7 @@ pub struct MessageActivity {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
+    "https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
 )]
 pub enum MessageActivityType {
     Join = 1,
@@ -91,7 +91,7 @@ bitflags! {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#message-object-message-types"
+    "https://discord.com/developers/docs/resources/channel#message-object-message-types"
 )]
 pub enum MessageType {
     Default = 0,

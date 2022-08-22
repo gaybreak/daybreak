@@ -4,7 +4,7 @@ use super::{user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
+    "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
 pub struct Channel<T> {
     pub id: Id,
@@ -38,7 +38,7 @@ pub struct Channel<T> {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
+    "https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
 )]
 pub enum ChannelType {
     GuildText = 0,
@@ -57,7 +57,7 @@ pub enum ChannelType {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-structure"
 )]
 pub struct Embed {
     pub title: Option<String>,
@@ -77,7 +77,7 @@ pub struct Embed {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
 )]
 pub struct EmbedThumbnail {
     pub url: String,
@@ -88,7 +88,7 @@ pub struct EmbedThumbnail {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
 )]
 pub struct EmbedVideo {
     pub url: Option<String>,
@@ -99,7 +99,7 @@ pub struct EmbedVideo {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
 )]
 pub struct EmbedImage {
     pub url: String,
@@ -110,7 +110,7 @@ pub struct EmbedImage {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure"
 )]
 pub struct EmbedProvider {
     pub name: Option<String>,
@@ -119,7 +119,7 @@ pub struct EmbedProvider {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure"
 )]
 pub struct EmbedAuthor {
     pub name: String,
@@ -130,7 +130,7 @@ pub struct EmbedAuthor {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
 )]
 pub struct EmbedFooter {
     pub text: String,
@@ -140,7 +140,7 @@ pub struct EmbedFooter {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure"
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure"
 )]
 pub struct EmbedField {
     pub name: String,
