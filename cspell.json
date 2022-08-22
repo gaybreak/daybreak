@@ -9,12 +9,19 @@
         "clippy",
         "Clippy",
         "codecov",
+        "Crosspost",
+        "CROSSPOST",
+        "Crossposted",
+        "CROSSPOSTED",
         "DS",
+        "enumflags",
+        "Hypesquad",
         "HYPESQUAD",
         "idents",
         "nsfw",
         "ok",
         "Ok",
+        "repr",
         "Requalified",
         "rpc",
         "rtc",
@@ -24,8 +31,6 @@
         "sku",
         "tts",
         "Vec",
-        "WIP",
-        "CROSSPOST",
-        "CROSSPOSTED"
+        "WIP"
     ]
 }

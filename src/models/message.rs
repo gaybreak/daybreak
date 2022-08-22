@@ -1,4 +1,4 @@
-use bitflags::bitflags;
+use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{user::User, Id};
@@ -73,21 +73,22 @@ pub enum MessageActivityType {
     JoinRequest = 5,
 }
 
-bitflags! {
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/resources/channel#message-object-message-flags"
-    )]
-    pub struct MessageFlags: u32 {
-        const CROSSPOSTED = 1 << 0;
-        const IS_CROSSPOST = 1 << 1;
-        const SUPPRESS_EMBEDS = 1 << 2;
-        const SOURCE_MESSAGE_DELETED = 1 << 3;
-        const URGENT = 1 << 4;
-        const HAS_THREAD = 1 << 5;
-        const EPHEMERAL = 1 << 6;
-        const LOADING = 1 << 7;
-        const FAILED_TO_MENTION_SOME_ROLES_IN_THREAD = 1 << 8;
-    }
+#[bitflags]
+#[repr(u16)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#message-object-message-flags"
+)]
+pub enum MessageFlags {
+    Crossposted = 1 << 0,
+    IsCrosspost = 1 << 1,
+    SuppressEmbeds = 1 << 2,
+    SourceMessageDeleted = 1 << 3,
+    Urgent = 1 << 4,
+    HasThread = 1 << 5,
+    Ephemeral = 1 << 6,
+    Loading = 1 << 7,
+    FailedToMentionSomeRolesInThread = 1 << 8,
 }
 
 #[derive(Clone, Copy, Debug)]

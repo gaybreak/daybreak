@@ -1,5 +1,6 @@
 name: codecov
 on:
+  workflow_dispatch:
   push:
     paths:
       - "src/**"
@@ -15,3 +16,5 @@ jobs:
 
       - name: Upload to codecov.io
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
