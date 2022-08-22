@@ -177,7 +177,7 @@ pub struct Reaction<T> {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure"
+    "https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure"
 )]
 pub struct AllowedMentions {
     pub parse: Vec<String>,
