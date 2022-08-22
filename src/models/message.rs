@@ -139,7 +139,10 @@ pub struct Reaction<T> {
 }
 
 #[derive(Clone, Debug)]
-#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure")]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel
+    #channel-mention-object-channel-mention-structure"
+)]
 pub struct ChannelMention {
     pub id: Id,
     pub guild_id: Id,

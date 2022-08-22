@@ -66,7 +66,10 @@ pub enum VideoQualityMode {
 }
 
 #[derive(Clone, Copy, Debug)]
-#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure")]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel
+    #thread-metadata-object-thread-metadata-structure"
+)]
 pub struct ThreadMetadata {
     pub archived: bool,
     pub auto_archive_duration: u16,
