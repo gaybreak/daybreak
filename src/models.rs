@@ -12,6 +12,10 @@
 pub mod application;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#attachment-object")]
 pub mod attachment;
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object"
+)]
+pub mod auto_moderation;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
 pub mod channel;
 #[doc = discord_url!("https://discord.com/developers/docs/interactions/application-commands")]
