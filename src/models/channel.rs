@@ -82,8 +82,8 @@ pub struct Embed {
 pub struct EmbedThumbnail {
     pub url: String,
     pub proxy_url: Option<String>,
-    pub height: Option<u32>,
-    pub width: Option<u32>,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
 }
 
 #[derive(Clone, Debug)]
@@ -93,8 +93,8 @@ pub struct EmbedThumbnail {
 pub struct EmbedVideo {
     pub url: Option<String>,
     pub proxy_url: Option<String>,
-    pub height: Option<u32>,
-    pub width: Option<u32>,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
 }
 
 #[derive(Clone, Debug)]
@@ -104,8 +104,8 @@ pub struct EmbedVideo {
 pub struct EmbedImage {
     pub url: String,
     pub proxy_url: Option<String>,
-    pub height: Option<u32>,
-    pub width: Option<u32>,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
 }
 
 #[derive(Clone, Debug)]

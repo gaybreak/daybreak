@@ -25,7 +25,7 @@ pub struct Message<T> {
     pub nonce: Option<String>,
     pub pinned: bool,
     pub webhook_id: Option<Id>,
-    pub message_type: u32,
+    pub message_type: MessageType,
     pub activity: Option<MessageActivity>,
     pub application: Option<Application>,
     pub application_id: Option<Id>,
@@ -84,7 +84,7 @@ bitflags! {
         const URGENT = 1 << 4;
         const HAS_THREAD = 1 << 5;
         const EPHEMERAL = 1 << 6;
-        const LOADING = 1 << 7; // for interaction responses
+        const LOADING = 1 << 7;
         const FAILED_TO_MENTION_SOME_ROLES_IN_THREAD = 1 << 8;
     }
 }
