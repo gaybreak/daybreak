@@ -147,3 +147,41 @@ pub struct EmbedField {
     pub value: String,
     pub inline: Option<bool>,
 }
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure"
+)]
+pub struct Attachment {
+    pub id: Id,
+    pub filename: String,
+    pub description: Option<String>,
+    pub content_type: Option<String>,
+    pub size: u32,
+    pub url: String,
+    pub proxy_url: String,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
+    pub ephemeral: Option<bool>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
+)]
+pub struct Reaction<T> {
+    pub count: u32,
+    pub me: bool,
+    pub emoji: T,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure"
+)]
+pub struct AllowedMentions {
+    parse: Vec<str>,
+    roles: Vec<Id>,
+    users: Vec<Id>,
+    replied_user: bool,
+}

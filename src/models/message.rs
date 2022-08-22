@@ -1,8 +1,9 @@
 use bitflags::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Embed, user::User, Id};
+use super::{user::User, Id};
 use crate::models::application::Application;
+use crate::models::channel::{Attachment, Embed};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -19,7 +20,7 @@ pub struct Message<T> {
     pub mention_everyone: bool,
     pub mentions: Vec<User>,
     pub mention_roles: Vec<Id>,
-    pub attachments: Vec<T>,
+    pub attachments: Vec<Attachment>,
     pub embeds: Vec<Embed>,
     pub reactions: Option<Vec<T>>,
     pub nonce: Option<String>,
@@ -37,7 +38,7 @@ pub struct Message<T> {
     pub components: Option<Vec<T>>,
     pub sticker_items: Option<Vec<T>>,
     pub stickers: Option<Vec<T>>,
-    pub position: Option<u64>,
+    pub position: Option<u8>,
 }
 
 #[derive(Clone, Copy, Debug)]
