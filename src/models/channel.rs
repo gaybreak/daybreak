@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{user::User, Id, message::MessageFlags};
+use super::{message::MessageFlags, user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(

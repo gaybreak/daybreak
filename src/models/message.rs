@@ -1,7 +1,13 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{attachment::Attachment, channel::Channel, embed::Embed, user::User, Id};
+use super::{
+    attachment::Attachment,
+    channel::{Channel, ChannelType},
+    embed::Embed,
+    user::User,
+    Id,
+};
 use crate::models::application::Application;
 
 #[derive(Clone, Debug)]
@@ -19,7 +25,7 @@ pub struct Message<T> {
     pub mention_everyone: bool,
     pub mentions: Vec<User>,
     pub mention_roles: Vec<Id>,
-    pub mention_channels: Option<Vec<T>>,
+    pub mention_channels: Option<Vec<ChannelMention>>,
     pub attachments: Vec<Attachment>,
     pub embeds: Vec<Embed>,
     pub reactions: Option<Vec<Reaction<T>>>,
@@ -130,6 +136,15 @@ pub struct Reaction<T> {
     pub count: u32,
     pub me: bool,
     pub emoji: T,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure")]
+pub struct ChannelMention {
+    pub id: Id,
+    pub guild_id: Id,
+    pub kind: ChannelType,
+    pub name: String,
 }
 
 #[derive(Clone, Debug)]
