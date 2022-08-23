@@ -94,3 +94,22 @@ pub struct AutoModerationActionData {
     pub channel_id: Id,
     pub duration_seconds: u32,
 }
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway
+    #auto-moderation-action-execution-auto-moderation-action-execution-event-fields"
+)]
+pub struct AutoModerationExecution {
+    pub guild_id: Id,
+    pub action: AutoModerationAction,
+    pub rule_id: Id,
+    pub rule_trigger_type: AutoModerationTriggerType,
+    pub user_id: Id,
+    pub channel_id: Option<Id>,
+    pub message_id: Option<Id>,
+    pub alert_system_message_id: Option<Id>,
+    pub content: String,
+    pub matched_keyword: Option<String>,
+    pub matched_content: Option<String>,
+}
