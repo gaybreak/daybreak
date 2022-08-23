@@ -5,6 +5,7 @@
     clippy::integer_arithmetic,
     clippy::missing_docs_in_private_items,
     clippy::module_name_repetitions,
+    clippy::struct_excessive_bools,
     missing_docs
 )]
 
@@ -34,6 +35,8 @@ pub mod message;
 pub mod teams;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
+pub mod voice;
 
 use time::{Duration, OffsetDateTime};
 

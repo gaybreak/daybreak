@@ -3,9 +3,11 @@
     "caseSensitive": true,
     "minWordLength": 0,
     "words": [
+        "afk",
         "ascii",
         "bitflags",
         "bitrate",
+        "bools",
         "clippy",
         "Clippy",
         "codecov",
