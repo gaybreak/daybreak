@@ -2,7 +2,6 @@ use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{
-    attachment::Attachment,
     channel::{Channel, ChannelType},
     embed::Embed,
     user::User,
@@ -130,16 +129,6 @@ pub struct MessageReference {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
-)]
-pub struct Reaction<T> {
-    pub count: u32,
-    pub me: bool,
-    pub emoji: T,
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #channel-mention-object-channel-mention-structure"
 )]
@@ -160,4 +149,31 @@ pub struct AllowedMentions {
     pub roles: Vec<Id>,
     pub users: Vec<Id>,
     pub replied_user: bool,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure"
+)]
+pub struct Attachment {
+    pub id: Id,
+    pub filename: String,
+    pub description: Option<String>,
+    pub content_type: Option<String>,
+    pub size: u32,
+    pub url: String,
+    pub proxy_url: String,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
+    pub ephemeral: Option<bool>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
+)]
+pub struct Reaction<T> {
+    pub count: u32,
+    pub me: bool,
+    pub emoji: T,
 }
