@@ -79,7 +79,7 @@ pub enum VerificationLevel {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild
+    "https://discord.com/developers/docs/resources/guild\
     #guild-object-default-message-notification-level"
 )]
 pub enum MessageNotificationLevel {
@@ -128,7 +128,7 @@ pub enum PremiumTier {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild
+    "https://discord.com/developers/docs/resources/guild\
     #welcome-screen-object-welcome-screen-structure"
 )]
 pub struct WelcomeScreen {
@@ -138,7 +138,7 @@ pub struct WelcomeScreen {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild
+    "https://discord.com/developers/docs/resources/guild\
     #welcome-screen-object-welcome-screen-channel-structure"
 )]
 pub struct WelcomeScreenChannel {
@@ -161,7 +161,7 @@ pub enum NsfwLevel {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/stage-instance
+    "https://discord.com/developers/docs/resources/stage-instance\
     #stage-instance-object-stage-instance-structure"
 )]
 pub struct StageInstance {
@@ -176,7 +176,7 @@ pub struct StageInstance {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/stage-instance
+    "https://discord.com/developers/docs/resources/stage-instance\
     #stage-instance-object-privacy-level"
 )]
 pub enum StagePrivacyLevel {

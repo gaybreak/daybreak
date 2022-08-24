@@ -49,7 +49,7 @@ pub enum ApplicationFlags {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application
+    "https://discord.com/developers/docs/resources/application\
     #install-params-object-install-params-structure"
 )]
 pub struct InstallParams {

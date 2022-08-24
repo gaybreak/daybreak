@@ -80,7 +80,7 @@ pub enum MessageType {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #message-object-message-activity-structure"
 )]
 pub struct MessageActivity {
@@ -140,7 +140,7 @@ pub struct Reaction<T> {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #channel-mention-object-channel-mention-structure"
 )]
 pub struct ChannelMention {
@@ -152,7 +152,7 @@ pub struct ChannelMention {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #allowed-mentions-object-allowed-mentions-structure"
 )]
 pub struct AllowedMentions {

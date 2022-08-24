@@ -2,7 +2,7 @@ use super::Id;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/application-commands
+    "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-guild-application-command-permissions-structure"
 )]
 pub struct CommandPermissions {
@@ -14,7 +14,7 @@ pub struct CommandPermissions {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/application-commands
+    "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
 pub struct CommandPermission {
@@ -25,7 +25,7 @@ pub struct CommandPermission {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/application-commands
+    "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
 pub enum CommandPermissionType {

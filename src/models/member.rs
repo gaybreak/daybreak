@@ -4,7 +4,7 @@ use super::Id;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #thread-member-object-thread-member-structure"
 )]
 pub struct ThreadMember<T> {
@@ -15,20 +15,16 @@ pub struct ThreadMember<T> {
     #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-member-update")]
     pub guild_id: Option<Id>,
     #[doc = discord_url!(
-        "https://discord.com/developers/docs/topics/gateway
+        "https://discord.com/developers/docs/topics/gateway\
         #thread-members-update-thread-members-update-event-fields"
     )]
     pub member: Option<T>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/topics/gateway
-        #thread-members-update-thread-members-update-event-fields"
-    )]
     pub presences: Option<Vec<T>>,
 }
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway
+    "https://discord.com/developers/docs/topics/gateway\
     #thread-members-update-thread-members-update-event-fields"
 )]
 pub struct ThreadMembers<T> {

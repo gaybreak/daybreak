@@ -69,7 +69,7 @@ pub enum VideoQualityMode {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #thread-metadata-object-thread-metadata-structure"
 )]
 pub struct Thread {
@@ -83,7 +83,7 @@ pub struct Thread {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway
+    "https://discord.com/developers/docs/topics/gateway\
     #channel-pins-update-channel-pins-update-event-fields"
 )]
 pub struct ChannelPinsUpdate {
@@ -94,7 +94,7 @@ pub struct ChannelPinsUpdate {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway
+    "https://discord.com/developers/docs/topics/gateway\
     #thread-list-sync-thread-list-sync-event-fields"
 )]
 pub struct ThreadSync<T> {

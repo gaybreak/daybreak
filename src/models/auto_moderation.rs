@@ -2,7 +2,7 @@ use super::Id;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-auto-moderation-rule-structure"
 )]
 pub struct AutoModerationRule {
@@ -21,7 +21,7 @@ pub struct AutoModerationRule {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-event-types"
 )]
 pub enum AutoModerationEvent {
@@ -30,7 +30,7 @@ pub enum AutoModerationEvent {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-types"
 )]
 pub enum AutoModerationTriggerType {
@@ -43,7 +43,7 @@ pub enum AutoModerationTriggerType {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-metadata"
 )]
 pub struct AutoModerationTrigger {
@@ -55,7 +55,7 @@ pub struct AutoModerationTrigger {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-keyword-preset-types"
 )]
 pub enum KeywordPresetType {
@@ -66,7 +66,7 @@ pub enum KeywordPresetType {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-auto-moderation-action-structure"
 )]
 pub struct AutoModerationAction {
@@ -76,7 +76,7 @@ pub struct AutoModerationAction {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-types"
 )]
 pub enum AutoModerationActionType {
@@ -87,7 +87,7 @@ pub enum AutoModerationActionType {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
+    "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-metadata"
 )]
 pub struct AutoModerationActionData {
@@ -97,7 +97,7 @@ pub struct AutoModerationActionData {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway
+    "https://discord.com/developers/docs/topics/gateway\
     #auto-moderation-action-execution-auto-moderation-action-execution-event-fields"
 )]
 pub struct AutoModerationExecution {
