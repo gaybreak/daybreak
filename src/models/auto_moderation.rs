@@ -22,6 +22,15 @@ pub struct AutoModerationRule {
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation
+    #auto-moderation-rule-object-event-types"
+)]
+pub enum AutoModerationEvent {
+    MessageSend = 1,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/auto-moderation
     #auto-moderation-rule-object-trigger-types"
 )]
 pub enum AutoModerationTriggerType {
@@ -53,15 +62,6 @@ pub enum KeywordPresetType {
     Profanity = 1,
     SexualContent = 2,
     Slurs = 3,
-}
-
-#[derive(Clone, Copy, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation
-    #auto-moderation-rule-object-event-types"
-)]
-pub enum AutoModerationEvent {
-    MessageSend = 1,
 }
 
 #[derive(Clone, Copy, Debug)]

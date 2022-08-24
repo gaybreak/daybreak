@@ -169,7 +169,7 @@ pub struct StageInstance {
     pub guild_id: Id,
     pub channel_id: Id,
     pub topic: String,
-    pub privacy_level: PrivacyLevel,
+    pub privacy_level: StagePrivacyLevel,
     pub discoverable_disabled: bool,
     pub guild_scheduled_event_id: Option<Id>,
 }
@@ -179,7 +179,7 @@ pub struct StageInstance {
     "https://discord.com/developers/docs/resources/stage-instance
     #stage-instance-object-privacy-level"
 )]
-pub enum PrivacyLevel {
+pub enum StagePrivacyLevel {
     Public = 1,
     GuildOnly = 2,
 }

@@ -22,6 +22,27 @@ pub struct Embed {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
+)]
+pub struct EmbedFooter {
+    pub text: String,
+    pub icon_url: Option<String>,
+    pub proxy_icon_url: Option<String>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
+)]
+pub struct EmbedImage {
+    pub url: String,
+    pub proxy_url: Option<String>,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
 )]
 pub struct EmbedThumbnail {
@@ -44,17 +65,6 @@ pub struct EmbedVideo {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
-)]
-pub struct EmbedImage {
-    pub url: String,
-    pub proxy_url: Option<String>,
-    pub height: Option<u16>,
-    pub width: Option<u16>,
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure"
 )]
 pub struct EmbedProvider {
@@ -69,16 +79,6 @@ pub struct EmbedProvider {
 pub struct EmbedAuthor {
     pub name: String,
     pub url: Option<String>,
-    pub icon_url: Option<String>,
-    pub proxy_icon_url: Option<String>,
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
-)]
-pub struct EmbedFooter {
-    pub text: String,
     pub icon_url: Option<String>,
     pub proxy_icon_url: Option<String>,
 }

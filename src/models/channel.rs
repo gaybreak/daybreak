@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{member::ThreadMember, message::MessageFlags, user::User, Id};
+use super::{member::ThreadMember, user::User, Id};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -8,7 +8,7 @@ use super::{member::ThreadMember, message::MessageFlags, user::User, Id};
 )]
 pub struct Channel<T> {
     pub id: Id,
-    pub channel_type: u32,
+    pub channel_type: ChannelType,
     pub guild_id: Option<Id>,
     pub position: Option<u16>,
     pub permission_overwrites: Option<Vec<T>>,
@@ -29,11 +29,11 @@ pub struct Channel<T> {
     pub video_quality_mode: Option<VideoQualityMode>,
     pub message_count: Option<u32>,
     pub member_count: Option<u8>,
-    pub thread_metadata: Option<ThreadMetadata>,
+    pub thread_metadata: Option<Thread>,
     pub member: Option<ThreadMember<T>>,
     pub default_auto_archive_duration: Option<u16>,
     pub permissions: Option<T>,
-    pub flags: Option<MessageFlags>,
+    pub flags: Option<T>,
     pub total_message_sent: Option<u32>,
     #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
     pub newly_created: Option<bool>,
@@ -72,7 +72,7 @@ pub enum VideoQualityMode {
     "https://discord.com/developers/docs/resources/channel
     #thread-metadata-object-thread-metadata-structure"
 )]
-pub struct ThreadMetadata {
+pub struct Thread {
     pub archived: bool,
     pub auto_archive_duration: u16,
     pub archive_timestamp: OffsetDateTime,

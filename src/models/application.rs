@@ -34,8 +34,7 @@ pub struct Application {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(u32)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application\
-    #application-object-application-flags"
+    "https://discord.com/developers/docs/resources/application#application-object-application-flags"
 )]
 pub enum ApplicationFlags {
     GatewayPresence = 1 << 12,
@@ -50,7 +49,7 @@ pub enum ApplicationFlags {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application\
+    "https://discord.com/developers/docs/resources/application
     #install-params-object-install-params-structure"
 )]
 pub struct InstallParams {
