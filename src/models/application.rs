@@ -1,6 +1,6 @@
 use enumflags2::bitflags;
 
-use super::{teams::Team, user::User, Id};
+use super::{user::User, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -34,8 +34,7 @@ pub struct Application {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(u32)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/application\
-    #application-object-application-flags"
+    "https://discord.com/developers/docs/resources/application#application-object-application-flags"
 )]
 pub enum ApplicationFlags {
     GatewayPresence = 1 << 12,
@@ -55,5 +54,34 @@ pub enum ApplicationFlags {
 )]
 pub struct InstallParams {
     pub scopes: Vec<String>,
-    pub permissions: String,
+    pub permissions: Permissions,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!("https://discord.com/developers/docs/topics/teams#data-models-team-object")]
+pub struct Team {
+    pub icon: Option<String>,
+    pub id: Id,
+    pub members: Vec<TeamMember>,
+    pub name: String,
+    pub owner_user_id: Id,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/teams#data-models-team-member-object"
+)]
+pub struct TeamMember {
+    pub membership_state: TeamMemberState,
+    pub team_id: Id,
+    pub user: User,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum"
+)]
+pub enum TeamMemberState {
+    Invited = 1,
+    Accepted = 2,
 }

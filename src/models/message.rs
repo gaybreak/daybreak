@@ -1,9 +1,13 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{user::User, Id};
+use super::{
+    channel::{Channel, ChannelType},
+    embed::Embed,
+    user::User,
+    Id,
+};
 use crate::models::application::Application;
-use crate::models::channel::{Attachment, Embed};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -20,9 +24,10 @@ pub struct Message<T> {
     pub mention_everyone: bool,
     pub mentions: Vec<User>,
     pub mention_roles: Vec<Id>,
+    pub mention_channels: Option<Vec<ChannelMention>>,
     pub attachments: Vec<Attachment>,
     pub embeds: Vec<Embed>,
-    pub reactions: Option<Vec<T>>,
+    pub reactions: Option<Vec<Reaction<T>>>,
     pub nonce: Option<String>,
     pub pinned: bool,
     pub webhook_id: Option<Id>,
@@ -34,27 +39,47 @@ pub struct Message<T> {
     pub flags: Option<MessageFlags>,
     pub referenced_message: Option<Box<Message<T>>>,
     pub interaction: Option<T>,
-    pub thread: Option<T>,
+    pub thread: Option<Channel<T>>,
     pub components: Option<Vec<T>>,
     pub sticker_items: Option<Vec<T>>,
     pub stickers: Option<Vec<T>>,
-    pub position: Option<u8>,
+    pub position: Option<u32>,
 }
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#message-reference-object"
+    "https://discord.com/developers/docs/resources/channel#message-object-message-types"
 )]
-pub struct MessageReference {
-    pub message_id: Option<Id>,
-    pub channel_id: Option<Id>,
-    pub guild_id: Option<Id>,
-    pub fail_if_not_exists: Option<bool>,
+pub enum MessageType {
+    Default = 0,
+    RecipientAdd = 1,
+    RecipientRemove = 2,
+    Call = 3,
+    ChannelNameChange = 4,
+    ChannelIconChange = 5,
+    ChannelPinnedMessage = 6,
+    UserJoin = 7,
+    GuildBoost = 8,
+    GuildBoostTier1 = 9,
+    GuildBoostTier2 = 10,
+    GuildBoostTier3 = 11,
+    ChannelFollowAdd = 12,
+    GuildDiscoveryDisqualified = 14,
+    GuildDiscoveryRequalified = 15,
+    GuildDiscoveryGracePeriodInitialWarning = 16,
+    GuildDiscoveryGracePeriodFinalWarning = 17,
+    ThreadCreated = 18,
+    Reply = 19,
+    ChatInputCommand = 20,
+    ThreadStarterMessage = 21,
+    GuildInviteReminder = 22,
+    ContextMenuCommand = 23,
+    AutoModerationAction = 24,
 }
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel
+    "https://discord.com/developers/docs/resources/channel\
     #message-object-message-activity-structure"
 )]
 pub struct MessageActivity {
@@ -93,31 +118,62 @@ pub enum MessageFlags {
 
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel#message-object-message-types"
+    "https://discord.com/developers/docs/resources/channel#message-reference-object"
 )]
-pub enum MessageType {
-    Default = 0,
-    RecipientAdd = 1,
-    RecipientRemove = 2,
-    Call = 3,
-    ChannelNameChange = 4,
-    ChannelIconChange = 5,
-    ChannelPinnedMessage = 6,
-    UserJoin = 7,
-    GuildBoost = 8,
-    GuildBoostTier1 = 9,
-    GuildBoostTier2 = 10,
-    GuildBoostTier3 = 11,
-    ChannelFollowAdd = 12,
-    GuildDiscoveryDisqualified = 14,
-    GuildDiscoveryRequalified = 15,
-    GuildDiscoveryGracePeriodInitialWarning = 16,
-    GuildDiscoveryGracePeriodFinalWarning = 17,
-    ThreadCreated = 18,
-    Reply = 19,
-    ChatInputCommand = 20,
-    ThreadStarterMessage = 21,
-    GuildInviteReminder = 22,
-    ContextMenuCommand = 23,
-    AutoModerationAction = 24,
+pub struct MessageReference {
+    pub message_id: Option<Id>,
+    pub channel_id: Option<Id>,
+    pub guild_id: Option<Id>,
+    pub fail_if_not_exists: Option<bool>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel\
+    #channel-mention-object-channel-mention-structure"
+)]
+pub struct ChannelMention {
+    pub id: Id,
+    pub guild_id: Id,
+    pub kind: ChannelType,
+    pub name: String,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel\
+    #allowed-mentions-object-allowed-mentions-structure"
+)]
+pub struct AllowedMentions {
+    pub parse: Vec<String>,
+    pub roles: Vec<Id>,
+    pub users: Vec<Id>,
+    pub replied_user: bool,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure"
+)]
+pub struct Attachment {
+    pub id: Id,
+    pub filename: String,
+    pub description: Option<String>,
+    pub content_type: Option<String>,
+    pub size: u32,
+    pub url: String,
+    pub proxy_url: String,
+    pub height: Option<u16>,
+    pub width: Option<u16>,
+    pub ephemeral: Option<bool>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
+)]
+pub struct Reaction<T> {
+    pub count: u32,
+    pub me: bool,
+    pub emoji: T,
 }
