@@ -27,7 +27,9 @@ pub mod emoji;
 pub mod gateway;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
 pub mod guild;
-#[doc = discord_url!("https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object")]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object"
+)]
 pub mod interactions;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-member-object")]
 pub mod member;
