@@ -7,7 +7,8 @@ use std::collections::HashMap;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure"
+    "https://discord.com/developers/docs/interactions/receiving-and-responding\
+    #interaction-object-interaction-structure"
 )]
 // the inception of T
 pub struct Interaction<T> {
@@ -18,6 +19,10 @@ pub struct Interaction<T> {
 }
 
 #[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/interactions/receiving-and-responding\
+#interaction-object-interaction-type"
+)]
 pub enum InteractionType {
     Ping = 1,
     ApplicationCommand = 2,
@@ -25,16 +30,22 @@ pub enum InteractionType {
     ApplicationCommandAutocomplete = 4,
     ModalSubmit = 5,
 }
+
 #[derive(Clone, Debug)]
+#[doc = discord_url!(
+"https://discord.com/developers/docs/interactions/receiving-and-responding\
+#interaction-object-interaction-data"
+)]
 pub enum InteractionData<T> {
     ApplicationCommand(ApplicationCommandData<T>),
     MessageComponent(MessageComponentData),
-    ModalSubmit(),
+    ModalSubmit(ModalSubmitData<T>),
 }
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-message-component-data-structure"
+"https://discord.com/developers/docs/interactions/receiving-and-responding\
+#interaction-object-message-component-data-structure"
 )]
 pub struct MessageComponentData {
     pub custom_id: String,
@@ -44,7 +55,8 @@ pub struct MessageComponentData {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-data-data-structure"
+"https://discord.com/developers/docs/interactions/receiving-and-responding\
+#interaction-object-application-command-data-data-structure"
 )]
 pub struct ApplicationCommandData<T> {
     pub id: Id,
@@ -59,7 +71,8 @@ pub struct ApplicationCommandData<T> {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-"https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure"
+"https://discord.com/developers/docs/interactions/receiving-and-responding\
+#interaction-object-resolved-data-structure"
 )]
 pub struct ResolvedData<T> {
     pub users: Option<HashMap<Id, User>>,
@@ -72,7 +85,8 @@ pub struct ResolvedData<T> {
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure"
+    "https://discord.com/developers/docs/interactions/receiving-and-responding\
+    #interaction-object-modal-submit-data-structure"
 )]
 pub struct ModalSubmitData<T> {
     pub custom_id: Id,
