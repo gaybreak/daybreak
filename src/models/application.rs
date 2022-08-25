@@ -1,6 +1,6 @@
 use enumflags2::bitflags;
 
-use super::{user::User, Id};
+use super::{user::User, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -54,7 +54,7 @@ pub enum ApplicationFlags {
 )]
 pub struct InstallParams {
     pub scopes: Vec<String>,
-    pub permissions: String,
+    pub permissions: Permissions,
 }
 
 #[derive(Clone, Debug)]

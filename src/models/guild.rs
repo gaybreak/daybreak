@@ -1,7 +1,7 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Channel, voice::VoiceState, Id};
+use super::{channel::Channel, voice::VoiceState, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -16,7 +16,7 @@ pub struct Guild<T> {
     pub discovery_splash: Option<String>,
     pub owner: Option<bool>,
     pub owner_id: Id,
-    pub permissions: Option<String>,
+    pub permissions: Option<Permissions>,
     pub region: Option<String>,
     pub afk_channel_id: Option<Id>,
     pub afk_timeout: u16,

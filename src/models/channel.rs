@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{member::ThreadMember, user::User, Id};
+use super::{member::ThreadMember, user::User, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -32,7 +32,7 @@ pub struct Channel<T> {
     pub thread_metadata: Option<Thread>,
     pub member: Option<ThreadMember<T>>,
     pub default_auto_archive_duration: Option<u16>,
-    pub permissions: Option<T>,
+    pub permissions: Option<Permissions>,
     pub flags: Option<T>,
     pub total_message_sent: Option<u32>,
     #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
