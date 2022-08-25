@@ -30,7 +30,7 @@ pub struct Channel<T> {
     pub message_count: Option<u32>,
     pub member_count: Option<u8>,
     pub thread_metadata: Option<Thread>,
-    pub member: Option<ThreadMember<T>>,
+    pub member: Option<ThreadMember>,
     pub default_auto_archive_duration: Option<u16>,
     pub permissions: Option<Permissions>,
     pub flags: Option<T>,
@@ -101,7 +101,7 @@ pub struct ThreadSync<T> {
     pub guild_id: Id,
     pub channel_ids: Option<Vec<Id>>,
     pub threads: Vec<Channel<T>>,
-    pub members: Vec<ThreadMember<T>>,
+    pub members: Vec<ThreadMember>,
 }
 
 #[derive(Clone, Debug)]

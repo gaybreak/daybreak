@@ -1,6 +1,6 @@
 use time::OffsetDateTime;
 
-use super::{user::User, Id, Permissions};
+use super::{presence::Activity, user::User, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -25,7 +25,7 @@ pub struct Member {
     "https://discord.com/developers/docs/resources/channel\
     #thread-member-object-thread-member-structure"
 )]
-pub struct ThreadMember<T> {
+pub struct ThreadMember {
     pub id: Option<Id>,
     pub user_id: Option<Id>,
     pub join_timestamp: OffsetDateTime,
@@ -37,7 +37,7 @@ pub struct ThreadMember<T> {
         #thread-members-update-thread-members-update-event-fields"
     )]
     pub member: Option<Member>,
-    pub presences: Option<Vec<T>>,
+    pub presences: Option<Vec<Activity>>,
 }
 
 #[derive(Clone, Debug)]
@@ -45,10 +45,10 @@ pub struct ThreadMember<T> {
     "https://discord.com/developers/docs/topics/gateway\
     #thread-members-update-thread-members-update-event-fields"
 )]
-pub struct ThreadMembers<T> {
+pub struct ThreadMembers {
     pub id: Id,
     pub guild_id: Id,
     pub member_count: u8,
-    pub added_members: Option<Vec<ThreadMember<T>>>,
+    pub added_members: Option<Vec<ThreadMember>>,
     pub removed_member_ids: Option<Vec<Id>>,
 }

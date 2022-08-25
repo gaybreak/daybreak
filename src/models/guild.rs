@@ -1,7 +1,7 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Channel, voice::VoiceState, Id, Permissions};
+use super::{channel::Channel, voice::VoiceState, Id, Permissions, presence::Activity};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -60,7 +60,7 @@ pub struct Guild<T> {
     pub members: Option<Vec<T>>,
     pub channels: Option<Vec<Channel<T>>>,
     pub threads: Option<Vec<Channel<T>>>,
-    pub presences: Option<Vec<T>>,
+    pub presences: Option<Vec<Activity>>,
     pub stage_instances: Option<Vec<StageInstance>>,
     pub guild_scheduled_events: Option<Vec<T>>,
 }

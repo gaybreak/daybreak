@@ -35,6 +35,8 @@ pub mod interactions;
 pub mod member;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
 pub mod message;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#presence")]
+pub mod presence;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
