@@ -6,7 +6,7 @@ on:
       - "src/**"
 env:
   CARGO_TERM_COLOR: always
-   export RUSTDOCFLAGS="-Dwarnings"
+  RUSTDOCFLAGS: -Dwarnings
 
 jobs:
   build:
