@@ -4,11 +4,11 @@ use time::OffsetDateTime;
 use super::{
     channel::{Channel, ChannelType},
     embed::Embed,
+    interaction::MessageInteraction,
     user::User,
     Id,
 };
-use crate::models::application::Application;
-use crate::models::emoji::Emoji;
+use crate::models::{application::Application, emoji::Emoji};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -28,7 +28,7 @@ pub struct Message<T> {
     pub mention_channels: Option<Vec<ChannelMention>>,
     pub attachments: Vec<Attachment>,
     pub embeds: Vec<Embed>,
-    pub reactions: Option<Vec<Reaction<T>>>,
+    pub reactions: Option<Vec<Reaction>>,
     pub nonce: Option<String>,
     pub pinned: bool,
     pub webhook_id: Option<Id>,
@@ -39,7 +39,7 @@ pub struct Message<T> {
     pub message_reference: Option<MessageReference>,
     pub flags: Option<MessageFlags>,
     pub referenced_message: Option<Box<Message<T>>>,
-    pub interaction: Option<T>,
+    pub interaction: Option<MessageInteraction>,
     pub thread: Option<Channel<T>>,
     pub components: Option<Vec<T>>,
     pub sticker_items: Option<Vec<T>>,
@@ -173,8 +173,8 @@ pub struct Attachment {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
 )]
-pub struct Reaction<T> {
+pub struct Reaction {
     pub count: u32,
     pub me: bool,
-    pub emoji: Emoji<T>,
+    pub emoji: Emoji,
 }

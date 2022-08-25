@@ -1,7 +1,7 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Channel, voice::VoiceState, Id, Permissions, presence::Activity};
+use super::{channel::Channel, presence::Activity, voice::VoiceState, Id, Permissions};
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(

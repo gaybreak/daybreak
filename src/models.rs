@@ -17,8 +17,6 @@ pub mod application;
 pub mod auto_moderation;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#channel-object")]
 pub mod channel;
-#[doc = discord_url!("https://discord.com/developers/docs/interactions/application-commands")]
-pub mod command;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#embed-object")]
 pub mod embed;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/emoji#emoji-object")]
@@ -28,9 +26,9 @@ pub mod gateway;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
 pub mod guild;
 #[doc = discord_url!(
-"https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object"
+    "https://discord.com/developers/docs/interactions/receiving-and-responding#interactions"
 )]
-pub mod interactions;
+pub mod interaction;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-member-object")]
 pub mod member;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
