@@ -49,9 +49,9 @@ pub enum InteractionType {
     #interaction-object-interaction-data"
 )]
 pub enum InteractionData<T> {
-    ApplicationCommand(ApplicationCommandData<T>),
-    MessageComponent(MessageComponentData<T>),
-    ModalSubmit(ModalSubmitData<T>),
+    ApplicationCommand(CommandData<T>),
+    MessageComponent(ComponentData<T>),
+    ModalSubmit(ModalData<T>),
 }
 
 #[derive(Clone, Debug)]
@@ -59,14 +59,25 @@ pub enum InteractionData<T> {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-application-command-data-structure"
 )]
-pub struct ApplicationCommandData<T> {
+pub struct CommandData<T> {
     pub id: Id,
     pub name: String,
-    pub command_type: T,
+    pub kind: CommandType,
     pub resolved: Option<ResolvedData<T>>,
-    pub options: Option<ApplicationCommandOption>,
+    pub options: Option<CommandOption>,
     pub guild_id: Option<Id>,
     pub target_id: Option<Id>,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/application-commands\
+    #application-command-object-application-command-interaction-data-option-structure"
+)]
+pub enum CommandType {
+    ChatInput = 1,
+    User = 2,
+    Message = 3,
 }
 
 #[derive(Clone, Debug)]
@@ -74,11 +85,11 @@ pub struct ApplicationCommandData<T> {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-interaction-data-option-structure"
 )]
-pub struct ApplicationCommandOption {
+pub struct CommandOption {
     pub name: String,
-    pub kind: ApplicationCommandOptionType,
+    pub kind: CommandOptionType,
     pub value: Option<String>,
-    pub options: Option<Vec<ApplicationCommandOption>>,
+    pub options: Option<Vec<CommandOption>>,
     pub focused: Option<bool>,
 }
 
@@ -87,7 +98,7 @@ pub struct ApplicationCommandOption {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-option-type"
 )]
-pub enum ApplicationCommandOptionType {
+pub enum CommandOptionType {
     SubCommand = 1,
     SubCommandGroup = 2,
     String = 3,
@@ -120,10 +131,22 @@ pub struct ResolvedData<T> {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-message-component-data-structure"
 )]
-pub struct MessageComponentData<T> {
+pub struct ComponentData<T> {
     pub custom_id: String,
-    pub component_type: T,
+    pub component_type: ComponentType,
     pub values: Vec<T>,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #component-object-component-types"
+)]
+pub enum ComponentType {
+    ActionRow = 1,
+    Button = 2,
+    SelectMenu = 3,
+    TextInput = 4,
 }
 
 #[derive(Clone, Debug)]
@@ -131,7 +154,7 @@ pub struct MessageComponentData<T> {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-modal-submit-data-structure"
 )]
-pub struct ModalSubmitData<T> {
+pub struct ModalData<T> {
     pub custom_id: Id,
     pub components: Vec<T>,
 }
