@@ -11,7 +11,7 @@ pub struct Channel<T> {
     pub channel_type: ChannelType,
     pub guild_id: Option<Id>,
     pub position: Option<u16>,
-    pub permission_overwrites: Option<Vec<T>>,
+    pub permission_overwrites: Option<Vec<PermissionOverwrite>>,
     pub name: Option<String>,
     pub topic: Option<String>,
     pub nsfw: Option<bool>,
@@ -102,4 +102,24 @@ pub struct ThreadSync<T> {
     pub channel_ids: Option<Vec<Id>>,
     pub threads: Vec<Channel<T>>,
     pub members: Vec<ThreadMember<T>>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
+)]
+pub struct PermissionOverwrite {
+    pub id: Id,
+    pub kind: PermissionOverwriteKind,
+    pub allow: String,
+    pub deny: String,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
+)]
+pub enum PermissionOverwriteKind {
+    Role = 0,
+    Member = 1,
 }
