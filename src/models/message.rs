@@ -4,7 +4,7 @@ use time::OffsetDateTime;
 use super::{
     channel::{Channel, ChannelType},
     embed::Embed,
-    interaction::MessageInteraction,
+    interaction::{Component, MessageInteraction},
     user::User,
     Id,
 };
@@ -41,7 +41,7 @@ pub struct Message<T> {
     pub referenced_message: Option<Box<Message<T>>>,
     pub interaction: Option<MessageInteraction>,
     pub thread: Option<Channel<T>>,
-    pub components: Option<Vec<T>>,
+    pub components: Option<Vec<Component>>,
     pub sticker_items: Option<Vec<T>>,
     pub stickers: Option<Vec<T>>,
     pub position: Option<u32>,

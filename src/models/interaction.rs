@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use super::{
     channel::Channel,
+    emoji::Emoji,
     member::Member,
     message::{Attachment, Message},
     user::User,
@@ -66,12 +67,12 @@ pub struct InteractionData<T> {
     )]
     pub custom_id: Option<String>,
     pub component_type: Option<ComponentType>,
-    pub values: Option<Vec<T>>,
+    pub values: Option<Vec<SelectOption>>,
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/receiving-and-responding\
         #interaction-object-modal-submit-data-structure"
     )]
-    pub components: Option<Vec<T>>,
+    pub components: Option<Vec<Component>>,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -141,6 +142,72 @@ pub enum ComponentType {
     Button = 2,
     SelectMenu = 3,
     TextInput = 4,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #select-menu-object-select-option-structure"
+)]
+pub struct SelectOption {
+    pub label: String,
+    pub value: String,
+    pub description: Option<String>,
+    pub emoji: Option<Emoji>,
+    pub default: Option<bool>,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components#message-components"
+)]
+pub struct Component {
+    pub kind: ComponentType,
+    pub disabled: Option<bool>,
+    pub custom_id: Option<String>,
+    pub style: Option<ComponentStyle>,
+    pub label: Option<String>,
+    pub placeholder: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    pub emoji: Option<Emoji>,
+    pub url: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
+    pub options: Vec<SelectOption>,
+    pub min_values: Option<u8>,
+    pub max_values: Option<u8>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
+    pub min_length: Option<u16>,
+    pub max_length: Option<u16>,
+    pub required: Option<bool>,
+    pub value: Option<String>,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #button-object-button-styles"
+)]
+pub enum ComponentStyle {
+    /// Short for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-styles"
+    )]
+    Primary = 1,
+    /// Paragraph for modals
+    Secondary = 2,
+    Success = 3,
+    Danger = 4,
+    Link = 5,
 }
 
 #[derive(Clone, Debug)]
