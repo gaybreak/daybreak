@@ -132,31 +132,6 @@ pub struct ResolvedData<T> {
     pub attachments: Option<HashMap<Id, Attachment>>,
 }
 
-#[derive(Clone, Copy, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #component-object-component-types"
-)]
-pub enum ComponentType {
-    ActionRow = 1,
-    Button = 2,
-    SelectMenu = 3,
-    TextInput = 4,
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #select-menu-object-select-option-structure"
-)]
-pub struct SelectOption {
-    pub label: String,
-    pub value: String,
-    pub description: Option<String>,
-    pub emoji: Option<Emoji>,
-    pub default: Option<bool>,
-}
-
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components#message-components"
@@ -194,6 +169,18 @@ pub struct Component {
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components\
+    #component-object-component-types"
+)]
+pub enum ComponentType {
+    ActionRow = 1,
+    Button = 2,
+    SelectMenu = 3,
+    TextInput = 4,
+}
+
+#[derive(Clone, Copy, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
     #button-object-button-styles"
 )]
 pub enum ComponentStyle {
@@ -208,6 +195,19 @@ pub enum ComponentStyle {
     Success = 3,
     Danger = 4,
     Link = 5,
+}
+
+#[derive(Clone, Debug)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #select-menu-object-select-option-structure"
+)]
+pub struct SelectOption {
+    pub label: String,
+    pub value: String,
+    pub description: Option<String>,
+    pub emoji: Option<Emoji>,
+    pub default: Option<bool>,
 }
 
 #[derive(Clone, Debug)]
