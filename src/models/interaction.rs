@@ -48,25 +48,30 @@ pub enum InteractionType {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-data"
 )]
-pub enum InteractionData<T> {
-    ApplicationCommand(CommandData<T>),
-    MessageComponent(ComponentData<T>),
-    ModalSubmit(ModalData<T>),
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-application-command-data-structure"
-)]
-pub struct CommandData<T> {
-    pub id: Id,
-    pub name: String,
-    pub kind: CommandType,
+pub struct InteractionData<T> {
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
+    pub id: Option<Id>,
+    pub name: Option<String>,
+    pub kind: Option<CommandType>,
     pub resolved: Option<ResolvedData<T>>,
-    pub options: Option<CommandOption>,
+    pub options: Option<Vec<CommandOption>>,
     pub guild_id: Option<Id>,
     pub target_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-message-component-data-structure"
+    )]
+    pub custom_id: Option<String>,
+    pub component_type: Option<ComponentType>,
+    pub values: Option<Vec<T>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-modal-submit-data-structure"
+    )]
+    pub components: Option<Vec<T>>,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -126,17 +131,6 @@ pub struct ResolvedData<T> {
     pub attachments: Option<HashMap<Id, Attachment>>,
 }
 
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-message-component-data-structure"
-)]
-pub struct ComponentData<T> {
-    pub custom_id: String,
-    pub component_type: ComponentType,
-    pub values: Vec<T>,
-}
-
 #[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components\
@@ -147,16 +141,6 @@ pub enum ComponentType {
     Button = 2,
     SelectMenu = 3,
     TextInput = 4,
-}
-
-#[derive(Clone, Debug)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-modal-submit-data-structure"
-)]
-pub struct ModalData<T> {
-    pub custom_id: Id,
-    pub components: Vec<T>,
 }
 
 #[derive(Clone, Debug)]
