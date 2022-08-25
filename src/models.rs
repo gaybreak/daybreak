@@ -21,7 +21,8 @@ pub mod channel;
 pub mod command;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#embed-object")]
 pub mod embed;
-mod emoji;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/emoji#emoji-object")]
+pub mod emoji;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#connecting-and-resuming")]
 pub mod gateway;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
@@ -36,7 +37,6 @@ pub mod message;
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
 pub mod voice;
-#[doc = discord_url!("https://discord.com/developers/docs/resources/emoji#emoji-object")]
 use enumflags2::bitflags;
 use time::{Duration, OffsetDateTime};
 
