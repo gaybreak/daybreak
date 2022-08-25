@@ -8,6 +8,7 @@ use super::{
     Id,
 };
 use crate::models::application::Application;
+use crate::models::emoji::Emoji;
 
 #[derive(Clone, Debug)]
 #[doc = discord_url!(
@@ -175,5 +176,5 @@ pub struct Attachment {
 pub struct Reaction<T> {
     pub count: u32,
     pub me: bool,
-    pub emoji: T,
+    pub emoji: Emoji<T>,
 }
