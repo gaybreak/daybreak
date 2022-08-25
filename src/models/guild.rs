@@ -56,7 +56,7 @@ pub struct Guild<T> {
     pub large: Option<bool>,
     pub unavailable: Option<bool>,
     pub member_count: Option<u32>,
-    pub voice_states: Option<Vec<VoiceState<T>>>,
+    pub voice_states: Option<Vec<VoiceState>>,
     pub members: Option<Vec<T>>,
     pub channels: Option<Vec<Channel<T>>>,
     pub threads: Option<Vec<Channel<T>>>,
