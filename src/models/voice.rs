@@ -2,10 +2,10 @@ use time::OffsetDateTime;
 
 use super::{member::Member, Id};
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct VoiceState {
     pub guild_id: Option<Id>,
     pub channel_id: Option<Id>,

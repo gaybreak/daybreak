@@ -9,11 +9,11 @@ use super::{
     Id, Permissions,
 };
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Interaction<T> {
     pub id: Id,
     pub application_id: Id,
@@ -31,11 +31,11 @@ pub struct Interaction<T> {
     pub guild_locale: Option<String>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-type"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum InteractionType {
     Ping = 1,
     ApplicationCommand = 2,
@@ -44,16 +44,20 @@ pub enum InteractionType {
     ModalSubmit = 5,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-interaction-data"
+    #interaction-object-application-command-data-structure"
 )]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/receiving-and-responding\
+    #interaction-object-message-component-data-structure"
+)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/receiving-and-responding\
+    #interaction-object-modal-submit-data-structure"
+)]
+#[derive(Clone, Debug)]
 pub struct InteractionData<T> {
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/receiving-and-responding\
-        #interaction-object-application-command-data-structure"
-    )]
     pub id: Option<Id>,
     pub name: Option<String>,
     pub kind: Option<CommandType>,
@@ -61,36 +65,28 @@ pub struct InteractionData<T> {
     pub options: Option<Vec<CommandOption>>,
     pub guild_id: Option<Id>,
     pub target_id: Option<Id>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/receiving-and-responding\
-        #interaction-object-message-component-data-structure"
-    )]
     pub custom_id: Option<String>,
     pub component_type: Option<ComponentType>,
     pub values: Option<Vec<SelectOption>>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/receiving-and-responding\
-        #interaction-object-modal-submit-data-structure"
-    )]
     pub components: Option<Vec<Component>>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-interaction-data-option-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum CommandType {
     ChatInput = 1,
     User = 2,
     Message = 3,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-interaction-data-option-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct CommandOption {
     pub name: String,
     pub kind: CommandOptionType,
@@ -99,11 +95,11 @@ pub struct CommandOption {
     pub focused: Option<bool>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-option-type"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum CommandOptionType {
     SubCommand = 1,
     SubCommandGroup = 2,
@@ -118,11 +114,11 @@ pub enum CommandOptionType {
     Attachment = 11,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-resolved-data-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct ResolvedData<T> {
     pub users: Option<HashMap<Id, User>>,
     pub members: Option<HashMap<Id, Member>>,
@@ -132,10 +128,19 @@ pub struct ResolvedData<T> {
     pub attachments: Option<HashMap<Id, Attachment>>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components#message-components"
+    "https://discord.com/developers/docs/interactions/message-components\
+    #button-object-button-structure"
 )]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #select-menu-object-select-menu-structure"
+)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #text-inputs-text-input-structure"
+)]
+#[derive(Clone, Debug)]
 pub struct Component {
     pub kind: ComponentType,
     pub disabled: Option<bool>,
@@ -143,34 +148,22 @@ pub struct Component {
     pub style: Option<ComponentStyle>,
     pub label: Option<String>,
     pub placeholder: Option<String>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/message-components\
-        #button-object-button-structure"
-    )]
     pub emoji: Option<Emoji>,
     pub url: Option<String>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/message-components\
-        #select-menu-object-select-menu-structure"
-    )]
     pub options: Vec<SelectOption>,
     pub min_values: Option<u8>,
     pub max_values: Option<u8>,
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/message-components\
-        #text-inputs-text-input-structure"
-    )]
     pub min_length: Option<u16>,
     pub max_length: Option<u16>,
     pub required: Option<bool>,
     pub value: Option<String>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components\
     #component-object-component-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum ComponentType {
     ActionRow = 1,
     Button = 2,
@@ -178,30 +171,33 @@ pub enum ComponentType {
     TextInput = 4,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components\
     #button-object-button-styles"
 )]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/interactions/message-components\
+    #text-inputs-text-input-styles"
+)]
+#[derive(Clone, Copy, Debug)]
 pub enum ComponentStyle {
     /// Short for modals
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/interactions/message-components\
-        #text-inputs-text-input-styles"
-    )]
     Primary = 1,
     /// Paragraph for modals
     Secondary = 2,
+    /// Invalid for modals
     Success = 3,
+    /// Invalid for modals
     Danger = 4,
+    /// Invalid for modals
     Link = 5,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/message-components\
     #select-menu-object-select-option-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct SelectOption {
     pub label: String,
     pub value: String,
@@ -210,11 +206,11 @@ pub struct SelectOption {
     pub default: Option<bool>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #message-interaction-object-message-interaction-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct MessageInteraction {
     pub id: Id,
     pub kind: InteractionType,
@@ -223,11 +219,11 @@ pub struct MessageInteraction {
     pub member: Option<Member>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-guild-application-command-permissions-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct CommandPermissions {
     pub id: Id,
     pub application_id: Id,
@@ -235,22 +231,22 @@ pub struct CommandPermissions {
     pub permissions: Vec<CommandPermission>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct CommandPermission {
     pub id: Id,
     pub kind: CommandPermissionType,
     pub permission: bool,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum CommandPermissionType {
     Role = 1,
     User = 2,

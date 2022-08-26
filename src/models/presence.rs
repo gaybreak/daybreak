@@ -3,10 +3,10 @@ use time::OffsetDateTime;
 
 use super::Id;
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Activity {
     pub name: String,
     pub kind: ActivityType,
@@ -25,10 +25,10 @@ pub struct Activity {
     pub buttons: Option<Vec<ActivityButton>>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum ActivityType {
     Game = 0,
     Streaming = 1,
@@ -38,38 +38,38 @@ pub enum ActivityType {
     Competing = 5,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct ActivityTimestamps {
     pub start: Option<OffsetDateTime>,
     pub end: Option<OffsetDateTime>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-emoji"
 )]
+#[derive(Clone, Debug)]
 pub struct ActivityEmoji {
     pub name: String,
     pub id: Option<Id>,
     pub animated: Option<bool>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-party"
 )]
+#[derive(Clone, Debug)]
 pub struct ActivityParty {
     pub id: Option<String>,
     pub size: Option<(u8, u8)>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-assets"
 )]
+#[derive(Clone, Debug)]
 pub struct ActivityAssets {
     pub large_image: Option<String>,
     pub large_text: Option<String>,
@@ -77,10 +77,10 @@ pub struct ActivityAssets {
     pub small_text: Option<String>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-secrets"
 )]
+#[derive(Clone, Debug)]
 pub struct ActivitySecrets {
     pub join: Option<String>,
     pub spectate: Option<String>,
@@ -89,10 +89,10 @@ pub struct ActivitySecrets {
 
 #[bitflags]
 #[repr(u16)]
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum ActivityFlags {
     Instance = 1 << 0,
     Join = 1 << 1,
@@ -105,10 +105,10 @@ pub enum ActivityFlags {
     Embedded = 1 << 8,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-buttons"
 )]
+#[derive(Clone, Debug)]
 pub struct ActivityButton {
     pub label: String,
     pub url: String,

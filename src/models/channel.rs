@@ -2,10 +2,11 @@ use time::OffsetDateTime;
 
 use super::{member::ThreadMember, user::User, Id, Permissions};
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
+#[derive(Clone, Debug)]
 pub struct Channel<T> {
     pub id: Id,
     pub channel_type: ChannelType,
@@ -39,10 +40,10 @@ pub struct Channel<T> {
     pub newly_created: Option<bool>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum ChannelType {
     GuildText = 0,
     DM = 1,
@@ -58,20 +59,20 @@ pub enum ChannelType {
     GuildForum = 15,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum VideoQualityMode {
     Auto = 1,
     Full = 2,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #thread-metadata-object-thread-metadata-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct Thread {
     pub archived: bool,
     pub auto_archive_duration: u16,
@@ -81,22 +82,22 @@ pub struct Thread {
     pub create_timestamp: Option<OffsetDateTime>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway\
     #channel-pins-update-channel-pins-update-event-fields"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct ChannelPinsUpdate {
     pub guild_id: Option<Id>,
     pub channel_id: Id,
     pub last_pin_timestamp: Option<OffsetDateTime>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway\
     #thread-list-sync-thread-list-sync-event-fields"
 )]
+#[derive(Clone, Debug)]
 pub struct ThreadSync<T> {
     pub guild_id: Id,
     pub channel_ids: Option<Vec<Id>>,
@@ -104,10 +105,10 @@ pub struct ThreadSync<T> {
     pub members: Vec<ThreadMember>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct PermissionOverwrite {
     pub id: Id,
     pub kind: PermissionOverwriteKind,
@@ -115,10 +116,10 @@ pub struct PermissionOverwrite {
     pub deny: String,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum PermissionOverwriteKind {
     Role = 0,
     Member = 1,

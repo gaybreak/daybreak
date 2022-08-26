@@ -42,10 +42,10 @@ pub mod voice;
 use enumflags2::bitflags;
 use time::{Duration, OffsetDateTime};
 
-use crate::{discord_url, InternalResult};
+use crate::InternalResult;
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
+#[derive(Clone, Copy, Debug)]
 pub struct Id(pub u64);
 
 impl Id {
@@ -68,10 +68,10 @@ impl Id {
 
 #[bitflags]
 #[repr(u64)]
-#[derive(Clone, Copy, Debug)]
 #[doc =discord_url!(
     "https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum Permissions {
     CreateInstantInvite = 1 << 0,
     KickMembers = 1 << 1,
@@ -116,8 +116,8 @@ pub enum Permissions {
     ModerateMembers = 1 << 40,
 }
 
-#[allow(clippy::unwrap_used)]
 #[cfg(test)]
+#[allow(clippy::unwrap_used)]
 mod tests {
     use time::OffsetDateTime;
 

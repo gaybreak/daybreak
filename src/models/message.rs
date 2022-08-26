@@ -10,10 +10,10 @@ use super::{
 };
 use crate::models::{application::Application, emoji::Emoji};
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Message<T> {
     pub id: Id,
     pub channel_id: Id,
@@ -47,10 +47,10 @@ pub struct Message<T> {
     pub position: Option<u32>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum MessageType {
     Default = 0,
     RecipientAdd = 1,
@@ -78,20 +78,20 @@ pub enum MessageType {
     AutoModerationAction = 24,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #message-object-message-activity-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct MessageActivity {
     pub message_activity_type: MessageActivityType,
     pub party_id: Option<String>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum MessageActivityType {
     Join = 1,
     Spectate = 2,
@@ -101,10 +101,10 @@ pub enum MessageActivityType {
 
 #[bitflags]
 #[repr(u16)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-flags"
 )]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum MessageFlags {
     Crossposted = 1 << 0,
     IsCrosspost = 1 << 1,
@@ -117,10 +117,10 @@ pub enum MessageFlags {
     FailedToMentionSomeRolesInThread = 1 << 8,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-reference-object"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct MessageReference {
     pub message_id: Option<Id>,
     pub channel_id: Option<Id>,
@@ -128,11 +128,11 @@ pub struct MessageReference {
     pub fail_if_not_exists: Option<bool>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #channel-mention-object-channel-mention-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct ChannelMention {
     pub id: Id,
     pub guild_id: Id,
@@ -140,11 +140,11 @@ pub struct ChannelMention {
     pub name: String,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #allowed-mentions-object-allowed-mentions-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct AllowedMentions {
     pub parse: Vec<String>,
     pub roles: Vec<Id>,
@@ -152,10 +152,10 @@ pub struct AllowedMentions {
     pub replied_user: bool,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Attachment {
     pub id: Id,
     pub filename: String,
@@ -169,10 +169,10 @@ pub struct Attachment {
     pub ephemeral: Option<bool>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Reaction {
     pub count: u32,
     pub me: bool,

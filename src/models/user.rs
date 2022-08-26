@@ -2,10 +2,10 @@ use enumflags2::bitflags;
 
 use super::Id;
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-user-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct User {
     pub id: Id,
     pub username: String,
@@ -26,14 +26,14 @@ pub struct User {
 
 #[bitflags]
 #[repr(u32)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[doc = discord_url!(
-        "https://discord.com/developers/docs/resources/user#user-object-user-flags"
-    )]
+    "https://discord.com/developers/docs/resources/user#user-object-user-flags"
+)]
+#[derive(Clone, Copy, Debug)]
 pub enum UserFlags {
-    STAFF = 1 << 0,
-    PARTNER = 1 << 1,
-    HYPESQUAD = 1 << 2,
+    Staff = 1 << 0,
+    Partner = 1 << 1,
+    Hypesquad = 1 << 2,
     BugHunterLevel1 = 1 << 3,
     HypesquadOnlineHouse1 = 1 << 6,
     HypesquadOnlineHouse2 = 1 << 7,
@@ -47,10 +47,10 @@ pub enum UserFlags {
     BotHttpInteractions = 1 << 19,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-premium-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum PremiumType {
     None = 0,
     NitroClassic = 1,

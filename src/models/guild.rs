@@ -3,10 +3,10 @@ use time::OffsetDateTime;
 
 use super::{channel::Channel, presence::Activity, voice::VoiceState, Id, Permissions};
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-guild-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct Guild<T> {
     pub id: Id,
     pub name: String,
@@ -65,10 +65,10 @@ pub struct Guild<T> {
     pub guild_scheduled_events: Option<Vec<T>>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-verification-level"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum VerificationLevel {
     None = 0,
     Low = 1,
@@ -77,28 +77,28 @@ pub enum VerificationLevel {
     VeryHigh = 4,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild\
     #guild-object-default-message-notification-level"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum MessageNotificationLevel {
     AllMessages = 0,
     OnlyMentions = 1,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum ExplicitContentFilterLevel {
     Disabled = 0,
     MembersWithoutRoles = 1,
     AllMembers = 2,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-object-mfa-level")]
+#[derive(Clone, Copy, Debug)]
 pub enum MfaLevel {
     None = 0,
     Elevated = 1,
@@ -106,8 +106,8 @@ pub enum MfaLevel {
 
 #[bitflags]
 #[repr(u8)]
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-object-mfa-level")]
+#[derive(Clone, Copy, Debug)]
 pub enum SystemChannelFlags {
     SuppressJoinNotifications = 1 << 0,
     SuppressPremiumSubscriptions = 1 << 1,
@@ -115,10 +115,10 @@ pub enum SystemChannelFlags {
     SuppressJoinNotificationReplies = 1 << 3,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-premium-tier"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum PremiumTier {
     None = 0,
     Tier1 = 1,
@@ -126,21 +126,21 @@ pub enum PremiumTier {
     Tier3 = 3,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild\
     #welcome-screen-object-welcome-screen-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct WelcomeScreen {
     pub description: Option<String>,
     pub welcome_channels: Vec<WelcomeScreenChannel>,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild\
     #welcome-screen-object-welcome-screen-channel-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct WelcomeScreenChannel {
     pub channel_id: Id,
     pub description: String,
@@ -148,10 +148,10 @@ pub struct WelcomeScreenChannel {
     pub emoji_name: Option<String>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum NsfwLevel {
     Default = 0,
     Explicit = 1,
@@ -159,11 +159,11 @@ pub enum NsfwLevel {
     AgeRestricted = 3,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/stage-instance\
     #stage-instance-object-stage-instance-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct StageInstance {
     pub id: Id,
     pub guild_id: Id,
@@ -174,20 +174,20 @@ pub struct StageInstance {
     pub guild_scheduled_event_id: Option<Id>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/stage-instance\
     #stage-instance-object-privacy-level"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum StagePrivacyLevel {
     Public = 1,
     GuildOnly = 2,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#unavailable-guild-object"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct UnavailableGuild {
     pub id: Id,
     pub unavailable: bool,

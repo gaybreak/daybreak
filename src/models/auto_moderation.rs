@@ -1,10 +1,10 @@
 use super::Id;
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-auto-moderation-rule-structure"
 )]
+#[derive(Clone, Debug)]
 pub struct AutoModerationRule {
     pub id: Id,
     pub guild_id: Id,
@@ -19,20 +19,20 @@ pub struct AutoModerationRule {
     pub exempt_channels: Vec<Id>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-event-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum AutoModerationEvent {
     MessageSend = 1,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum AutoModerationTriggerType {
     Keyword = 1,
     HarmfulLink = 2,
@@ -41,11 +41,11 @@ pub enum AutoModerationTriggerType {
     MentionSpam = 5,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-metadata"
 )]
+#[derive(Clone, Debug)]
 pub struct AutoModerationTrigger {
     pub keyword_filter: Vec<String>,
     pub presets: Vec<KeywordPresetType>,
@@ -53,53 +53,53 @@ pub struct AutoModerationTrigger {
     pub mention_total_limit: u8,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-keyword-preset-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum KeywordPresetType {
     Profanity = 1,
     SexualContent = 2,
     Slurs = 3,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-auto-moderation-action-structure"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct AutoModerationAction {
     pub kind: AutoModerationActionType,
     pub metadata: Option<AutoModerationActionData>,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-types"
 )]
+#[derive(Clone, Copy, Debug)]
 pub enum AutoModerationActionType {
     BlockMessage = 1,
     SendAlertMessage = 2,
     Timeout = 3,
 }
 
-#[derive(Clone, Copy, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-metadata"
 )]
+#[derive(Clone, Copy, Debug)]
 pub struct AutoModerationActionData {
     pub channel_id: Id,
     pub duration_seconds: u32,
 }
 
-#[derive(Clone, Debug)]
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway\
     #auto-moderation-action-execution-auto-moderation-action-execution-event-fields"
 )]
+#[derive(Clone, Debug)]
 pub struct AutoModerationExecution {
     pub guild_id: Id,
     pub action: AutoModerationAction,

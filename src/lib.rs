@@ -56,14 +56,15 @@
     clippy::exhaustive_enums
 )]
 
-/// To be used like `#[doc = discord_url!("https://discord.com/developers/docs/...")]`
+/// # Example
+/// ```rust
+/// #[doc = discord_url!("https://discord.com/developers/docs/...")]
+/// ```
 macro_rules! discord_url {
     ($url: literal) => {
         concat!("\n\n[Refer to the Discord docs](", $url, ")")
     };
 }
-
-use discord_url;
 
 pub mod models;
 
