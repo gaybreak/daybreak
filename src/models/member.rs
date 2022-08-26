@@ -21,6 +21,34 @@ pub struct Member {
 }
 
 #[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/permissions#role-object-role-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct Role {
+    pub id: Id,
+    pub name: String,
+    pub color: u32,
+    pub hoist: bool,
+    pub icon: Option<String>,
+    pub unicode_emoji: Option<String>,
+    pub position: u8,
+    pub permissions: Permissions,
+    pub managed: bool,
+    pub mentionable: bool,
+    pub tags: Option<RoleTags>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct RoleTags {
+    pub bot_id: Option<Id>,
+    pub integration_id: Option<Id>,
+    pub premium_subscriber: Option<bool>,
+}
+
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #thread-member-object-thread-member-structure"
 )]

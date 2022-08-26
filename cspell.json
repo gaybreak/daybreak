@@ -4,6 +4,7 @@
     "minWordLength": 0,
     "words": [
         "afk",
+        "Apng",
         "ascii",
         "bitflags",
         "bitrate",
@@ -37,6 +38,7 @@
         "rustup",
         "sku",
         "tts",
+        "unicode",
         "Vad",
         "Vec",
         "WIP"
