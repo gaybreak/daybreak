@@ -2,7 +2,13 @@ use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{
-    channel::Channel, member::Member, presence::Activity, voice::VoiceState, Id, Permissions,
+    channel::Channel,
+    emoji::{Emoji, Sticker},
+    member::{Member, Role},
+    presence::Activity,
+    user::User,
+    voice::VoiceState,
+    Id, Permissions,
 };
 
 #[doc = discord_url!(
@@ -27,8 +33,8 @@ pub struct Guild<T> {
     pub verification_level: VerificationLevel,
     pub default_message_notifications: MessageNotificationLevel,
     pub explicit_content_filter: ExplicitContentFilterLevel,
-    pub roles: Vec<T>,
-    pub emojis: Vec<T>,
+    pub roles: Vec<Role>,
+    pub emojis: Vec<Emoji>,
     pub features: Vec<String>,
     pub mfa_level: MfaLevel,
     pub application_id: Option<Id>,
@@ -49,7 +55,7 @@ pub struct Guild<T> {
     pub approximate_presence_count: Option<u32>,
     pub welcome_screen: Option<WelcomeScreen>,
     pub nsfw_level: NsfwLevel,
-    pub stickers: Vec<T>,
+    pub stickers: Option<Vec<Sticker>>,
     pub premium_progress_bar_enabled: bool,
     #[doc = discord_url!(
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
@@ -94,7 +100,7 @@ pub struct Guild<T> {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
     )]
-    pub guild_scheduled_events: Option<Vec<T>>,
+    pub guild_scheduled_events: Option<Vec<ScheduledEvent>>,
 }
 
 #[doc = discord_url!(
@@ -214,6 +220,71 @@ pub struct StageInstance {
 pub enum StagePrivacyLevel {
     Public = 1,
     GuildOnly = 2,
+}
+
+#[doc =discord_url!(
+    "https://discord.com/developers/docs/resources/guild-scheduled-event\
+    #guild-scheduled-event-object-guild-scheduled-event-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct ScheduledEvent {
+    pub id: Id,
+    pub guild_id: Id,
+    pub channel_id: Option<Id>,
+    pub creator_id: Option<Id>,
+    pub name: String,
+    pub description: Option<String>,
+    pub scheduled_start_time: OffsetDateTime,
+    pub scheduled_end_time: Option<OffsetDateTime>,
+    pub privacy_level: ScheduledEventPrivacy,
+    pub status: ScheduledEventStatus,
+    pub entity_type: ScheduledEventEntityType,
+    pub entity_id: Option<Id>,
+    pub entity_metadata: ScheduledEventEntity,
+    pub creator: Option<User>,
+    pub user_count: Option<u16>,
+    pub image: Option<String>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild-scheduled-event\
+    #guild-scheduled-event-object-guild-scheduled-event-privacy-level"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum ScheduledEventPrivacy {
+    GuildOnly = 2,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild-scheduled-event\
+    #guild-scheduled-event-object-guild-scheduled-event-status"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum ScheduledEventStatus {
+    Scheduled = 1,
+    Active = 2,
+    Completed = 3,
+    Canceled = 4,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild-scheduled-event\
+    #guild-scheduled-event-object-guild-scheduled-event-entity-metadata"
+)]
+#[derive(Clone, Debug)]
+pub struct ScheduledEventEntity {
+    pub location: Option<String>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild-scheduled-event\
+    #guild-scheduled-event-object-guild-scheduled-event-entity-types"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum ScheduledEventEntityType {
+    StageInstance = 1,
+    Voice = 2,
+    External = 3,
 }
 
 #[doc = discord_url!(
