@@ -5,7 +5,7 @@ use crate::models::{user::User, Id};
 )]
 #[derive(Clone, Debug)]
 pub struct Emoji {
-    pub id: Id,
+    pub id: Option<Id>,
     pub name: Option<String>,
     pub roles: Option<Id>,
     pub user: Option<User>,
@@ -13,4 +13,42 @@ pub struct Emoji {
     pub managed: Option<bool>,
     pub animated: Option<bool>,
     pub available: Option<bool>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct Sticker {
+    pub id: Id,
+    pub pack_id: Option<Id>,
+    pub name: String,
+    pub description: Option<String>,
+    pub tags: String,
+    pub asset: Option<String>,
+    pub kind: StickerType,
+    pub format_type: StickerFormat,
+    pub available: Option<bool>,
+    pub guild_id: Option<Id>,
+    pub user: Option<User>,
+    pub sort_value: Option<u8>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum StickerType {
+    Standard = 1,
+    Guild = 2,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum StickerFormat {
+    Png = 1,
+    Apng = 2,
+    Lottie = 3,
 }
