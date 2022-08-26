@@ -1,7 +1,9 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{channel::Channel, presence::Activity, voice::VoiceState, Id, Permissions};
+use super::{
+    channel::Channel, member::Member, presence::Activity, voice::VoiceState, Id, Permissions,
+};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#guild-object-guild-structure"
@@ -53,15 +55,45 @@ pub struct Guild<T> {
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
     )]
     pub joined_at: Option<OffsetDateTime>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub large: Option<bool>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub unavailable: Option<bool>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub member_count: Option<u32>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub voice_states: Option<Vec<VoiceState>>,
-    pub members: Option<Vec<T>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
+    pub members: Option<Vec<Member>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub channels: Option<Vec<Channel<T>>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub threads: Option<Vec<Channel<T>>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub presences: Option<Vec<Activity>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub stage_instances: Option<Vec<StageInstance>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
+    )]
     pub guild_scheduled_events: Option<Vec<T>>,
 }
 

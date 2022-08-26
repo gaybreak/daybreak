@@ -66,6 +66,26 @@ macro_rules! discord_url {
     };
 }
 
+/// # Example
+/// ```rust
+/// #[doc = fields_documented!()]
+/// ```
+macro_rules! fields_documented {
+    () => {
+        "Refer to the documentation of the fields"
+    };
+}
+
+/// # Example
+/// ```rust
+/// #[doc = variants_documented!()]
+/// ```
+macro_rules! variants_documented {
+    () => {
+        "Refer to the documentation of the variants"
+    };
+}
+
 pub mod models;
 
 /// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)

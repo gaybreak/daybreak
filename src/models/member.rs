@@ -24,21 +24,25 @@ pub struct Member {
     "https://discord.com/developers/docs/resources/channel\
     #thread-member-object-thread-member-structure"
 )]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway#thread-member-update"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway\
-    #thread-members-update-thread-members-update-event-fields"
-)]
 #[derive(Clone, Debug)]
 pub struct ThreadMember {
     pub id: Option<Id>,
     pub user_id: Option<Id>,
     pub join_timestamp: OffsetDateTime,
     pub flags: u8,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#thread-member-update"
+    )]
     pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #thread-members-update-thread-members-update-event-fields"
+    )]
     pub member: Option<Member>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #thread-members-update-thread-members-update-event-fields"
+    )]
     pub presences: Option<Vec<Activity>>,
 }
 

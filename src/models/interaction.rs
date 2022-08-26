@@ -46,28 +46,68 @@ pub enum InteractionType {
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-application-command-data-structure"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-message-component-data-structure"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/receiving-and-responding\
-    #interaction-object-modal-submit-data-structure"
+    #interaction-object-interaction-data"
 )]
 #[derive(Clone, Debug)]
 pub struct InteractionData<T> {
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub name: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub kind: Option<CommandType>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub resolved: Option<ResolvedData<T>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub options: Option<Vec<CommandOption>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-application-command-data-structure"
+    )]
     pub target_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-message-component-data-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-modal-submit-data-structure"
+    )]
     pub custom_id: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-message-component-data-structure"
+    )]
     pub component_type: Option<ComponentType>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-message-component-data-structure"
+    )]
     pub values: Option<Vec<SelectOption>>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/receiving-and-responding\
+        #interaction-object-modal-submit-data-structure"
+    )]
     pub components: Option<Vec<Component>>,
 }
 
@@ -128,34 +168,115 @@ pub struct ResolvedData<T> {
     pub attachments: Option<HashMap<Id, Attachment>>,
 }
 
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #button-object-button-structure"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #select-menu-object-select-menu-structure"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #text-inputs-text-input-structure"
-)]
+#[doc = fields_documented!()]
 #[derive(Clone, Debug)]
 pub struct Component {
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub kind: ComponentType,
-    pub disabled: Option<bool>,
-    pub custom_id: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub style: Option<ComponentStyle>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub label: Option<String>,
-    pub placeholder: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
     pub emoji: Option<Emoji>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
+    pub custom_id: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
     pub url: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
+    pub disabled: Option<bool>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
+    pub placeholder: Option<String>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
     pub options: Vec<SelectOption>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
     pub min_values: Option<u8>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #select-menu-object-select-menu-structure"
+    )]
     pub max_values: Option<u8>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub min_length: Option<u16>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub max_length: Option<u16>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub required: Option<bool>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-structure"
+    )]
     pub value: Option<String>,
 }
 
@@ -171,25 +292,41 @@ pub enum ComponentType {
     TextInput = 4,
 }
 
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #button-object-button-styles"
-)]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/interactions/message-components\
-    #text-inputs-text-input-styles"
-)]
+#[doc = variants_documented!()]
 #[derive(Clone, Copy, Debug)]
 pub enum ComponentStyle {
-    /// Short for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-styles"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-styles"
+    )]
     Primary = 1,
-    /// Paragraph for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-styles"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #text-inputs-text-input-styles"
+    )]
     Secondary = 2,
-    /// Invalid for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-styles"
+    )]
     Success = 3,
-    /// Invalid for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-styles"
+    )]
     Danger = 4,
-    /// Invalid for modals
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/interactions/message-components\
+        #button-object-button-styles"
+    )]
     Link = 5,
 }
 
