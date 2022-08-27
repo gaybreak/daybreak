@@ -35,10 +35,13 @@ pub mod member;
 pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#presence")]
 pub mod presence;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/permissions#role-object")]
+pub mod role;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
 pub mod voice;
+
 use enumflags2::bitflags;
 use time::{Duration, OffsetDateTime};
 

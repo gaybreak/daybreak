@@ -3,8 +3,9 @@ use std::collections::HashMap;
 use super::{
     channel::Channel,
     emoji::Emoji,
-    member::{Member, Role},
+    member::Member,
     message::{Attachment, Message},
+    role::Role,
     user::User,
     Id, Permissions,
 };

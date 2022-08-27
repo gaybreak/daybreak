@@ -4,8 +4,9 @@ use time::OffsetDateTime;
 use super::{
     channel::Channel,
     emoji::{Emoji, Sticker},
-    member::{Member, Role},
+    member::Member,
     presence::Activity,
+    role::Role,
     user::User,
     voice::VoiceState,
     Id, Permissions,
