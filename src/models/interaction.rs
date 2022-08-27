@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use super::{
     channel::Channel,
     emoji::Emoji,
-    member::Member,
+    member::{Member, Role},
     message::{Attachment, Message},
     user::User,
     Id, Permissions,
@@ -14,18 +14,18 @@ use super::{
     #interaction-object-interaction-structure"
 )]
 #[derive(Clone, Debug)]
-pub struct Interaction<T> {
+pub struct Interaction {
     pub id: Id,
     pub application_id: Id,
     pub kind: InteractionType,
-    pub data: Option<InteractionData<T>>,
+    pub data: Option<InteractionData>,
     pub guild_id: Option<Id>,
     pub channel_id: Option<Id>,
     pub member: Option<Id>,
     pub user: Option<User>,
     pub token: String,
     pub version: u8,
-    pub message: Option<Message<T>>,
+    pub message: Option<Message>,
     pub app_permissions: Option<Permissions>,
     pub locale: Option<String>,
     pub guild_locale: Option<String>,
@@ -49,7 +49,7 @@ pub enum InteractionType {
     #interaction-object-interaction-data"
 )]
 #[derive(Clone, Debug)]
-pub struct InteractionData<T> {
+pub struct InteractionData {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/receiving-and-responding\
         #interaction-object-application-command-data-structure"
@@ -69,7 +69,7 @@ pub struct InteractionData<T> {
         "https://discord.com/developers/docs/interactions/receiving-and-responding\
         #interaction-object-application-command-data-structure"
     )]
-    pub resolved: Option<ResolvedData<T>>,
+    pub resolved: Option<ResolvedData>,
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/receiving-and-responding\
         #interaction-object-application-command-data-structure"
@@ -159,12 +159,12 @@ pub enum CommandOptionType {
     #interaction-object-resolved-data-structure"
 )]
 #[derive(Clone, Debug)]
-pub struct ResolvedData<T> {
+pub struct ResolvedData {
     pub users: Option<HashMap<Id, User>>,
     pub members: Option<HashMap<Id, Member>>,
-    pub roles: Option<HashMap<Id, T>>,
-    pub channels: Option<HashMap<Id, Channel<T>>>,
-    pub messages: Option<HashMap<Id, Message<T>>>,
+    pub roles: Option<HashMap<Id, Role>>,
+    pub channels: Option<HashMap<Id, Channel>>,
+    pub messages: Option<HashMap<Id, Message>>,
     pub attachments: Option<HashMap<Id, Attachment>>,
 }
 
