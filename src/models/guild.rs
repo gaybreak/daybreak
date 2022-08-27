@@ -295,3 +295,16 @@ pub struct UnavailableGuild {
     pub id: Id,
     pub unavailable: bool,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway#guild-ban-add-guild-ban-add-event-fields"
+)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-ban-remove-guild-ban-remove-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct GuildBan {
+    pub guild_id: Id,
+    pub user: User,
+}
