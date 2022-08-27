@@ -289,6 +289,17 @@ pub enum ScheduledEventEntityType {
 }
 
 #[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct ScheduledEventUser {
+    pub guild_scheduled_event_id: Id,
+    pub user_id: Id,
+    pub guild_id: Id,
+}
+
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#unavailable-guild-object"
 )]
 #[derive(Clone, Copy, Debug)]
