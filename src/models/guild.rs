@@ -2,11 +2,13 @@ use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{
+    application::Application,
     channel::Channel,
     emoji::{Emoji, Sticker},
     member::Member,
     presence::Activity,
     role::Role,
+    scheduled_event::ScheduledEvent,
     user::User,
     voice::VoiceState,
     Id, Permissions,
@@ -223,82 +225,6 @@ pub enum StagePrivacyLevel {
     GuildOnly = 2,
 }
 
-#[doc =discord_url!(
-    "https://discord.com/developers/docs/resources/guild-scheduled-event\
-    #guild-scheduled-event-object-guild-scheduled-event-structure"
-)]
-#[derive(Clone, Debug)]
-pub struct ScheduledEvent {
-    pub id: Id,
-    pub guild_id: Id,
-    pub channel_id: Option<Id>,
-    pub creator_id: Option<Id>,
-    pub name: String,
-    pub description: Option<String>,
-    pub scheduled_start_time: OffsetDateTime,
-    pub scheduled_end_time: Option<OffsetDateTime>,
-    pub privacy_level: ScheduledEventPrivacy,
-    pub status: ScheduledEventStatus,
-    pub entity_type: ScheduledEventEntityType,
-    pub entity_id: Option<Id>,
-    pub entity_metadata: ScheduledEventEntity,
-    pub creator: Option<User>,
-    pub user_count: Option<u16>,
-    pub image: Option<String>,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild-scheduled-event\
-    #guild-scheduled-event-object-guild-scheduled-event-privacy-level"
-)]
-#[derive(Clone, Copy, Debug)]
-pub enum ScheduledEventPrivacy {
-    GuildOnly = 2,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild-scheduled-event\
-    #guild-scheduled-event-object-guild-scheduled-event-status"
-)]
-#[derive(Clone, Copy, Debug)]
-pub enum ScheduledEventStatus {
-    Scheduled = 1,
-    Active = 2,
-    Completed = 3,
-    Canceled = 4,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild-scheduled-event\
-    #guild-scheduled-event-object-guild-scheduled-event-entity-metadata"
-)]
-#[derive(Clone, Debug)]
-pub struct ScheduledEventEntity {
-    pub location: Option<String>,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/guild-scheduled-event\
-    #guild-scheduled-event-object-guild-scheduled-event-entity-types"
-)]
-#[derive(Clone, Copy, Debug)]
-pub enum ScheduledEventEntityType {
-    StageInstance = 1,
-    Voice = 2,
-    External = 3,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway\
-    #guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields"
-)]
-#[derive(Clone, Copy, Debug)]
-pub struct ScheduledEventUser {
-    pub guild_scheduled_event_id: Id,
-    pub user_id: Id,
-    pub guild_id: Id,
-}
-
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#unavailable-guild-object"
 )]
@@ -311,6 +237,10 @@ pub struct UnavailableGuild {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#guild-ban-add-guild-ban-add-event-fields"
 )]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-ban-remove-guild-ban-remove-event-fields"
+)]
 #[derive(Clone, Debug)]
 pub struct GuildBan {
     pub guild_id: Id,
@@ -318,10 +248,74 @@ pub struct GuildBan {
 }
 
 #[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild#integration-object-integration-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct Integration {
+    pub id: Id,
+    pub name: String,
+    pub kind: String,
+    pub enabled: Option<bool>,
+    pub syncing: Option<bool>,
+    pub role_id: Option<Id>,
+    pub enable_emoticons: Option<bool>,
+    pub expire_behavior: Option<IntegrationExpire>,
+    pub expire_grace_period: Option<u16>,
+    pub user: Option<User>,
+    pub account: IntegrationAccount,
+    pub synced_at: Option<OffsetDateTime>,
+    pub subscriber_count: Option<u32>,
+    pub revoked: Option<bool>,
+    pub application: Option<IntegrationApplication>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #integration-create-integration-create-event-additional-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #integration-update-integration-update-event-additional-fields"
+    )]
+    pub guild_id: Option<Id>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild\
+    #integration-object-integration-expire-behaviors"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum IntegrationExpire {
+    RemoveRole = 0,
+    Kick = 1,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild\
+    #integration-account-object-integration-account-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct IntegrationAccount {
+    pub id: String,
+    pub name: String,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/guild\
+    #integration-application-object-integration-application-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct IntegrationApplication {
+    pub id: Id,
+    pub name: String,
+    pub icon: Option<String>,
+    pub description: String,
+    pub bot: Option<User>,
+}
+
+#[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway\
     #guild-integrations-update-guild-integrations-update-event-fields"
 )]
 #[derive(Clone, Copy, Debug)]
-pub struct GuildIntegrations {
+pub struct Integrations {
     pub guild_id: Id,
 }

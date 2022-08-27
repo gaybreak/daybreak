@@ -37,6 +37,8 @@ pub mod message;
 pub mod presence;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/permissions#role-object")]
 pub mod role;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/guild-scheduled-event")]
+pub mod scheduled_event;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
