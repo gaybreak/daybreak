@@ -52,3 +52,13 @@ pub enum StickerFormat {
     Apng = 2,
     Lottie = 3,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct StickerItem {
+    pub id: Id,
+    pub name: String,
+    pub format_type: StickerFormat,
+}
