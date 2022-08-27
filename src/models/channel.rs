@@ -1,3 +1,4 @@
+use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{member::ThreadMember, user::User, Id, Permissions};
@@ -5,9 +6,8 @@ use super::{member::ThreadMember, user::User, Id, Permissions};
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
-#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
 #[derive(Clone, Debug)]
-pub struct Channel<T> {
+pub struct Channel {
     pub id: Id,
     pub channel_type: ChannelType,
     pub guild_id: Option<Id>,
@@ -34,7 +34,7 @@ pub struct Channel<T> {
     pub member: Option<ThreadMember>,
     pub default_auto_archive_duration: Option<u16>,
     pub permissions: Option<Permissions>,
-    pub flags: Option<T>,
+    pub flags: Option<ChannelFlags>,
     pub total_message_sent: Option<u32>,
     #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
     pub newly_created: Option<bool>,
@@ -57,6 +57,16 @@ pub enum ChannelType {
     GuildStageVoice = 13,
     GuildDirectory = 14,
     GuildForum = 15,
+}
+
+#[bitflags]
+#[repr(u8)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel#channel-object-channel-flags"
+)]
+#[derive(Clone, Copy, Debug)]
+pub enum ChannelFlags {
+    Pinned = 1 << 1,
 }
 
 #[doc = discord_url!(
@@ -98,10 +108,10 @@ pub struct ChannelPinsUpdate {
     #thread-list-sync-thread-list-sync-event-fields"
 )]
 #[derive(Clone, Debug)]
-pub struct ThreadSync<T> {
+pub struct ThreadSync {
     pub guild_id: Id,
     pub channel_ids: Option<Vec<Id>>,
-    pub threads: Vec<Channel<T>>,
+    pub threads: Vec<Channel>,
     pub members: Vec<ThreadMember>,
 }
 
