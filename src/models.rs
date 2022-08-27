@@ -25,6 +25,8 @@ pub mod emoji;
 pub mod gateway;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
 pub mod guild;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/guild#integration-object")]
+pub mod integration;
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding#interactions"
 )]
