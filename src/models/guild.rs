@@ -15,7 +15,7 @@ use super::{
     "https://discord.com/developers/docs/resources/guild#guild-object-guild-structure"
 )]
 #[derive(Clone, Debug)]
-pub struct Guild<T> {
+pub struct Guild {
     pub id: Id,
     pub name: String,
     pub icon: Option<String>,
@@ -84,11 +84,11 @@ pub struct Guild<T> {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
     )]
-    pub channels: Option<Vec<Channel<T>>>,
+    pub channels: Option<Vec<Channel>>,
     #[doc = discord_url!(
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
     )]
-    pub threads: Option<Vec<Channel<T>>>,
+    pub threads: Option<Vec<Channel>>,
     #[doc = discord_url!(
         "https://discord.com/developers/docs/topics/gateway#guild-create-guild-create-extra-fields"
     )]
