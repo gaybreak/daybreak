@@ -4,6 +4,7 @@ use time::OffsetDateTime;
 use super::{
     channel::{Channel, ChannelType},
     embed::Embed,
+    emoji::{Sticker, StickerItem},
     interaction::{Component, MessageInteraction},
     user::User,
     Id,
@@ -14,7 +15,7 @@ use crate::models::{application::Application, emoji::Emoji};
     "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
 )]
 #[derive(Clone, Debug)]
-pub struct Message<T> {
+pub struct Message {
     pub id: Id,
     pub channel_id: Id,
     pub author: User,
@@ -38,12 +39,12 @@ pub struct Message<T> {
     pub application_id: Option<Id>,
     pub message_reference: Option<MessageReference>,
     pub flags: Option<MessageFlags>,
-    pub referenced_message: Option<Box<Message<T>>>,
+    pub referenced_message: Option<Box<Message>>,
     pub interaction: Option<MessageInteraction>,
-    pub thread: Option<Channel<T>>,
+    pub thread: Option<Channel>,
     pub components: Option<Vec<Component>>,
-    pub sticker_items: Option<Vec<T>>,
-    pub stickers: Option<Vec<T>>,
+    pub sticker_items: Option<Vec<StickerItem>>,
+    pub stickers: Option<Vec<Sticker>>,
     pub position: Option<u32>,
 }
 
