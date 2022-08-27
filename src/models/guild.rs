@@ -299,12 +299,17 @@ pub struct UnavailableGuild {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#guild-ban-add-guild-ban-add-event-fields"
 )]
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway\
-    #guild-ban-remove-guild-ban-remove-event-fields"
-)]
 #[derive(Clone, Debug)]
 pub struct GuildBan {
     pub guild_id: Id,
     pub user: User,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-integrations-update-guild-integrations-update-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct GuildIntegrations {
+    pub guild_id: Id,
 }
