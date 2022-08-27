@@ -8,8 +8,8 @@ use super::Id;
 #[derive(Clone, Debug)]
 pub struct User {
     pub id: Id,
-    pub username: String,
-    pub discriminator: String,
+    pub username: Option<String>,
+    pub discriminator: Option<String>,
     pub avatar: Option<String>,
     pub bot: Option<bool>,
     pub system: Option<bool>,
