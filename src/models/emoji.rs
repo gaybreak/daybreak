@@ -63,3 +63,23 @@ pub struct StickerItem {
     pub name: String,
     pub format_type: StickerFormat,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-emojis-update-guild-emojis-update-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct GuildEmojis {
+    pub guild_id: Id,
+    pub emojis: Vec<Emoji>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-stickers-update-guild-stickers-update-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct GuildStickers {
+    pub guild_id: Id,
+    pub stickers: Vec<Sticker>,
+}
