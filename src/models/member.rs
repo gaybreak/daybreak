@@ -62,6 +62,30 @@ pub struct RoleTags {
 }
 
 #[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-role-create-guild-role-create-event-fields"
+)]
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-role-update-guild-role-update-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct NewRole {
+    pub guild_id: Id,
+    pub role: Role,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #guild-role-delete-guild-role-delete-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct RemovedRole {
+    pub guild_id: Id,
+    pub role_id: Id,
+}
+
+#[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
     #thread-member-object-thread-member-structure"
 )]
