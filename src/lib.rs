@@ -57,7 +57,7 @@
 )]
 
 /// # Example
-/// ```rust
+/// ```ignore
 /// #[doc = discord_url!("https://discord.com/developers/docs/...")]
 /// ```
 macro_rules! discord_url {
@@ -67,7 +67,7 @@ macro_rules! discord_url {
 }
 
 /// # Example
-/// ```rust
+/// ```ignore
 /// #[doc = fields_documented!()]
 /// ```
 macro_rules! fields_documented {
@@ -77,7 +77,7 @@ macro_rules! fields_documented {
 }
 
 /// # Example
-/// ```rust
+/// ```ignore
 /// #[doc = variants_documented!()]
 /// ```
 macro_rules! variants_documented {
