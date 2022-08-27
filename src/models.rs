@@ -31,6 +31,8 @@ pub mod integration;
     "https://discord.com/developers/docs/interactions/receiving-and-responding#interactions"
 )]
 pub mod interaction;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#invites")]
+pub mod invite;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-member-object")]
 pub mod member;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
