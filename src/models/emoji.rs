@@ -54,7 +54,8 @@ pub enum StickerFormat {
 }
 
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure"
+    "https://discord.com/developers/docs/resources/sticker\
+    #sticker-item-object-sticker-item-structure"
 )]
 #[derive(Clone, Debug)]
 pub struct StickerItem {
