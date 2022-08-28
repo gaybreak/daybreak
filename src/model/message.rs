@@ -282,7 +282,7 @@ pub struct TypingMessage {
 }
 
 #[doc = discord_url!(
-    "https://discord.com/developers/docs/topics/gateway
+    "https://discord.com/developers/docs/topics/gateway\
     #webhooks-update-webhooks-update-event-fields"
 )]
 #[derive(Clone, Copy, Debug)]
