@@ -1,6 +1,6 @@
 use enumflags2::bitflags;
 
-use super::Id;
+use super::{member::Member, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-user-structure"
@@ -22,6 +22,11 @@ pub struct User {
     pub flags: Option<UserFlags>,
     pub premium_type: Option<PremiumType>,
     pub public_flags: Option<UserFlags>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-create-message-create-extra-fields"
+    )]
+    pub member: Option<Box<Member>>,
 }
 
 #[bitflags]
@@ -55,4 +60,25 @@ pub enum PremiumType {
     None = 0,
     NitroClassic = 1,
     Nitro = 2,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway#message-delete-message-delete-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct RemovedMessage {
+    pub id: Id,
+    pub channel_id: Id,
+    pub guild_id: Option<Id>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #message-delete-bulk-message-delete-bulk-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct RemovedMessages {
+    pub id: Vec<Id>,
+    pub channel_id: Id,
+    pub guild_id: Option<Id>,
 }

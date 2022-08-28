@@ -6,6 +6,7 @@ use super::{
     embed::Embed,
     emoji::{Sticker, StickerItem},
     interaction::{Component, MessageInteraction},
+    member::Member,
     user::User,
     Id,
 };
@@ -18,22 +19,22 @@ use crate::models::{application::Application, emoji::Emoji};
 pub struct Message {
     pub id: Id,
     pub channel_id: Id,
-    pub author: User,
-    pub content: String,
-    pub created_at: OffsetDateTime,
+    pub author: Option<User>,
+    pub content: Option<String>,
+    pub created_at: Option<OffsetDateTime>,
     pub edited_at: Option<OffsetDateTime>,
-    pub tts: bool,
-    pub mention_everyone: bool,
-    pub mentions: Vec<User>,
-    pub mention_roles: Vec<Id>,
+    pub tts: Option<bool>,
+    pub mention_everyone: Option<bool>,
+    pub mentions: Option<Vec<User>>,
+    pub mention_roles: Option<Vec<Id>>,
     pub mention_channels: Option<Vec<ChannelMention>>,
-    pub attachments: Vec<Attachment>,
-    pub embeds: Vec<Embed>,
+    pub attachments: Option<Vec<Attachment>>,
+    pub embeds: Option<Vec<Embed>>,
     pub reactions: Option<Vec<Reaction>>,
     pub nonce: Option<String>,
-    pub pinned: bool,
+    pub pinned: Option<bool>,
     pub webhook_id: Option<Id>,
-    pub message_type: MessageType,
+    pub message_type: Option<MessageType>,
     pub activity: Option<MessageActivity>,
     pub application: Option<Application>,
     pub application_id: Option<Id>,
@@ -46,6 +47,22 @@ pub struct Message {
     pub sticker_items: Option<Vec<StickerItem>>,
     pub stickers: Option<Vec<Sticker>>,
     pub position: Option<u32>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-create-message-create-extra-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#message-update"
+    )]
+    pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-create-message-create-extra-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#message-update"
+    )]
+    pub member: Option<Member>,
 }
 
 #[doc = discord_url!(
