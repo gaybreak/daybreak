@@ -2,7 +2,6 @@ use enumflags2::bitflags;
 use time::OffsetDateTime;
 
 use super::{
-    application::Application,
     channel::Channel,
     emoji::{Emoji, Sticker},
     member::Member,

@@ -280,3 +280,13 @@ pub struct TypingMessage {
     pub timestamp: OffsetDateTime,
     pub member: Option<Member>,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway
+    #webhooks-update-webhooks-update-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct UpdatedWebhook {
+    pub guild_id: Id,
+    pub channel_id: Id,
+}
