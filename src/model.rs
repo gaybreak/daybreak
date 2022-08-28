@@ -25,20 +25,29 @@ pub mod emoji;
 pub mod gateway;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-resource")]
 pub mod guild;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/guild#integration-object")]
+pub mod integration;
 #[doc = discord_url!(
     "https://discord.com/developers/docs/interactions/receiving-and-responding#interactions"
 )]
 pub mod interaction;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#invites")]
+pub mod invite;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/guild#guild-member-object")]
 pub mod member;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/channel#message-object")]
 pub mod message;
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#presence")]
 pub mod presence;
+#[doc = discord_url!("https://discord.com/developers/docs/topics/permissions#role-object")]
+pub mod role;
+#[doc = discord_url!("https://discord.com/developers/docs/resources/guild-scheduled-event")]
+pub mod scheduled_event;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/user")]
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
 pub mod voice;
+
 use enumflags2::bitflags;
 use time::{Duration, OffsetDateTime};
 

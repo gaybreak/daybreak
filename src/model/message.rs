@@ -6,10 +6,11 @@ use super::{
     embed::Embed,
     emoji::{Sticker, StickerItem},
     interaction::{Component, MessageInteraction},
+    member::Member,
     user::User,
     Id,
 };
-use crate::models::{application::Application, emoji::Emoji};
+use crate::model::{application::Application, emoji::Emoji};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
@@ -18,22 +19,22 @@ use crate::models::{application::Application, emoji::Emoji};
 pub struct Message {
     pub id: Id,
     pub channel_id: Id,
-    pub author: User,
-    pub content: String,
-    pub created_at: OffsetDateTime,
+    pub author: Option<User>,
+    pub content: Option<String>,
+    pub created_at: Option<OffsetDateTime>,
     pub edited_at: Option<OffsetDateTime>,
-    pub tts: bool,
-    pub mention_everyone: bool,
-    pub mentions: Vec<User>,
-    pub mention_roles: Vec<Id>,
+    pub tts: Option<bool>,
+    pub mention_everyone: Option<bool>,
+    pub mentions: Option<Vec<User>>,
+    pub mention_roles: Option<Vec<Id>>,
     pub mention_channels: Option<Vec<ChannelMention>>,
-    pub attachments: Vec<Attachment>,
-    pub embeds: Vec<Embed>,
+    pub attachments: Option<Vec<Attachment>>,
+    pub embeds: Option<Vec<Embed>>,
     pub reactions: Option<Vec<Reaction>>,
     pub nonce: Option<String>,
-    pub pinned: bool,
+    pub pinned: Option<bool>,
     pub webhook_id: Option<Id>,
-    pub message_type: MessageType,
+    pub message_type: Option<MessageType>,
     pub activity: Option<MessageActivity>,
     pub application: Option<Application>,
     pub application_id: Option<Id>,
@@ -46,6 +47,22 @@ pub struct Message {
     pub sticker_items: Option<Vec<StickerItem>>,
     pub stickers: Option<Vec<Sticker>>,
     pub position: Option<u32>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-create-message-create-extra-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#message-update"
+    )]
+    pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-create-message-create-extra-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway#message-update"
+    )]
+    pub member: Option<Member>,
 }
 
 #[doc = discord_url!(
@@ -178,4 +195,98 @@ pub struct Reaction {
     pub count: u32,
     pub me: bool,
     pub emoji: Emoji,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    pub user_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub channel_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub message_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    pub member: Option<Member>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #message-reaction-remove-all-message-reaction-remove-all-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct PrunedReactions {
+    pub channel_id: Id,
+    pub message_id: Id,
+    pub guild_id: Option<Id>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway#typing-start-typing-start-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct TypingMessage {
+    pub channel_id: Id,
+    pub guild_id: Option<Id>,
+    pub user_id: Id,
+    pub timestamp: OffsetDateTime,
+    pub member: Option<Member>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #webhooks-update-webhooks-update-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct UpdatedWebhook {
+    pub guild_id: Id,
+    pub channel_id: Id,
 }

@@ -1,4 +1,4 @@
-use crate::models::{user::User, Id};
+use crate::model::{user::User, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure"

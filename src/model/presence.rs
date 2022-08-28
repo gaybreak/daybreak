@@ -1,7 +1,28 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::Id;
+use super::{user::User, Id};
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #presence-update-presence-update-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct Presence {
+    pub user: User,
+    pub guild_id: Id,
+    pub status: String,
+    pub activities: Vec<Activity>,
+    pub client_status: ClientStatus,
+}
+
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#client-status-object")]
+#[derive(Clone, Debug)]
+pub struct ClientStatus {
+    pub desktop: Option<String>,
+    pub mobile: Option<String>,
+    pub web: Option<String>,
+}
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure"
