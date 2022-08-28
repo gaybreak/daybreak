@@ -86,7 +86,7 @@ macro_rules! variants_documented {
     };
 }
 
-pub mod models;
+pub mod model;
 
 /// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)
 /// if it is
