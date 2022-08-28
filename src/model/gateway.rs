@@ -1,6 +1,6 @@
 use super::{application::Application, guild::UnavailableGuild, user::User};
-use crate::models::presence::Activity;
-use crate::models::Id;
+use crate::model::presence::Activity;
+use crate::model::Id;
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#hello-hello-structure")]
 #[derive(Clone, Copy, Debug)]
