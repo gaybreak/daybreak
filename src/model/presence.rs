@@ -134,3 +134,15 @@ pub struct ActivityButton {
     pub label: String,
     pub url: String,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #update-presence-gateway-presence-update-structure"
+)]
+#[derive(Clone, Debug)]
+pub struct UpdatedPresence {
+    pub since: Option<OffsetDateTime>,
+    pub activities: Vec<Activity>,
+    pub status: String,
+    pub afk: bool,
+}
