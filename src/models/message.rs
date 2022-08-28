@@ -195,4 +195,76 @@ pub struct Reaction {
     pub count: u32,
     pub me: bool,
     pub emoji: Emoji,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    pub user_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub channel_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub message_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-emoji-message-reaction-remove-emoji-event-fields"
+    )]
+    pub guild_id: Option<Id>,
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-add-message-reaction-add-event-fields"
+    )]
+    #[doc = discord_url!(
+        "https://discord.com/developers/docs/topics/gateway\
+        #message-reaction-remove-message-reaction-remove-event-fields"
+    )]
+    pub member: Option<Member>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #message-reaction-remove-all-message-reaction-remove-all-event-fields"
+)]
+#[derive(Clone, Copy, Debug)]
+pub struct PrunedReactions {
+    pub channel_id: Id,
+    pub message_id: Id,
+    pub guild_id: Option<Id>,
 }
