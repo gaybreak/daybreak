@@ -268,3 +268,15 @@ pub struct PrunedReactions {
     pub message_id: Id,
     pub guild_id: Option<Id>,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway#typing-start-typing-start-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct TypingMessage {
+    pub channel_id: Id,
+    pub guild_id: Option<Id>,
+    pub user_id: Id,
+    pub timestamp: OffsetDateTime,
+    pub member: Option<Member>,
+}
