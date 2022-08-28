@@ -21,3 +21,14 @@ pub struct VoiceState {
     pub suppress: bool,
     pub request_to_speak_timestamp: Option<OffsetDateTime>,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/topics/gateway\
+    #voice-server-update-voice-server-update-event-fields"
+)]
+#[derive(Clone, Debug)]
+pub struct VoiceServer {
+    pub token: String,
+    pub guild_id: Id,
+    pub endpoint: Option<String>,
+}
