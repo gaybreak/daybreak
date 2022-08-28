@@ -47,7 +47,7 @@ pub struct NewRole {
     #guild-role-delete-guild-role-delete-event-fields"
 )]
 #[derive(Clone, Copy, Debug)]
-pub struct RemovedRole {
+pub struct DeletedRole {
     pub guild_id: Id,
     pub role_id: Id,
 }

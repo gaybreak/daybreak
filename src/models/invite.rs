@@ -34,7 +34,7 @@ pub enum InviteTarget {
     "https://discord.com/developers/docs/topics/gateway#invite-delete-invite-delete-event-fields"
 )]
 #[derive(Clone, Debug)]
-pub struct RemovedInvite {
+pub struct DeletedInvite {
     pub channel_id: Id,
     pub guild_id: Option<Id>,
     pub code: String,

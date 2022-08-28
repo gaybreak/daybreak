@@ -66,7 +66,7 @@ pub enum PremiumType {
     "https://discord.com/developers/docs/topics/gateway#message-delete-message-delete-event-fields"
 )]
 #[derive(Clone, Copy, Debug)]
-pub struct RemovedMessage {
+pub struct DeletedMessage {
     pub id: Id,
     pub channel_id: Id,
     pub guild_id: Option<Id>,
@@ -77,7 +77,7 @@ pub struct RemovedMessage {
     #message-delete-bulk-message-delete-bulk-event-fields"
 )]
 #[derive(Clone, Debug)]
-pub struct RemovedMessages {
+pub struct DeletedMessages {
     pub id: Vec<Id>,
     pub channel_id: Id,
     pub guild_id: Option<Id>,
