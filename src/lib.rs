@@ -86,6 +86,7 @@ macro_rules! variants_documented {
     };
 }
 
+/// Discord objects and (de)serialization implementations on them
 pub mod model;
 
 /// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)

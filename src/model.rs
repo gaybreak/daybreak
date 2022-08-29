@@ -1,5 +1,3 @@
-//! Discord objects and (de)serialization implementations on them
-
 #![allow(
     clippy::default_numeric_fallback,
     clippy::integer_arithmetic,
