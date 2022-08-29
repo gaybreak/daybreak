@@ -27,7 +27,6 @@
     single_use_lifetimes,
     trivial_casts,
     trivial_numeric_casts,
-    unreachable_pub,
     unsafe_code,
     unsafe_op_in_unsafe_fn,
     unstable_features,
@@ -39,6 +38,8 @@
     unused_qualifications,
     unused_results,
     variant_size_differences,
+    // unstable lints: 
+    // unreachable_pub,
     // nightly lints:
     // fuzzy_provenance_casts,
     // lossy_provenance_casts,
@@ -55,6 +56,8 @@
     clippy::exhaustive_structs,
     clippy::exhaustive_enums
 )]
+
+use http::Http;
 
 /// # Example
 /// ```ignore
@@ -86,6 +89,8 @@ macro_rules! variants_documented {
     };
 }
 
+/// Implementation of the HTTP client to make requests to Discord
+mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
 
@@ -94,3 +99,24 @@ pub mod model;
 ///
 /// [NEW_ISSUE_URL]: https://github.com/gaybreak/daybreak/issues/new
 type InternalResult<T> = Result<T, anyhow::Error>;
+
+/// Brings all of the stateful structs together
+#[derive(Debug)]
+pub struct Context {
+    /// The HTTP client used in the crate
+    http: Http,
+}
+
+impl Context {
+    /// Create a new context
+    ///
+    /// This is most likely the first method you'll need to call to use this
+    /// framework so welcome to Daybreak!
+    #[must_use]
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> Self {
+        Self {
+            http: http::create(),
+        }
+    }
+}
