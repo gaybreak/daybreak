@@ -3,6 +3,7 @@
     "caseSensitive": true,
     "minWordLength": 0,
     "words": [
+        "ACK",
         "afk",
         "Apng",
         "ascii",
@@ -35,13 +36,14 @@
         "Rustc",
         "RUSTDOCFLAGS",
         "rustfmt",
+        "rustls",
         "rustup",
         "sku",
         "tts",
         "unicode",
         "Vad",
         "Vec",
-        "WIP",
-        "ACK"
+        "webpki",
+        "WIP"
     ]
 }
