@@ -1,4 +1,4 @@
-use crate::http::Http;
+use crate::http::{self, Http};
 
 #[derive(Debug)]
 /// Brings all of the stateful structs together
@@ -12,21 +12,23 @@ impl Context {
     ///
     /// This is probably the first method you'll need to call to use this
     /// framework so welcome to Daybreak!
-    /// 
+    ///
     /// # Example
     /// ```rust
+    /// use daybreak::context::{Config, Context};
     /// use once_cell::sync::Lazy;
-    /// use daybreak::context::{Context, Config};
-    /// 
-    /// static CTX: Lazy<Context> = Lazy::new(|| Context::new(&Config {
-    ///     token: "my totally real token"
-    /// }));
+    ///
+    /// static CTX: Lazy<Context> = Lazy::new(|| {
+    ///     Context::new(&Config {
+    ///         token: "my totally real token",
+    ///     })
+    /// });
     /// ```
     #[must_use]
     #[allow(clippy::new_without_default)]
     pub fn new(config: &Config<'_>) -> Self {
         Self {
-            http: Http::new(config.token.to_owned()),
+            http: http::create(),
         }
     }
 }
@@ -34,6 +36,7 @@ impl Context {
 /// The info required to create a context
 #[derive(Clone, Debug)]
 pub struct Config<'conf> {
-    /// The bot's token as obtained from [Discord applications page](https://discord.com/developers/applications)
+    /// The bot's token as obtained from
+    /// [Discord applications page](https://discord.com/developers/applications)
     pub token: &'conf str,
 }
