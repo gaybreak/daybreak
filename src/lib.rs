@@ -57,8 +57,6 @@
     clippy::exhaustive_enums
 )]
 
-use http::Http;
-
 /// # Example
 /// ```ignore
 /// #[doc = discord_url!("https://discord.com/developers/docs/...")]
@@ -93,6 +91,8 @@ macro_rules! variants_documented {
 mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
+/// The definition and creation of a context 
+pub mod context;
 
 /// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)
 /// if it is
@@ -100,23 +100,3 @@ pub mod model;
 /// [NEW_ISSUE_URL]: https://github.com/gaybreak/daybreak/issues/new
 type InternalResult<T> = Result<T, anyhow::Error>;
 
-/// Brings all of the stateful structs together
-#[derive(Debug)]
-pub struct Context {
-    /// The HTTP client used in the crate
-    http: Http,
-}
-
-impl Context {
-    /// Create a new context
-    ///
-    /// This is most likely the first method you'll need to call to use this
-    /// framework so welcome to Daybreak!
-    #[must_use]
-    #[allow(clippy::new_without_default)]
-    pub fn new() -> Self {
-        Self {
-            http: http::create(),
-        }
-    }
-}
