@@ -16,6 +16,9 @@ struct ContextInner {
 impl Context {
     /// Create a context from a given config
     ///
+    /// This is probably the first method you'll need to call to use this
+    /// framework so welcome to Daybreak!
+    /// 
     /// # Example
     /// ```rust
     /// use daybreak::context::{Context, Config};
