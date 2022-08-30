@@ -40,6 +40,7 @@
         "rustls",
         "rustup",
         "sku",
+        "thiserror",
         "tts",
         "unicode",
         "Vad",
