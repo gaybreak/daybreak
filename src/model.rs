@@ -9,6 +9,8 @@
 
 #[doc = discord_url!("https://discord.com/developers/docs/resources/application")]
 pub mod application;
+// #[doc = discord_url!("https://discord.com/developers/docs/resources/audit-log#audit-logs-resource")]
+// pub mod audit_log;
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object"
 )]
@@ -45,6 +47,8 @@ pub mod scheduled_event;
 pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
 pub mod voice;
+// #[doc = discord_url!("https://discord.com/developers/docs/resources/webhook#webhook-resource")]
+// pub mod webhook;
 
 use enumflags2::bitflags;
 use time::{Duration, OffsetDateTime};

@@ -1,5 +1,8 @@
 use crate::http::{self, Http};
 
+// /// Context methods about the audit log
+// pub mod audit_log;
+
 #[derive(Debug)]
 /// Brings all of the stateful structs together
 pub struct Context {
