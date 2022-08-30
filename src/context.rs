@@ -1,10 +1,10 @@
 use once_cell::sync::Lazy;
 
-use crate::http::{self, Http};
+use crate::http::Http;
 
 /// Brings all of the stateful structs together
 #[derive(Debug)]
-pub struct Context(Lazy<ContextInner>);
+pub struct Context(Lazy<ContextInner, fn(Config<'_>) -> ContextInner>);
 
 #[derive(Debug)]
 /// The actual context data wrapped to be wrapped with Lazy
@@ -29,8 +29,8 @@ impl Context {
     #[must_use]
     #[allow(clippy::new_without_default)]
     pub const fn new(config: &Config<'_>) -> Self {
-        Self(Lazy::new(|| ContextInner {
-            http: http::create(),
+        Self(Lazy::new(|config| ContextInner {
+            http: Http::new(config.token.to_owned()),
         }))
     }
 }
