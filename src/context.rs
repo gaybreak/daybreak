@@ -1,14 +1,8 @@
-use once_cell::sync::Lazy;
-
 use crate::http::Http;
 
+#[derive(Debug)]
 /// Brings all of the stateful structs together
-#[derive(Debug)]
-pub struct Context(Lazy<ContextInner, fn(Config<'_>) -> ContextInner>);
-
-#[derive(Debug)]
-/// The actual context data wrapped to be wrapped with Lazy
-struct ContextInner {
+pub struct Context {
     /// The HTTP client used in the crate
     http: Http,
 }
@@ -21,17 +15,19 @@ impl Context {
     /// 
     /// # Example
     /// ```rust
+    /// use once_cell::sync::Lazy;
     /// use daybreak::context::{Context, Config};
-    /// static CTX: Context = Context::new(&Config {
+    /// 
+    /// static CTX: Lazy<Context> = Lazy::new(|| Context::new(&Config {
     ///     token: "my totally real token"
-    /// });
+    /// }));
     /// ```
     #[must_use]
     #[allow(clippy::new_without_default)]
-    pub const fn new(config: &Config<'_>) -> Self {
-        Self(Lazy::new(|config| ContextInner {
+    pub fn new(config: &Config<'_>) -> Self {
+        Self {
             http: Http::new(config.token.to_owned()),
-        }))
+        }
     }
 }
 
