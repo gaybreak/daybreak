@@ -38,7 +38,7 @@
     unused_qualifications,
     unused_results,
     variant_size_differences,
-    // unstable lints: 
+    // unstable lints:
     // unreachable_pub,
     // nightly lints:
     // fuzzy_provenance_casts,
@@ -54,8 +54,14 @@
     clippy::separated_literal_suffix,
     clippy::missing_inline_in_public_items,
     clippy::exhaustive_structs,
-    clippy::exhaustive_enums
+    clippy::exhaustive_enums,
+    // Disallow before release:
+    dead_code,
 )]
+
+use enumflags2::BitFlags;
+use model::permission::{self, Permissions};
+use thiserror::Error;
 
 /// # Example
 /// ```ignore
@@ -87,16 +93,101 @@ macro_rules! variants_documented {
     };
 }
 
+/// The definition and creation of a context
+pub mod context;
 /// Implementation of the HTTP client to make requests to Discord
 mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
-/// The definition and creation of a context 
-pub mod context;
 
-/// A result that shouldn't be an error, [please open an issue](NEW_ISSUE_URL)
-/// if it is
+// #[error(
+//     "Unexpected error: {0}\nIf this is an error with Daybreak, please open an
+// issue at \     https://github.com/gaybreak/daybreak/issues/new"
+// )]
+// Other(#[from] anyhow::Error),
+
+/// A user-facing error
 ///
-/// [NEW_ISSUE_URL]: https://github.com/gaybreak/daybreak/issues/new
-type InternalResult<T> = Result<T, anyhow::Error>;
+/// This is the only error type used in Daybreak by design because in most cases
+/// only the type of the user-facing error is useful and the rest is handled the
+/// same by printing, executing a webhook etc.
+///
+/// This means the simplest way to handle errors in your code flow is using
+/// `anyhow::Error` everywhere and downcasting it when it might be a user error
+///
+/// If this is an error with Daybreak,
+/// [please open an issue](https://github.com/gaybreak/daybreak/issues/new)
+///
+/// # Downcasting Example
+///
+/// ```rust
+/// use std::fs;
+///
+/// use anyhow::{anyhow, Error};
+/// use daybreak::UserError;
+///
+/// fn maybe_user_error(user_input: &[u8]) -> Result<(), Error> {
+///     if std::str::from_utf8(user_input)?.starts_with("Boo!") {
+///         // Read the next example to see how to actually use `UserError`
+///         return Err(UserError::custom(anyhow!("Your input scared me :(")).into());
+///     }
+///     Ok(())
+/// }
+///
+/// assert!(maybe_user_error(&[159]) // Invalid byte
+///     .unwrap_err()
+///     .downcast_ref::<UserError>()
+///     .is_none());
+/// assert!(maybe_user_error(&[66, 111, 111, 33]) // Bytes for "Boo!"
+///     .unwrap_err()
+///     .downcast_ref::<UserError>()
+///     .is_some())
+/// ```
+///
+/// This should have every error to be reported to the user of the bot,
+/// so you can add your own errors to this enum
+///
+/// # User Error Example
+///
+/// ```rust
+/// use daybreak::UserError;
+/// use thiserror::Error;
+///
+/// #[derive(Error, Debug)]
+/// enum CoolCommandError {
+///     #[error("You are cringe, cringe people are not allowed to use this bot")]
+///     MemberCringe,
+///     // Other user errors here
+/// }
+///
+/// fn check_for_cringe(member_nick: &str) -> Result<(), UserError> {
+///     if member_nick.contains("69") {
+///         return Err(UserError::custom(CoolCommandError::MemberCringe));
+///     }
+///     return Ok(());
+/// }
+///
+/// assert_eq!(
+///     check_for_cringe("your-mom-69").unwrap_err().to_string(),
+///     "You are cringe, cringe people are not allowed to use this bot",
+/// )
+/// ```
+#[derive(Error, Debug)]
+pub enum UserError {
+    /// The bot is missing some permissions
+    #[error(
+        "The bot doesn't have the required permissions for this:\n{}",
+        permission::to_pretty_string(*.0),
+    )]
+    MissingPermissions(BitFlags<Permissions>),
+    /// The error is user-defined
+    #[error("{0}")]
+    Custom(anyhow::Error),
+}
 
+impl UserError {
+    /// Create a custom user error from any error type
+    pub fn custom(err: impl Into<anyhow::Error>) -> Self {
+        Self::Custom(err.into())
+    }
+}

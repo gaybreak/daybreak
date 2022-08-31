@@ -54,9 +54,8 @@ pub mod voice;
 // #[doc = discord_url!("https://discord.com/developers/docs/resources/webhook#webhook-resource")]
 // pub mod webhook;
 
+use anyhow::Error;
 use time::{Duration, OffsetDateTime};
-
-use crate::InternalResult;
 
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
 #[derive(Clone, Copy, Debug)]
@@ -73,7 +72,7 @@ impl Id {
         clippy::cast_possible_wrap,
         clippy::as_conversions
     )]
-    pub fn timestamp(self) -> InternalResult<OffsetDateTime> {
+    pub fn timestamp(self) -> Result<OffsetDateTime, Error> {
         Ok(OffsetDateTime::from_unix_timestamp(
             Duration::milliseconds(((self.0 >> 22) + 1_420_070_400_000) as i64).whole_seconds(),
         )?)
