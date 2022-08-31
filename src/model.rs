@@ -54,12 +54,21 @@ pub mod voice;
 // #[doc = discord_url!("https://discord.com/developers/docs/resources/webhook#webhook-resource")]
 // pub mod webhook;
 
+use std::fmt::Display;
+
 use anyhow::Error;
+use serde::Deserialize;
 use time::{Duration, OffsetDateTime};
 
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Id(pub u64);
+
+impl Display for Id {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
 
 impl Id {
     /// The unix timestamp of the ID
