@@ -43,6 +43,7 @@
         "thiserror",
         "tts",
         "unicode",
+        "utf",
         "Vad",
         "Vec",
         "webpki",

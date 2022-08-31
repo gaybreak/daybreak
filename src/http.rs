@@ -1,6 +1,7 @@
 use enumflags2::BitFlags;
-use hyper::{client::HttpConnector, Body, Client, Method, Request, Response};
+use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request};
 use hyper_rustls::{HttpsConnector, HttpsConnectorBuilder};
+use serde::de::DeserializeOwned;
 use thiserror::Error;
 
 use crate::{context::Context, model::Permissions};
@@ -30,7 +31,7 @@ pub fn create() -> Http {
     Client::builder().build(connector)
 }
 
-pub struct DiscordRequest<T> {
+pub struct DiscordRequest<T: DeserializeOwned> {
     required_permissions: BitFlags<Permissions>,
     method: Method,
     endpoint: String,
@@ -38,14 +39,15 @@ pub struct DiscordRequest<T> {
 }
 
 impl Context {
-    async fn send_request<T>(&self, request: DiscordRequest<T>) -> HttpResult<Response<Body>> {
+    async fn send_request<T: DeserializeOwned>(&self, request: DiscordRequest<T>) -> HttpResult<T> {
         if !self.permissions.contains(request.required_permissions) {
             return Err(HttpError::MissingPermissions(
                 !(self.permissions & request.required_permissions),
             ));
         }
 
-        self.http
+        let body = self
+            .http
             .request(
                 Request::builder()
                     .method(request.method)
@@ -59,6 +61,15 @@ impl Context {
                     .map_err(|err| HttpError::Other(err.into()))?,
             )
             .await
-            .map_err(|err| HttpError::Other(err.into()))
+            .map_err(|err| HttpError::Other(err.into()))?
+            .into_body();
+        let bytes = to_bytes(body)
+            .await
+            .map_err(|err| HttpError::Other(err.into()))?;
+
+        Ok(serde_json::from_str(
+            std::str::from_utf8(&bytes).map_err(|err| HttpError::Other(err.into()))?,
+        )
+        .map_err(|err| HttpError::Other(err.into()))?)
     }
 }
