@@ -1,25 +1,13 @@
+use anyhow::Error;
 use enumflags2::BitFlags;
 use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request};
 use hyper_rustls::{HttpsConnector, HttpsConnectorBuilder};
 use serde::de::DeserializeOwned;
-use thiserror::Error;
 
-use crate::{context::Context, model::Permissions};
+use crate::{context::Context, model::permission::Permissions, UserError};
 
 /// The client type used in this crate
 pub type Http = Client<HttpsConnector<HttpConnector>>;
-pub type HttpResult<T> = Result<T, HttpError>;
-
-#[derive(Error, Debug)]
-pub enum HttpError {
-    #[error("The bot doesn't have the required permissions to make this request: {0}")]
-    MissingPermissions(BitFlags<Permissions>),
-    #[error(
-        "Unexpected error, if this is an error with Daybreak, please open an issue at \
-        https://github.com/gaybreak/daybreak/issues/new: {0}"
-    )]
-    Other(#[from] anyhow::Error),
-}
 
 /// Creates the HTTP client
 pub fn create() -> Http {
@@ -31,19 +19,29 @@ pub fn create() -> Http {
     Client::builder().build(connector)
 }
 
+/// An HTTP request to be made to the Discord HTTP API
 pub struct DiscordRequest<T: DeserializeOwned> {
+    /// The required permissions to make the request
     required_permissions: BitFlags<Permissions>,
+    /// The method of the request
     method: Method,
+    /// The endpoint URL of the request
     endpoint: String,
+    /// The type to deserialize the response to
     returns: T,
 }
 
 impl Context {
-    async fn send_request<T: DeserializeOwned>(&self, request: DiscordRequest<T>) -> HttpResult<T> {
+    /// Send a `DiscordRequest`, returning the expected type
+    async fn send_request<T: DeserializeOwned + Send>(
+        &self,
+        request: DiscordRequest<T>,
+    ) -> Result<T, Error> {
         if !self.permissions.contains(request.required_permissions) {
-            return Err(HttpError::MissingPermissions(
+            return Err(UserError::MissingPermissions(
                 !(self.permissions & request.required_permissions),
-            ));
+            )
+            .into());
         }
 
         let body = self
@@ -57,19 +55,12 @@ impl Context {
                         "DiscordBot (https://github.com/gaybreak/daybreak 0.1)",
                     )
                     .header("Authorization", &self.token)
-                    .body(Body::empty())
-                    .map_err(|err| HttpError::Other(err.into()))?,
+                    .body(Body::empty())?,
             )
-            .await
-            .map_err(|err| HttpError::Other(err.into()))?
+            .await?
             .into_body();
-        let bytes = to_bytes(body)
-            .await
-            .map_err(|err| HttpError::Other(err.into()))?;
+        let bytes = to_bytes(body).await?;
 
-        Ok(serde_json::from_str(
-            std::str::from_utf8(&bytes).map_err(|err| HttpError::Other(err.into()))?,
-        )
-        .map_err(|err| HttpError::Other(err.into()))?)
+        Ok(serde_json::from_str(std::str::from_utf8(&bytes)?)?)
     }
 }
