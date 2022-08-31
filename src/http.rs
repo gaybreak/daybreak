@@ -48,7 +48,10 @@ impl Request {
 impl Context {
     /// Send the given request to Discord, returning the expected type
     #[doc = http_errors_doc!()]
-    pub async fn request<T: DeserializeOwned + Send>(&self, request: Request) -> Result<T, Error> {
+    pub(crate) async fn request<T: DeserializeOwned + Send>(
+        &self,
+        request: Request,
+    ) -> Result<T, Error> {
         if !self.permissions.contains(request.required_permissions) {
             return Err(UserError::MissingPermissions(
                 !(self.permissions & request.required_permissions),
