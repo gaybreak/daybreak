@@ -1,6 +1,6 @@
 use enumflags2::bitflags;
 
-use super::{user::User, Id, Permissions};
+use super::{permission::Permissions, user::User, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/application\

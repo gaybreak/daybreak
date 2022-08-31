@@ -1,9 +1,10 @@
 use time::OffsetDateTime;
 
 use super::{
+    permission::Permissions,
     presence::{Activity, Presence},
     user::User,
-    Id, Permissions,
+    Id,
 };
 
 #[doc = discord_url!(

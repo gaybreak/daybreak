@@ -1,7 +1,7 @@
 use enumflags2::bitflags;
 use time::OffsetDateTime;
 
-use super::{member::ThreadMember, user::User, Id, Permissions};
+use super::{member::ThreadMember, permission::Permissions, user::User, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"

@@ -5,12 +5,13 @@ use super::{
     channel::Channel,
     emoji::{Emoji, Sticker},
     member::Member,
+    permission::Permissions,
     presence::Activity,
     role::Role,
     scheduled_event::ScheduledEvent,
     user::User,
     voice::VoiceState,
-    Id, Permissions,
+    Id,
 };
 
 #[doc = discord_url!(

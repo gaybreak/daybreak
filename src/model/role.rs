@@ -1,4 +1,4 @@
-use super::{Id, Permissions};
+use super::{permission::Permissions, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/permissions#role-object-role-structure"

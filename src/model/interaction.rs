@@ -5,9 +5,10 @@ use super::{
     emoji::Emoji,
     member::Member,
     message::{Attachment, Message},
+    permission::Permissions,
     role::Role,
     user::User,
-    Id, Permissions,
+    Id,
 };
 
 #[doc = discord_url!(

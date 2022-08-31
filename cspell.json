@@ -20,6 +20,7 @@
         "CTX",
         "DS",
         "Dwarnings",
+        "dyn",
         "enumflags",
         "env",
         "fmt",

@@ -1,17 +1,19 @@
+#![allow(clippy::multiple_inherent_impl)]
+
 use enumflags2::{BitFlag, BitFlags};
 
 use crate::{
     http::{self, Http},
-    model::Permissions,
+    model::permission::Permissions,
 };
 
 // /// Context methods about the audit log
 // pub mod audit_log;
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/auto-moderation\
-    #list-auto-moderation-rules-for-guild"
-)]
-pub mod auto_moderation;
+// #[doc = discord_url!(
+//     "https://discord.com/developers/docs/resources/auto-moderation\
+//     #list-auto-moderation-rules-for-guild"
+// )]
+// pub mod auto_moderation;
 
 #[derive(Debug)]
 /// Brings all of the stateful structs together
