@@ -10,7 +10,7 @@ use crate::{
 // /// Context methods about the audit log
 // pub mod audit_log;
 /// Context methods on auto moderation
-pub mod auto_moderation;
+mod auto_moderation;
 
 #[derive(Debug)]
 /// Brings all of the stateful structs together

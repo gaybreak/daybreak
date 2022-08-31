@@ -100,10 +100,8 @@ macro_rules! variants_documented {
 /// ```
 macro_rules! http_errors_doc {
     () => {
-        "Returns [`crate::UserError::MissingPermissions`] when the bot doesn't have the required \
-         permissions
-
-        Or an an unexpected error on an HTTP or deserialization error"
+        "# Errors\n\nReturns [`crate::UserError::MissingPermissions`] when the bot doesn't have \
+         the required permissions\n\nOr an `anyhow::Error` on an HTTP or deserialization error"
     };
 }
 
