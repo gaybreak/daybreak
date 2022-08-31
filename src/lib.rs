@@ -93,18 +93,26 @@ macro_rules! variants_documented {
     };
 }
 
+/// # Example
+/// ```ignore
+/// #[doc = discord_url!("https://discord.com/developers/docs/...")]
+/// #[doc = http_errors_doc!()]
+/// ```
+macro_rules! http_errors_doc {
+    () => {
+        "Returns [`crate::UserError::MissingPermissions`] when the bot doesn't have the required \
+         permissions
+
+        Or an an unexpected error on an HTTP or deserialization error"
+    };
+}
+
 /// The definition and creation of a context
 pub mod context;
 /// Implementation of the HTTP client to make requests to Discord
 mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
-
-// #[error(
-//     "Unexpected error: {0}\nIf this is an error with Daybreak, please open an
-// issue at \     https://github.com/gaybreak/daybreak/issues/new"
-// )]
-// Other(#[from] anyhow::Error),
 
 /// A user-facing error
 ///
