@@ -4,7 +4,7 @@ use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request
 use hyper_rustls::{HttpsConnector, HttpsConnectorBuilder};
 use serde::de::DeserializeOwned;
 
-use crate::{context::Context, model::permission::Permissions, UserError};
+use crate::{model::permission::Permissions, Context, UserError};
 
 /// The client type used in this crate
 pub type Http = Client<HttpsConnector<HttpConnector>>;
