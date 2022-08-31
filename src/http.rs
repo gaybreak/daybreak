@@ -1,6 +1,6 @@
 use anyhow::Error;
 use enumflags2::BitFlags;
-use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request};
+use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request as HyperRequest};
 use hyper_rustls::{HttpsConnector, HttpsConnectorBuilder};
 use serde::de::DeserializeOwned;
 
@@ -20,23 +20,35 @@ pub fn create() -> Http {
 }
 
 /// An HTTP request to be made to the Discord HTTP API
-pub struct DiscordRequest<T: DeserializeOwned> {
+#[derive(Clone, Debug)]
+pub struct Request {
     /// The required permissions to make the request
     required_permissions: BitFlags<Permissions>,
     /// The method of the request
     method: Method,
     /// The endpoint URL of the request
     endpoint: String,
-    /// The type to deserialize the response to
-    returns: T,
+}
+
+impl Request {
+    /// Creates a new `Request` from the given fields
+    pub const fn new(
+        required_permissions: BitFlags<Permissions>,
+        method: Method,
+        endpoint: String,
+    ) -> Self {
+        Self {
+            required_permissions,
+            method,
+            endpoint,
+        }
+    }
 }
 
 impl Context {
-    /// Send a `DiscordRequest`, returning the expected type
-    async fn send_request<T: DeserializeOwned + Send>(
-        &self,
-        request: DiscordRequest<T>,
-    ) -> Result<T, Error> {
+    /// Send the given request to Discord, returning the expected type
+    #[doc = http_errors_doc!()]
+    pub async fn request<T: DeserializeOwned + Send>(&self, request: Request) -> Result<T, Error> {
         if !self.permissions.contains(request.required_permissions) {
             return Err(UserError::MissingPermissions(
                 !(self.permissions & request.required_permissions),
@@ -47,9 +59,9 @@ impl Context {
         let body = self
             .http
             .request(
-                Request::builder()
+                HyperRequest::builder()
                     .method(request.method)
-                    .uri(format!("https://discord.com/api/v10/{}", request.endpoint))
+                    .uri(format!("https://discord.com/api/v10{}", request.endpoint))
                     .header(
                         "User-Agent",
                         "DiscordBot (https://github.com/gaybreak/daybreak 0.1)",
