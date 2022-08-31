@@ -147,7 +147,7 @@ impl Context {
     /// ```
     #[must_use]
     #[allow(clippy::new_without_default)]
-    pub fn new(config: &Config<'_>) -> Self {
+    pub fn new(config: &ContextConfig<'_>) -> Self {
         Self {
             token: format!("Bot {}", config.token),
             permissions: Permissions::all(),
@@ -158,7 +158,7 @@ impl Context {
 
 /// The info required to create a context
 #[derive(Clone, Debug)]
-pub struct Config<'conf> {
+pub struct ContextConfig<'conf> {
     /// The bot's token as obtained from
     /// [Discord applications page](https://discord.com/developers/applications)
     pub token: &'conf str,
