@@ -133,13 +133,16 @@ impl Context {
     ///
     /// # Example
     /// ```rust
-    /// use daybreak::{Context, ContextConfig};
+    /// use daybreak::{model::Id, Context, ContextConfig};
     /// use once_cell::sync::Lazy;
+    /// 
     /// static CTX: Lazy<Context> = Lazy::new(|| {
     ///     Context::new(&ContextConfig {
     ///         token: "my totally real token",
     ///     })
     /// });
+    /// 
+    /// CTX.auto_moderation_rules(Id(1234));
     /// ```
     #[must_use]
     #[allow(clippy::new_without_default)]
@@ -162,75 +165,43 @@ pub struct ContextConfig<'conf> {
 
 /// A user-facing error
 ///
-/// This is the only error type used in Daybreak by design because in most cases
-/// only the type of the user-facing error is useful and the rest is handled the
-/// same by printing, executing a webhook etc.
-///
-/// This means the simplest way to handle errors in your code flow is using
-/// `anyhow::Error` everywhere and downcasting it when it might be a user error
-///
-/// If this is an error with Daybreak,
-/// [please open an issue](https://github.com/gaybreak/daybreak/issues/new)
-///
-/// # Downcasting Example
-///
-/// ```rust
-/// use std::fs;
-///
-/// use anyhow::{anyhow, Error};
-/// use daybreak::UserError;
-///
-/// fn maybe_user_error(user_input: &[u8]) -> Result<(), Error> {
-///     if std::str::from_utf8(user_input)?.starts_with("Boo!") {
-///         // Read the next example to see how to actually use `UserError`
-///         return Err(UserError::custom(anyhow!("Your input scared me :(")).into());
-///     }
-///     Ok(())
-/// }
-///
-/// assert!(maybe_user_error(&[159]) // Invalid byte
-///     .unwrap_err()
-///     .downcast_ref::<UserError>()
-///     .is_none());
-/// assert!(maybe_user_error(&[66, 111, 111, 33]) // Bytes for "Boo!"
-///     .unwrap_err()
-///     .downcast_ref::<UserError>()
-///     .is_some())
-/// ```
-///
 /// This should have every error to be reported to the user of the bot,
-/// so you can add your own errors to this enum
+/// so you can add your own errors to this enum, refer to [`Self::custom`] to
+/// see how to do that
 ///
-/// # User Error Example
+/// You won't receive these in an interaction event, where they're handled
+/// implicitly for you!
+///
+/// In other events, you'll just get an `anyhow::Error` which you can downcast
+/// to see if it's a user error, you don't have to do this if you or the methods
+/// you call never return a `UserError`
+///
+/// # Example
 ///
 /// ```rust
 /// use daybreak::UserError;
-/// use thiserror::Error;
-///
-/// #[derive(Error, Debug)]
-/// enum CoolCommandError {
-///     #[error("You are cringe, cringe people are not allowed to use this bot")]
-///     MemberCringe,
-///     // Other user errors here
+/// # let my_amazing_error = anyhow::anyhow!("");
+/// # fn tell_the_user_somehow(_: String) {};
+/// 
+/// match my_amazing_error.downcast::<UserError>() {
+///     Ok(user_err) => tell_the_user_somehow(user_err.to_string()),
+///     Err(err) => eprintln!("The dev really messed this up huh: {err}"),
 /// }
-///
-/// fn check_for_cringe(member_nick: &str) -> Result<(), UserError> {
-///     if member_nick.contains("69") {
-///         return Err(UserError::custom(CoolCommandError::MemberCringe));
-///     }
-///     return Ok(());
-/// }
-///
-/// assert_eq!(
-///     check_for_cringe("your-mom-69").unwrap_err().to_string(),
-///     "You are cringe, cringe people are not allowed to use this bot",
-/// )
 /// ```
+///
+/// # Error Handling Reasoning
+///
+/// Daybreak methods return an `anyhow::Error` because it usually means a bug in
+/// your program or Daybreak, and the best way to handle those is by printing
+/// them and notifying the developer
+///
+/// If you think the returned error is an problem in Daybreak,
+/// [please open an issue](https://github.com/gaybreak/daybreak/issues/new)
 #[derive(Error, Debug)]
 pub enum UserError {
     /// The bot is missing some permissions
     #[error(
-        "The bot doesn't have the required permissions for this:\n{}",
+        "Please give the bot these permissions:\n{}",
         permission::to_pretty_string(*.0),
     )]
     MissingPermissions(BitFlags<Permissions>),
@@ -241,6 +212,36 @@ pub enum UserError {
 
 impl UserError {
     /// Create a custom user error from any error type
+    ///
+    /// ```rust
+    /// use anyhow::Error;
+    /// use daybreak::UserError;
+    ///
+    /// #[derive(thiserror::Error, Debug)]
+    /// enum CustomUserError {
+    ///     #[error(
+    ///         "You are cringe because your username is \"{0}\", cringe people aren't allowed to use \
+    ///          this bot"
+    ///     )]
+    ///     MemberCringe(String),
+    ///     // Other user errors here
+    /// }
+    ///
+    /// fn cringe_check(member_nick: String) -> Result<(), Error> {
+    ///     if member_nick.contains("69") {
+    ///         return Err(UserError::custom(CustomUserError::MemberCringe(member_nick)).into());
+    ///     }
+    ///     Ok(())
+    /// }
+    ///
+    /// assert_eq!(
+    ///     cringe_check("your-mom-69".to_owned())
+    ///         .unwrap_err()
+    ///         .to_string(),
+    ///     "You are cringe because your username is \"your-mom-69\", cringe people aren't allowed to \
+    ///      use this bot",
+    /// )
+    /// ```
     pub fn custom(err: impl Into<anyhow::Error>) -> Self {
         Self::Custom(err.into())
     }
