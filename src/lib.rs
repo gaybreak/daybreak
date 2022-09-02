@@ -253,4 +253,23 @@ impl UserError {
 mod tests {
     // Suppress `unused_crate_dependencies` false positives
     use once_cell as _;
+
+    #[test]
+    fn doc_macros() {
+        assert_eq!(discord_url!("foo"), "\n\n[Refer to the Discord docs](foo)");
+        assert_eq!(
+            fields_documented!(),
+            "Refer to the documentation of the fields"
+        );
+        assert_eq!(
+            variants_documented!(),
+            "Refer to the documentation of the variants"
+        );
+        assert_eq!(
+            http_errors_doc!(),
+            "# Errors\n\nReturns [`crate::UserError::MissingPermissions`] when the bot doesn't \
+             have the required permissions\n\nOr an `anyhow::Error` on an HTTP or deserialization \
+             error"
+        )
+    }
 }
