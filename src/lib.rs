@@ -251,6 +251,16 @@ mod tests {
     // Suppress `unused_crate_dependencies` false positives
     use once_cell as _;
 
+    use crate::{Context, ContextConfig};
+
+    #[test]
+    fn context_new() {
+        assert_eq!(
+            Context::new(&ContextConfig { token: "foo" }).token,
+            "Bot foo"
+        )
+    }
+
     #[test]
     fn doc_macros() {
         assert_eq!(discord_url!("foo"), "\n\n[Refer to the Discord docs](foo)");
