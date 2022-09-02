@@ -136,11 +136,11 @@ impl Context {
     ///
     /// # Example
     /// ```rust
-    /// use daybreak::context::{Config, Context};
+    /// use daybreak::{Context, ContextConfig};
     /// use once_cell::sync::Lazy;
     ///
     /// static CTX: Lazy<Context> = Lazy::new(|| {
-    ///     Context::new(&Config {
+    ///     Context::new(&ContextConfig {
     ///         token: "my totally real token",
     ///     })
     /// });
