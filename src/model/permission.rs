@@ -105,7 +105,20 @@ impl Display for Permissions {
 pub fn to_pretty_string(permissions: BitFlags<Permissions>) -> String {
     permissions
         .iter()
-        .map(|perm| perm.to_string())
+        .map(|perm| format!("- {perm}"))
         .collect::<Vec<String>>()
-        .join("\n- ")
+        .join("\n")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Permissions;
+
+    #[test]
+    fn to_pretty_string() {
+        assert_eq!(
+            super::to_pretty_string(Permissions::CreateInstantInvite | Permissions::KickMembers),
+            "- Create Invite\n- Kick Members"
+        )
+    }
 }
