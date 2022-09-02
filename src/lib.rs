@@ -252,5 +252,5 @@ impl UserError {
 #[cfg(test)]
 mod tests {
     // Suppress `unused_crate_dependencies` false positives
-    use once_cell;
+    use once_cell as _;
 }
