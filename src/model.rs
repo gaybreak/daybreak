@@ -90,11 +90,6 @@ mod tests {
     use super::Id;
 
     #[test]
-    fn id_fmt() {
-        assert_eq!(Id(1234).to_string(), "1234")
-    }
-
-    #[test]
     fn id_timestamp() {
         assert_eq!(
             Id(258_568_289_746_288_641).timestamp().unwrap(),

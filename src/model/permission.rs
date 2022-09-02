@@ -117,13 +117,6 @@ mod tests {
     use super::Permissions;
 
     #[test]
-    fn fmt() {
-        for perm in Permissions::all() {
-            assert!(!perm.to_string().is_empty());
-        }
-    }
-
-    #[test]
     fn to_pretty_string() {
         assert_eq!(
             super::to_pretty_string(Permissions::CreateInstantInvite | Permissions::KickMembers),
