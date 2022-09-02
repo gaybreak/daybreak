@@ -106,15 +106,12 @@ macro_rules! http_errors_doc {
     };
 }
 
+/// Context method on auto moderation
+mod auto_moderation;
 /// Implementation of the HTTP client to make requests to Discord
 mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
-
-// /// Context methods about the audit log
-// pub mod audit_log;
-/// Context method on auto moderation
-mod auto_moderation;
 
 #[derive(Debug)]
 #[allow(clippy::multiple_inherent_impl)]
