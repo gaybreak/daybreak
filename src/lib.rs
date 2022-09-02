@@ -135,13 +135,13 @@ impl Context {
     /// ```rust
     /// use daybreak::{model::Id, Context, ContextConfig};
     /// use once_cell::sync::Lazy;
-    /// 
+    ///
     /// static CTX: Lazy<Context> = Lazy::new(|| {
     ///     Context::new(&ContextConfig {
     ///         token: "my totally real token",
     ///     })
     /// });
-    /// 
+    ///
     /// CTX.auto_moderation_rules(Id(1234));
     /// ```
     #[must_use]
@@ -182,7 +182,7 @@ pub struct ContextConfig<'conf> {
 /// use daybreak::UserError;
 /// # let my_amazing_error = anyhow::anyhow!("");
 /// # fn tell_the_user_somehow(_: String) {};
-/// 
+///
 /// match my_amazing_error.downcast::<UserError>() {
 ///     Ok(user_err) => tell_the_user_somehow(user_err.to_string()),
 ///     Err(err) => eprintln!("The dev really messed this up huh: {err}"),
@@ -220,7 +220,7 @@ impl UserError {
     /// #[derive(thiserror::Error, Debug)]
     /// enum CustomUserError {
     ///     #[error(
-    ///         "You are cringe because your username is \"{0}\", cringe people aren't allowed to use \
+    ///         "You're cringe because your username is *{0}*, cringe people aren't allowed to use \
     ///          this bot"
     ///     )]
     ///     MemberCringe(String),
@@ -238,7 +238,7 @@ impl UserError {
     ///     cringe_check("your-mom-69".to_owned())
     ///         .unwrap_err()
     ///         .to_string(),
-    ///     "You are cringe because your username is \"your-mom-69\", cringe people aren't allowed to \
+    ///     "You're cringe because your username is *your-mom-69*, cringe people aren't allowed to \
     ///      use this bot",
     /// )
     /// ```
