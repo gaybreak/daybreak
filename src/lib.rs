@@ -138,7 +138,6 @@ impl Context {
     /// ```rust
     /// use daybreak::{Context, ContextConfig};
     /// use once_cell::sync::Lazy;
-    ///
     /// static CTX: Lazy<Context> = Lazy::new(|| {
     ///     Context::new(&ContextConfig {
     ///         token: "my totally real token",
@@ -248,4 +247,10 @@ impl UserError {
     pub fn custom(err: impl Into<anyhow::Error>) -> Self {
         Self::Custom(err.into())
     }
+}
+
+#[cfg(test)]
+mod tests {
+    // Suppress `unused_crate_dependencies` false positives
+    use once_cell;
 }
