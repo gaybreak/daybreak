@@ -109,18 +109,3 @@ pub fn to_pretty_string(permissions: BitFlags<Permissions>) -> String {
         .collect::<Vec<String>>()
         .join("\n")
 }
-
-#[cfg(test)]
-mod tests {
-    use enumflags2::BitFlag;
-
-    use super::Permissions;
-
-    #[test]
-    fn to_pretty_string() {
-        assert_eq!(
-            super::to_pretty_string(Permissions::CreateInstantInvite | Permissions::KickMembers),
-            "- Create Invite\n- Kick Members"
-        );
-    }
-}

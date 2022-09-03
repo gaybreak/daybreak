@@ -81,19 +81,3 @@ impl Id {
         )?)
     }
 }
-
-#[cfg(test)]
-#[allow(clippy::unwrap_used)]
-mod tests {
-    use time::OffsetDateTime;
-
-    use super::Id;
-
-    #[test]
-    fn id_timestamp() {
-        assert_eq!(
-            Id(258_568_289_746_288_641).timestamp().unwrap(),
-            OffsetDateTime::from_unix_timestamp(1_481_717_884).unwrap()
-        );
-    }
-}

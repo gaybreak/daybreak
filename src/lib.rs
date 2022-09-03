@@ -112,6 +112,9 @@ mod auto_moderation;
 mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
+/// Tests for everything in Daybreak
+#[cfg(test)]
+mod tests;
 
 #[derive(Debug)]
 #[allow(clippy::multiple_inherent_impl)]
@@ -244,21 +247,5 @@ impl UserError {
     /// ```
     pub fn custom(err: impl Into<anyhow::Error>) -> Self {
         Self::Custom(err.into())
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    // Suppress `unused_crate_dependencies` false positives
-    use once_cell as _;
-
-    use crate::{Context, ContextConfig};
-
-    #[test]
-    fn context_new() {
-        assert_eq!(
-            Context::new(&ContextConfig { token: "foo" }).token,
-            "Bot foo"
-        )
     }
 }
