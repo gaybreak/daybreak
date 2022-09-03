@@ -93,8 +93,8 @@ pub enum AutoModerationActionType {
 )]
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct AutoModerationActionData {
-    pub channel_id: Id,
-    pub duration_seconds: u32,
+    pub channel_id: Option<Id>,
+    pub duration_seconds: Option<u32>,
 }
 
 #[doc = discord_url!(
