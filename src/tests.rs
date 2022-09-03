@@ -7,14 +7,16 @@ use crate::{model::Id, Context, ContextConfig};
 
 static CTX: Lazy<Context> = Lazy::new(|| {
     Context::new(&ContextConfig {
-        token: env!("TEST_BOT_TOKEN"),
+        token: env!("DAYBREAK_BOT_TOKEN"),
     })
 });
 
 fn guild_id() -> Id {
-    Id(env!("TEST_GUILD_ID").parse().unwrap())
+    Id(env!("DAYBREAK_GUILD_ID").parse().unwrap())
 }
 
+/// Tests for HTTP endpoints
+mod http;
 /// Tests for models
 mod model;
 

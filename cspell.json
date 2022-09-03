@@ -30,6 +30,7 @@
         "idents",
         "invitable",
         "nsfw",
+        "num",
         "ok",
         "Ok",
         "repr",
@@ -49,6 +50,7 @@
         "unicode",
         "utf",
         "Vad",
+        "vec",
         "Vec",
         "webpki",
         "WIP"
