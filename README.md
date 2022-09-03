@@ -1,7 +1,6 @@
 # Daybreak (WIP)
 
-[<img src="join_support_server_badge.png" height="32"/>]: https://discord.gg/zjHGWz2Rex
-
+[![discord server invite](https://img.shields.io/badge/discord-join%20server-7788D4?logo=discord)](https://discord.gg/zjHGWz2Rex)
 [![build](https://github.com/gaybreak/daybreak/actions/workflows/build.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/build.yml)
 [![security audit](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/security-audit.yml)
 [![links checker](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml/badge.svg)](https://github.com/gaybreak/daybreak/actions/workflows/links-check.yml)
