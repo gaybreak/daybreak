@@ -4,6 +4,7 @@
     clippy::missing_docs_in_private_items,
     clippy::module_name_repetitions,
     clippy::struct_excessive_bools,
+    clippy::as_conversions,
     missing_docs
 )]
 
@@ -48,7 +49,7 @@ pub mod user;
 #[doc = discord_url!("https://discord.com/developers/docs/resources/voice#voice-resource")]
 pub mod voice;
 
-use std::fmt::Display;
+use std::{fmt::Display, num::ParseIntError};
 
 use anyhow::Error;
 use serde::Deserialize;
@@ -56,11 +57,20 @@ use time::{Duration, OffsetDateTime};
 
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize)]
+#[serde(try_from = "String")]
 pub struct Id(pub u64);
 
 impl Display for Id {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
+    }
+}
+
+impl TryFrom<String> for Id {
+    type Error = ParseIntError;
+
+    fn try_from(s: String) -> Result<Self, Self::Error> {
+        Ok(Self(s.parse()?))
     }
 }
 
