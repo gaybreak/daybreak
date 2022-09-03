@@ -7,6 +7,8 @@ on:
 env:
   CARGO_TERM_COLOR: always
   RUSTDOCFLAGS: -Dwarnings
+  DAYBREAK_BOT_TOKEN: ${{ secrets.DAYBREAK_BOT_TOKEN }}
+  DAYBREAK_GUILD_ID: ${{ secrets.DAYBREAK_GUILD_ID }}
 
 jobs:
   build:
