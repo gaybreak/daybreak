@@ -2,7 +2,7 @@ use anyhow::Error;
 use enumflags2::BitFlags;
 use hyper::{body::to_bytes, client::HttpConnector, Body, Client, Method, Request as HyperRequest};
 use hyper_rustls::{HttpsConnector, HttpsConnectorBuilder};
-use serde::de::DeserializeOwned;
+use serde::{de::DeserializeOwned, Serialize};
 
 use crate::{model::permission::Permissions, Context, UserError};
 
@@ -46,11 +46,33 @@ impl Request {
 }
 
 impl Context {
-    /// Send the given request to Discord, returning the expected type
+    /// Send the given request to Discord with no body, returning the expected
+    /// type
     #[doc = http_errors_doc!()]
-    pub(crate) async fn request<T: DeserializeOwned + Send>(
+    pub(crate) async fn empty_request<T: DeserializeOwned + Send>(
         &self,
         request: Request,
+    ) -> Result<T, Error> {
+        self.request(request, None::<()>).await
+    }
+
+    /// Send the given request to Discord with no body, returning the expected
+    /// type
+    #[doc = http_errors_doc!()]
+    pub(crate) async fn request_with_params<T: DeserializeOwned + Send>(
+        &self,
+        request: Request,
+        params: impl Serialize + Send,
+    ) -> Result<T, Error> {
+        self.request(request, Some(params)).await
+    }
+
+    /// Send the given request to Discord, returning the expected type
+    #[doc = http_errors_doc!()]
+    async fn request<T: DeserializeOwned + Send>(
+        &self,
+        request: Request,
+        params: Option<impl Serialize + Send>,
     ) -> Result<T, Error> {
         if !self.permissions.contains(request.required_permissions) {
             return Err(UserError::MissingPermissions(
@@ -59,22 +81,24 @@ impl Context {
             .into());
         }
 
-        let body = self
-            .http
-            .request(
-                HyperRequest::builder()
-                    .method(request.method)
-                    .uri(format!("https://discord.com/api/v10{}", request.endpoint))
-                    .header(
-                        "User-Agent",
-                        "DiscordBot (https://github.com/gaybreak/daybreak 0.1)",
-                    )
-                    .header("Authorization", &self.token)
-                    .body(Body::empty())?,
+        let request_body = if let Some(p) = params {
+            serde_json::to_string(&p)?.into()
+        } else {
+            Body::empty()
+        };
+
+        let hyper_request = HyperRequest::builder()
+            .method(request.method)
+            .uri(format!("https://discord.com/api/v10{}", request.endpoint))
+            .header(
+                "User-Agent",
+                "DiscordBot (https://github.com/gaybreak/daybreak 0.1)",
             )
-            .await?
-            .into_body();
-        let bytes = to_bytes(body).await?;
+            .header("Authorization", &self.token)
+            .body(request_body)?;
+
+        let response = self.http.request(hyper_request).await?.into_body();
+        let bytes = to_bytes(response).await?;
 
         Ok(serde_json::from_str(std::str::from_utf8(&bytes)?)?)
     }

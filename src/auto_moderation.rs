@@ -17,7 +17,7 @@ impl Context {
         &self,
         guild_id: Id,
     ) -> Result<Vec<AutoModerationRule>, Error> {
-        self.request(Request::new(
+        self.empty_request(Request::new(
             Permissions::ManageGuild.into(),
             Method::GET,
             format!("/guilds/{guild_id}/auto-moderation/rules"),
