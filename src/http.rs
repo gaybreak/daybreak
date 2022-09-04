@@ -55,7 +55,7 @@ impl Context {
     ///
     /// # Example
     ///
-    /// Implements the [delete auto moderation rule endpoint](DISCORD_DOCS_URL)
+    /// Implements the [delete auto moderation rule endpoint][DISCORD_DOCS_URL]
     ///
     /// [DISCORD_DOCS_URL]:
     /// https://discord.com/developers/docs/resources/auto-moderation#delete-auto-moderation-rule
@@ -112,7 +112,7 @@ impl Context {
     ///
     /// # Example
     ///
-    /// Implements the [modify auto moderation rule endpoint](DISCORD_DOCS_URL)
+    /// Implements the [modify auto moderation rule endpoint][DISCORD_DOCS_URL]
     ///
     /// [DISCORD_DOCS_URL]:
     /// https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule
