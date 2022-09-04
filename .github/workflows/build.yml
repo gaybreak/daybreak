@@ -5,6 +5,7 @@ on:
     paths:
       - "src/**"
 env:
+  RUST_BACKTRACE: 1
   CARGO_TERM_COLOR: always
   RUSTDOCFLAGS: -Dwarnings
   DAYBREAK_BOT_TOKEN: ${{ secrets.DAYBREAK_BOT_TOKEN }}
