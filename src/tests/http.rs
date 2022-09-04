@@ -163,3 +163,14 @@ async fn auto_moderation_rules() {
         ]
     );
 }
+
+#[tokio::test]
+async fn auto_moderation_rule() {
+    let disabled_rule = disabled_rule();
+    assert_eq!(
+        CTX.auto_moderation_rule(guild_id(), disabled_rule.id)
+            .await
+            .unwrap(),
+        disabled_rule
+    );
+}
