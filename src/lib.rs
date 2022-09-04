@@ -109,7 +109,7 @@ macro_rules! http_errors_doc {
 /// Context method on auto moderation
 mod auto_moderation;
 /// Implementation of the HTTP client to make requests to Discord
-mod http;
+pub mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
 /// Tests for everything in Daybreak

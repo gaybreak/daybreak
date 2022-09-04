@@ -52,11 +52,11 @@ pub mod voice;
 use std::{fmt::Display, num::ParseIntError};
 
 use anyhow::Error;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use time::{Duration, OffsetDateTime};
 
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(try_from = "String")]
 pub struct Id(pub u64);
 

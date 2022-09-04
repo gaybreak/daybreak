@@ -1,5 +1,5 @@
-use serde::Deserialize;
-use serde_repr::Deserialize_repr;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 use super::Id;
 
@@ -8,7 +8,7 @@ use super::Id;
     #auto-moderation-rule-object-auto-moderation-rule-structure"
 )]
 #[derive(Clone, Debug, Deserialize)]
-#[cfg_attr(test, derive(PartialEq))]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 pub struct AutoModerationRule {
     pub id: Id,
     pub guild_id: Id,
@@ -27,8 +27,8 @@ pub struct AutoModerationRule {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-event-types"
 )]
-#[derive(Clone, Copy, Debug, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
 pub enum AutoModerationEvent {
     MessageSend = 1,
@@ -39,7 +39,7 @@ pub enum AutoModerationEvent {
     #auto-moderation-rule-object-trigger-types"
 )]
 #[derive(Clone, Copy, Debug, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq))]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
 pub enum AutoModerationTriggerType {
     Keyword = 1,
@@ -53,8 +53,8 @@ pub enum AutoModerationTriggerType {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-metadata"
 )]
-#[derive(Clone, Debug, Deserialize)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 pub struct AutoModerationTrigger {
     pub keyword_filter: Option<Vec<String>>,
     pub presets: Option<Vec<KeywordPresetType>>,
@@ -66,8 +66,8 @@ pub struct AutoModerationTrigger {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-keyword-preset-types"
 )]
-#[derive(Clone, Copy, Debug, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
 pub enum KeywordPresetType {
     Profanity = 1,
@@ -79,8 +79,8 @@ pub enum KeywordPresetType {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-auto-moderation-action-structure"
 )]
-#[derive(Clone, Copy, Debug, Deserialize)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 pub struct AutoModerationAction {
     #[serde(rename(serialize = "type", deserialize = "type"))]
     pub kind: AutoModerationActionType,
@@ -91,8 +91,8 @@ pub struct AutoModerationAction {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-types"
 )]
-#[derive(Clone, Copy, Debug, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
 pub enum AutoModerationActionType {
     BlockMessage = 1,
@@ -104,8 +104,8 @@ pub enum AutoModerationActionType {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-metadata"
 )]
-#[derive(Clone, Copy, Debug, Deserialize)]
-#[cfg_attr(test, derive(PartialEq))]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq, Eq))]
 pub struct AutoModerationActionData {
     pub channel_id: Option<Id>,
     pub duration_seconds: Option<u32>,
