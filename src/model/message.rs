@@ -1,4 +1,6 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{
@@ -15,7 +17,7 @@ use crate::model::{application::Application, emoji::Emoji};
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Message {
     pub id: Id,
     pub channel_id: Id,
@@ -68,7 +70,8 @@ pub struct Message {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum MessageType {
     Default = 0,
     RecipientAdd = 1,
@@ -100,7 +103,7 @@ pub enum MessageType {
     "https://discord.com/developers/docs/resources/channel\
     #message-object-message-activity-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct MessageActivity {
     pub message_activity_type: MessageActivityType,
     pub party_id: Option<String>,
@@ -109,7 +112,8 @@ pub struct MessageActivity {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-activity-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum MessageActivityType {
     Join = 1,
     Spectate = 2,
@@ -122,7 +126,7 @@ pub enum MessageActivityType {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-object-message-flags"
 )]
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum MessageFlags {
     Crossposted = 1 << 0,
     IsCrosspost = 1 << 1,
@@ -138,7 +142,7 @@ pub enum MessageFlags {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#message-reference-object"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct MessageReference {
     pub message_id: Option<Id>,
     pub channel_id: Option<Id>,
@@ -150,7 +154,7 @@ pub struct MessageReference {
     "https://discord.com/developers/docs/resources/channel\
     #channel-mention-object-channel-mention-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ChannelMention {
     pub id: Id,
     pub guild_id: Id,
@@ -162,7 +166,7 @@ pub struct ChannelMention {
     "https://discord.com/developers/docs/resources/channel\
     #allowed-mentions-object-allowed-mentions-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct AllowedMentions {
     pub parse: Vec<String>,
     pub roles: Vec<Id>,
@@ -173,7 +177,7 @@ pub struct AllowedMentions {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Attachment {
     pub id: Id,
     pub filename: String,
@@ -190,7 +194,7 @@ pub struct Attachment {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Reaction {
     pub count: u32,
     pub me: bool,
@@ -262,7 +266,7 @@ pub struct Reaction {
     "https://discord.com/developers/docs/topics/gateway\
     #message-reaction-remove-all-message-reaction-remove-all-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct PrunedReactions {
     pub channel_id: Id,
     pub message_id: Id,
@@ -272,7 +276,7 @@ pub struct PrunedReactions {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#typing-start-typing-start-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct TypingMessage {
     pub channel_id: Id,
     pub guild_id: Option<Id>,
@@ -285,7 +289,7 @@ pub struct TypingMessage {
     "https://discord.com/developers/docs/topics/gateway\
     #webhooks-update-webhooks-update-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct UpdatedWebhook {
     pub guild_id: Id,
     pub channel_id: Id,

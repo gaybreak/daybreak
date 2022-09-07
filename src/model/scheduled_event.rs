@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{user::User, Id};
@@ -6,7 +8,7 @@ use super::{user::User, Id};
     "https://discord.com/developers/docs/resources/guild-scheduled-event\
     #guild-scheduled-event-object-guild-scheduled-event-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ScheduledEvent {
     pub id: Id,
     pub guild_id: Id,
@@ -30,7 +32,8 @@ pub struct ScheduledEvent {
     "https://discord.com/developers/docs/resources/guild-scheduled-event\
     #guild-scheduled-event-object-guild-scheduled-event-privacy-level"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ScheduledEventPrivacy {
     GuildOnly = 2,
 }
@@ -39,7 +42,8 @@ pub enum ScheduledEventPrivacy {
     "https://discord.com/developers/docs/resources/guild-scheduled-event\
     #guild-scheduled-event-object-guild-scheduled-event-status"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ScheduledEventStatus {
     Scheduled = 1,
     Active = 2,
@@ -51,7 +55,7 @@ pub enum ScheduledEventStatus {
     "https://discord.com/developers/docs/resources/guild-scheduled-event\
     #guild-scheduled-event-object-guild-scheduled-event-entity-metadata"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ScheduledEventEntity {
     pub location: Option<String>,
 }
@@ -60,7 +64,8 @@ pub struct ScheduledEventEntity {
     "https://discord.com/developers/docs/resources/guild-scheduled-event\
     #guild-scheduled-event-object-guild-scheduled-event-entity-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ScheduledEventEntityType {
     StageInstance = 1,
     Voice = 2,
@@ -75,7 +80,7 @@ pub enum ScheduledEventEntityType {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-scheduled-event-user-remove-guild-scheduled-event-user-remove-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct ScheduledEventUser {
     pub guild_scheduled_event_id: Id,
     pub user_id: Id,

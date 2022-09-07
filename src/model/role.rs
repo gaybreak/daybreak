@@ -1,9 +1,11 @@
+use serde::{Deserialize, Serialize};
+
 use super::{permission::Permissions, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/permissions#role-object-role-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Role {
     pub id: Id,
     pub name: String,
@@ -21,7 +23,7 @@ pub struct Role {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct RoleTags {
     pub bot_id: Option<Id>,
     pub integration_id: Option<Id>,
@@ -36,7 +38,7 @@ pub struct RoleTags {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-role-update-guild-role-update-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct NewRole {
     pub guild_id: Id,
     pub role: Role,
@@ -46,7 +48,7 @@ pub struct NewRole {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-role-delete-guild-role-delete-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct DeletedRole {
     pub guild_id: Id,
     pub role_id: Id,

@@ -1,4 +1,6 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 use super::{permission::Permissions, user::User, Id};
 
@@ -6,7 +8,7 @@ use super::{permission::Permissions, user::User, Id};
     "https://discord.com/developers/docs/resources/application\
     #application-object-application-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Application {
     pub id: Id,
     pub name: String,
@@ -35,7 +37,7 @@ pub struct Application {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/application#application-object-application-flags"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ApplicationFlags {
     GatewayPresence = 1 << 12,
     GatewayPresenceLimited = 1 << 13,
@@ -51,14 +53,14 @@ pub enum ApplicationFlags {
     "https://discord.com/developers/docs/resources/application\
     #install-params-object-install-params-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct InstallParams {
     pub scopes: Vec<String>,
     pub permissions: Permissions,
 }
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/teams#data-models-team-object")]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Team {
     pub icon: Option<String>,
     pub id: Id,
@@ -70,7 +72,7 @@ pub struct Team {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/teams#data-models-team-member-object"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct TeamMember {
     pub membership_state: TeamMemberState,
     pub team_id: Id,
@@ -80,7 +82,8 @@ pub struct TeamMember {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum TeamMemberState {
     Invited = 1,
     Accepted = 2,
