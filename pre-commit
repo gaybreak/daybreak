@@ -1,0 +1,16 @@
+# Move this file to .git/hooks/ to ensure the GitHub check action (except the tests) will also pass
+
+export RUST_BACKTRACE=1
+export RUSTDOCFLAGS=-Dwarnings
+
+cargo build
+
+rustup toolchain install nightly
+rustup component add rustfmt --toolchain nightly
+cargo +nightly fmt --check
+
+cargo doc --no-deps
+cargo clippy -- -D warnings
+
+# https://cspell.org/docs/installation
+cspell lint --gitignore --fail-fast "**"
