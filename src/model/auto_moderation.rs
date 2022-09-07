@@ -7,7 +7,7 @@ use super::Id;
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-auto-moderation-rule-structure"
 )]
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 #[cfg_attr(test, derive(PartialEq, Eq))]
 pub struct AutoModerationRule {
     pub id: Id,
@@ -27,9 +27,8 @@ pub struct AutoModerationRule {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-event-types"
 )]
-#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum AutoModerationEvent {
     MessageSend = 1,
 }
@@ -38,9 +37,8 @@ pub enum AutoModerationEvent {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-trigger-types"
 )]
-#[derive(Clone, Copy, Debug, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum AutoModerationTriggerType {
     Keyword = 1,
     HarmfulLink = 2,
@@ -66,9 +64,8 @@ pub struct AutoModerationTrigger {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-rule-object-keyword-preset-types"
 )]
-#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum KeywordPresetType {
     Profanity = 1,
     SexualContent = 2,
@@ -91,9 +88,8 @@ pub struct AutoModerationAction {
     "https://discord.com/developers/docs/resources/auto-moderation\
     #auto-moderation-action-object-action-types"
 )]
-#[derive(Clone, Copy, Debug, Serialize_repr, Deserialize_repr)]
-#[cfg_attr(test, derive(PartialEq, Eq))]
 #[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum AutoModerationActionType {
     BlockMessage = 1,
     SendAlertMessage = 2,
@@ -115,7 +111,7 @@ pub struct AutoModerationActionData {
     "https://discord.com/developers/docs/topics/gateway\
     #auto-moderation-action-execution-auto-moderation-action-execution-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct AutoModerationExecution {
     pub guild_id: Id,
     pub action: AutoModerationAction,

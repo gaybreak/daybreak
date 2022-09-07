@@ -1,13 +1,14 @@
 use std::fmt::Display;
 
 use enumflags2::{bitflags, BitFlags};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[bitflags]
 #[repr(u64)]
 #[doc =discord_url!(
     "https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum Permissions {
     CreateInstantInvite = 1 << 0,
     KickMembers = 1 << 1,

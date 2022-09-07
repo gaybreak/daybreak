@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{member::Member, Id};
@@ -5,7 +7,7 @@ use super::{member::Member, Id};
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct VoiceState {
     pub guild_id: Option<Id>,
     pub channel_id: Option<Id>,
@@ -26,7 +28,7 @@ pub struct VoiceState {
     "https://discord.com/developers/docs/topics/gateway\
     #voice-server-update-voice-server-update-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct VoiceServer {
     pub token: String,
     pub guild_id: Id,
@@ -37,7 +39,7 @@ pub struct VoiceServer {
     "https://discord.com/developers/docs/topics/gateway\
     #update-voice-state-gateway-voice-state-update-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct UpdatedVoiceState {
     pub guild_id: Id,
     pub channel_id: Option<Id>,
@@ -48,7 +50,8 @@ pub struct UpdatedVoiceState {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum VoiceOpcode {
     Identify = 0,
     SelectProtocol = 1,

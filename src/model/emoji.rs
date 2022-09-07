@@ -1,9 +1,12 @@
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
+
 use crate::model::{user::User, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Emoji {
     pub id: Option<Id>,
     pub name: Option<String>,
@@ -18,7 +21,7 @@ pub struct Emoji {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Sticker {
     pub id: Id,
     pub pack_id: Option<Id>,
@@ -37,7 +40,8 @@ pub struct Sticker {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum StickerType {
     Standard = 1,
     Guild = 2,
@@ -46,7 +50,8 @@ pub enum StickerType {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum StickerFormat {
     Png = 1,
     Apng = 2,
@@ -57,7 +62,7 @@ pub enum StickerFormat {
     "https://discord.com/developers/docs/resources/sticker\
     #sticker-item-object-sticker-item-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct StickerItem {
     pub id: Id,
     pub name: String,
@@ -68,7 +73,7 @@ pub struct StickerItem {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-emojis-update-guild-emojis-update-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct GuildEmojis {
     pub guild_id: Id,
     pub emojis: Vec<Emoji>,
@@ -78,7 +83,7 @@ pub struct GuildEmojis {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-stickers-update-guild-stickers-update-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct GuildStickers {
     pub guild_id: Id,
     pub stickers: Vec<Sticker>,

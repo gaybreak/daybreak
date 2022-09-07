@@ -1,4 +1,6 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{member::ThreadMember, permission::Permissions, user::User, Id};
@@ -6,7 +8,7 @@ use super::{member::ThreadMember, permission::Permissions, user::User, Id};
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Channel {
     pub id: Id,
     pub channel_type: ChannelType,
@@ -43,7 +45,8 @@ pub struct Channel {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ChannelType {
     GuildText = 0,
     DM = 1,
@@ -64,7 +67,7 @@ pub enum ChannelType {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-flags"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ChannelFlags {
     Pinned = 1 << 1,
 }
@@ -72,7 +75,8 @@ pub enum ChannelFlags {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum VideoQualityMode {
     Auto = 1,
     Full = 2,
@@ -82,7 +86,7 @@ pub enum VideoQualityMode {
     "https://discord.com/developers/docs/resources/channel\
     #thread-metadata-object-thread-metadata-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct Thread {
     pub archived: bool,
     pub auto_archive_duration: u16,
@@ -96,7 +100,7 @@ pub struct Thread {
     "https://discord.com/developers/docs/topics/gateway\
     #channel-pins-update-channel-pins-update-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct ChannelPinsUpdate {
     pub guild_id: Option<Id>,
     pub channel_id: Id,
@@ -107,7 +111,7 @@ pub struct ChannelPinsUpdate {
     "https://discord.com/developers/docs/topics/gateway\
     #thread-list-sync-thread-list-sync-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ThreadSync {
     pub guild_id: Id,
     pub channel_ids: Option<Vec<Id>>,
@@ -118,7 +122,7 @@ pub struct ThreadSync {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PermissionOverwrite {
     pub id: Id,
     pub kind: PermissionOverwriteKind,
@@ -129,7 +133,8 @@ pub struct PermissionOverwrite {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum PermissionOverwriteKind {
     Role = 0,
     Member = 1,

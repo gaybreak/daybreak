@@ -56,7 +56,7 @@ use serde::{Deserialize, Serialize};
 use time::{Duration, OffsetDateTime};
 
 #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(try_from = "String")]
 pub struct Id(pub u64);
 

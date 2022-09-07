@@ -1,4 +1,6 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{user::User, Id};
@@ -7,7 +9,7 @@ use super::{user::User, Id};
     "https://discord.com/developers/docs/topics/gateway\
     #presence-update-presence-update-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Presence {
     pub user: User,
     pub guild_id: Id,
@@ -17,7 +19,7 @@ pub struct Presence {
 }
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#client-status-object")]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ClientStatus {
     pub desktop: Option<String>,
     pub mobile: Option<String>,
@@ -27,7 +29,7 @@ pub struct ClientStatus {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Activity {
     pub name: String,
     pub kind: ActivityType,
@@ -49,7 +51,8 @@ pub struct Activity {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ActivityType {
     Game = 0,
     Streaming = 1,
@@ -62,7 +65,7 @@ pub enum ActivityType {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct ActivityTimestamps {
     pub start: Option<OffsetDateTime>,
     pub end: Option<OffsetDateTime>,
@@ -71,7 +74,7 @@ pub struct ActivityTimestamps {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-emoji"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ActivityEmoji {
     pub name: String,
     pub id: Option<Id>,
@@ -81,7 +84,7 @@ pub struct ActivityEmoji {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-party"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ActivityParty {
     pub id: Option<String>,
     pub size: Option<(u8, u8)>,
@@ -90,7 +93,7 @@ pub struct ActivityParty {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-assets"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ActivityAssets {
     pub large_image: Option<String>,
     pub large_text: Option<String>,
@@ -101,7 +104,7 @@ pub struct ActivityAssets {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-secrets"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ActivitySecrets {
     pub join: Option<String>,
     pub spectate: Option<String>,
@@ -113,7 +116,7 @@ pub struct ActivitySecrets {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ActivityFlags {
     Instance = 1 << 0,
     Join = 1 << 1,
@@ -129,7 +132,7 @@ pub enum ActivityFlags {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#activity-object-activity-buttons"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ActivityButton {
     pub label: String,
     pub url: String,
@@ -139,7 +142,7 @@ pub struct ActivityButton {
     "https://discord.com/developers/docs/topics/gateway\
     #update-presence-gateway-presence-update-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct UpdatedPresence {
     pub since: Option<OffsetDateTime>,
     pub activities: Vec<Activity>,

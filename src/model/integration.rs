@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
 
 use super::{user::User, Id};
@@ -5,7 +7,7 @@ use super::{user::User, Id};
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/guild#integration-object-integration-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Integration {
     pub id: Id,
     pub name: String,
@@ -37,7 +39,8 @@ pub struct Integration {
     "https://discord.com/developers/docs/resources/guild\
     #integration-object-integration-expire-behaviors"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum IntegrationExpire {
     RemoveRole = 0,
     Kick = 1,
@@ -47,7 +50,7 @@ pub enum IntegrationExpire {
     "https://discord.com/developers/docs/resources/guild\
     #integration-account-object-integration-account-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct IntegrationAccount {
     pub id: String,
     pub name: String,
@@ -57,7 +60,7 @@ pub struct IntegrationAccount {
     "https://discord.com/developers/docs/resources/guild\
     #integration-application-object-integration-application-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct IntegrationApplication {
     pub id: Id,
     pub name: String,
@@ -70,7 +73,7 @@ pub struct IntegrationApplication {
     "https://discord.com/developers/docs/topics/gateway\
     #guild-integrations-update-guild-integrations-update-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct Integrations {
     pub guild_id: Id,
 }

@@ -1,4 +1,6 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 use super::{
     application::Application, guild::UnavailableGuild, presence::UpdatedPresence, user::User, Id,
@@ -7,7 +9,7 @@ use super::{
 #[bitflags]
 #[repr(u32)]
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#list-of-intents")]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum Intents {
     Guilds = 1 << 0,
     GuildMembers = 1 << 1,
@@ -33,7 +35,7 @@ pub enum Intents {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Payload {
     pub op: GatewayOpcode,
     pub d: Option<String>,
@@ -44,7 +46,8 @@ pub struct Payload {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum GatewayOpcode {
     Dispatch = 0,
     Heartbeat = 1,
@@ -62,7 +65,7 @@ pub enum GatewayOpcode {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#identify-identify-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Identify {
     pub token: String,
     pub properties: IdentifyConnection,
@@ -76,7 +79,7 @@ pub struct Identify {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct IdentifyConnection {
     pub os: String,
     pub browser: String,
@@ -84,13 +87,13 @@ pub struct IdentifyConnection {
 }
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#hello-hello-structure")]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct Hello {
     pub heartbeat_interval: u32,
 }
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#ready-ready-event-fields")]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Ready {
     pub v: u8,
     pub user: User,
@@ -102,7 +105,7 @@ pub struct Ready {
 }
 
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#resume-resume-structure")]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Resume {
     pub token: String,
     pub session_id: String,
@@ -113,7 +116,7 @@ pub struct Resume {
     "https://discord.com/developers/docs/topics/gateway\
     #request-guild-members-guild-request-members-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RequestGuildMembers {
     pub guild_id: Id,
     pub query: Option<String>,
@@ -126,7 +129,7 @@ pub struct RequestGuildMembers {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct BotGateway {
     pub url: Option<String>,
     pub shards: u16,
@@ -137,7 +140,7 @@ pub struct BotGateway {
     "https://discord.com/developers/docs/topics/gateway\
     #session-start-limit-object-session-start-limit-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct SessionStartLimit {
     pub total: u32,
     pub remaining: u32,

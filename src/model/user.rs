@@ -1,11 +1,13 @@
 use enumflags2::bitflags;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 use super::{member::Member, Id};
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-user-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: Id,
     pub username: Option<String>,
@@ -34,7 +36,7 @@ pub struct User {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-user-flags"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum UserFlags {
     Staff = 1 << 0,
     Partner = 1 << 1,
@@ -55,7 +57,8 @@ pub enum UserFlags {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/user#user-object-premium-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum PremiumType {
     None = 0,
     NitroClassic = 1,
@@ -65,7 +68,7 @@ pub enum PremiumType {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway#message-delete-message-delete-event-fields"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct DeletedMessage {
     pub id: Id,
     pub channel_id: Id,
@@ -76,7 +79,7 @@ pub struct DeletedMessage {
     "https://discord.com/developers/docs/topics/gateway\
     #message-delete-bulk-message-delete-bulk-event-fields"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct DeletedMessages {
     pub id: Vec<Id>,
     pub channel_id: Id,

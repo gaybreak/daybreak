@@ -1,9 +1,10 @@
+use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
 
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Embed {
     pub title: Option<String>,
     pub embed_type: Option<String>,
@@ -23,7 +24,7 @@ pub struct Embed {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedFooter {
     pub text: String,
     pub icon_url: Option<String>,
@@ -33,7 +34,7 @@ pub struct EmbedFooter {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedImage {
     pub url: String,
     pub proxy_url: Option<String>,
@@ -44,7 +45,7 @@ pub struct EmbedImage {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedThumbnail {
     pub url: String,
     pub proxy_url: Option<String>,
@@ -55,7 +56,7 @@ pub struct EmbedThumbnail {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedVideo {
     pub url: Option<String>,
     pub proxy_url: Option<String>,
@@ -66,7 +67,7 @@ pub struct EmbedVideo {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedProvider {
     pub name: Option<String>,
     pub url: Option<String>,
@@ -75,7 +76,7 @@ pub struct EmbedProvider {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedAuthor {
     pub name: String,
     pub url: Option<String>,
@@ -86,7 +87,7 @@ pub struct EmbedAuthor {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EmbedField {
     pub name: String,
     pub value: String,

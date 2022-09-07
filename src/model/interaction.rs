@@ -1,5 +1,8 @@
 use std::collections::HashMap;
 
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
+
 use super::{
     channel::Channel,
     emoji::Emoji,
@@ -15,7 +18,7 @@ use super::{
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Interaction {
     pub id: Id,
     pub application_id: Id,
@@ -37,7 +40,8 @@ pub struct Interaction {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-type"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum InteractionType {
     Ping = 1,
     ApplicationCommand = 2,
@@ -50,7 +54,7 @@ pub enum InteractionType {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-interaction-data"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct InteractionData {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/receiving-and-responding\
@@ -117,7 +121,8 @@ pub struct InteractionData {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-interaction-data-option-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum CommandType {
     ChatInput = 1,
     User = 2,
@@ -128,7 +133,7 @@ pub enum CommandType {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-interaction-data-option-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CommandOption {
     pub name: String,
     pub kind: CommandOptionType,
@@ -141,7 +146,8 @@ pub struct CommandOption {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-object-application-command-option-type"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum CommandOptionType {
     SubCommand = 1,
     SubCommandGroup = 2,
@@ -160,7 +166,7 @@ pub enum CommandOptionType {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #interaction-object-resolved-data-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ResolvedData {
     pub users: Option<HashMap<Id, User>>,
     pub members: Option<HashMap<Id, Member>>,
@@ -171,7 +177,7 @@ pub struct ResolvedData {
 }
 
 #[doc = fields_documented!()]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Component {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/message-components\
@@ -286,7 +292,8 @@ pub struct Component {
     "https://discord.com/developers/docs/interactions/message-components\
     #component-object-component-types"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ComponentType {
     ActionRow = 1,
     Button = 2,
@@ -295,7 +302,8 @@ pub enum ComponentType {
 }
 
 #[doc = variants_documented!()]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum ComponentStyle {
     #[doc = discord_url!(
         "https://discord.com/developers/docs/interactions/message-components\
@@ -336,7 +344,7 @@ pub enum ComponentStyle {
     "https://discord.com/developers/docs/interactions/message-components\
     #select-menu-object-select-option-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SelectOption {
     pub label: String,
     pub value: String,
@@ -349,7 +357,7 @@ pub struct SelectOption {
     "https://discord.com/developers/docs/interactions/receiving-and-responding\
     #message-interaction-object-message-interaction-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct MessageInteraction {
     pub id: Id,
     pub kind: InteractionType,
@@ -362,7 +370,7 @@ pub struct MessageInteraction {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-guild-application-command-permissions-structure"
 )]
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CommandPermissions {
     pub id: Id,
     pub application_id: Id,
@@ -374,7 +382,7 @@ pub struct CommandPermissions {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct CommandPermission {
     pub id: Id,
     pub kind: CommandPermissionType,
@@ -385,7 +393,8 @@ pub struct CommandPermission {
     "https://discord.com/developers/docs/interactions/application-commands\
     #application-command-permissions-object-application-command-permissions-structure"
 )]
-#[derive(Clone, Copy, Debug)]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize_repr, Deserialize_repr)]
 pub enum CommandPermissionType {
     Role = 1,
     User = 2,
