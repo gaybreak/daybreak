@@ -55,39 +55,50 @@ use anyhow::Error;
 use serde::{Deserialize, Serialize};
 use time::{Duration, OffsetDateTime};
 
-#[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[serde(try_from = "String")]
-pub struct Id(pub u64);
 
-impl Display for Id {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.0)
+// TODO: specialized ID
+
+#[macro_export]
+macro_rules! id {
+    ( $variant:ident ) => {
+            #[doc = discord_url!("https://discord.com/developers/docs/reference#snowflakes")]
+            #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+            #[serde(try_from = "String")]
+            pub struct $variant(pub u64);
+
+            impl Display for $variant {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    write!(f, "{}", self.0)
+                }
+            }
+
+            impl TryFrom<String> for $variant {
+                type Error = ParseIntError;
+                fn try_from(s: String) -> Result<Self, Self::Error> {
+                    Ok(Self(s.parse()?))
+                }
+            }
+
+            impl $variant {
+                /// The unix timestamp of the ID
+                #[doc = discord_url!(
+                    "https://discord.com/developers/docs/reference\
+                        #snowflakes-snowflake-id-format-structure-left-to-right"
+                )]
+                #[allow(
+                    clippy::integer_arithmetic,
+                    clippy::cast_possible_wrap,
+                    clippy::as_conversions
+                )]
+            pub fn timestamp(self) -> Result<OffsetDateTime, Error> {
+                    Ok(OffsetDateTime::from_unix_timestamp(
+                        Duration::milliseconds(((self.0 >> 22) + 1_420_070_400_000) as i64)
+                        .whole_seconds(),
+                    )?)
+                }
+            }
     }
 }
 
-impl TryFrom<String> for Id {
-    type Error = ParseIntError;
-
-    fn try_from(s: String) -> Result<Self, Self::Error> {
-        Ok(Self(s.parse()?))
-    }
-}
-
-impl Id {
-    /// The unix timestamp of the ID
-    #[doc = discord_url!(
-        "https://discord.com/developers/docs/reference\
-        #snowflakes-snowflake-id-format-structure-left-to-right"
-    )]
-    #[allow(
-        clippy::integer_arithmetic,
-        clippy::cast_possible_wrap,
-        clippy::as_conversions
-    )]
-    pub fn timestamp(self) -> Result<OffsetDateTime, Error> {
-        Ok(OffsetDateTime::from_unix_timestamp(
-            Duration::milliseconds(((self.0 >> 22) + 1_420_070_400_000) as i64).whole_seconds(),
-        )?)
-    }
-}
+id!(Id); // TODO: remove instances of Id and replace with suitable alternatives.
+id!(ChannelId);

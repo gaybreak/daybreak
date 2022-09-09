@@ -9,22 +9,22 @@ use crate::{
     model::{
         channel::*,
         permission::Permissions,
-        Id, member::ThreadMember,
+        Id, ChannelId, member::ThreadMember,
         user::User},
 };
-enum MessageQueryParams {
+enum MessageQueryParams {   // TODO: MessageID
     Around(Id),
     Before(Id),
     After(Id)
 }
-impl Channel {
+impl ChannelId {
     #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel\
         #get-channel"
     )]
     #[doc = http_errors_doc!()]
-    pub async fn from_id(ctx: &Context, id: &Id) -> Result<Channel,Error> {
-        ctx.channel_request_id(id, Method::GET)
+    pub async fn get_info(&self, ctx: &Context) -> Result<Channel,Error> {
+        ctx.channel_request_id(self, Method::GET).await
     }
 
     #[doc = discord_url!(
@@ -32,31 +32,31 @@ impl Channel {
         #deleteclose-channel"
     )]
     #[doc = http_errors_doc!()]
-    pub async fn delete(ctx: &Context, id: &Id) -> Result<Channel,Error> {
-        ctx.channel_request_id(id, Method::DELETE)
+    pub async fn channel_delete(self, ctx: &Context) -> Result<Channel,Error> {
+        ctx.channel_request_id(&self, Method::DELETE).await
     }
 
-    pub async fn edit<F: FnOnce(ChannelModifier) -> ChannelModifier>(
+    pub async fn edit<F: FnOnce(ChannelEdit) -> ChannelEdit>(
         self,
         ctx: &Context,
         f: F,
     ) -> Result<Channel, Error> {
-        let id = self.id;
-        let patch = f(ChannelModifier::default());
-        let reply = ctx.request_with_params(Request::new(
+        let id = self.0;
+        let patch = f(ChannelEdit::default());
+        ctx.request_with_params(Request::new(
             Permissions::ViewChannel.into(),
             Method::PATCH,
             format!("/channels/{id}"),
         ),
                                 patch
-        ).await?;
+        ).await?
     }
 }
 
 impl Context {
     pub async fn channel_request_id(
         &self,
-        channel_id: &Id,
+        channel_id: &ChannelId,
         method: Method,
     ) -> Result<Channel, Error> {
         self.empty_request(Request::new(
@@ -73,7 +73,7 @@ impl Context {
 /// The little worker people enter the computer and change the channel through here
 /// any data passed through here can be built into new or existing channel (build, patch)
 /// TODO: finish
-#[derive(Default, Debug, Copy, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 struct ChannelEdit {
     pub id: Id,
     pub channel_type: ChannelType,
