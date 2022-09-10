@@ -1,3 +1,4 @@
+use std::path::Component::ParentDir;
 use anyhow::Error;
 use hyper::Method;
 use serde::{Deserialize, Deserializer, Serialize};
@@ -9,7 +10,7 @@ use crate::{
     model::{
         channel::*,
         permission::Permissions,
-        Id, ChannelId, member::ThreadMember,
+        Id, member::ThreadMember,
         user::User},
 };
 enum MessageQueryParams {   // TODO: MessageID
@@ -17,46 +18,10 @@ enum MessageQueryParams {   // TODO: MessageID
     Before(Id),
     After(Id)
 }
-impl ChannelId {
-    #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel\
-        #get-channel"
-    )]
-    #[doc = http_errors_doc!()]
-    pub async fn get_info(&self, ctx: &Context) -> Result<Channel,Error> {
-        ctx.channel_request_id(self, Method::GET).await
-    }
-
-    #[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/channel\
-        #deleteclose-channel"
-    )]
-    #[doc = http_errors_doc!()]
-    pub async fn channel_delete(self, ctx: &Context) -> Result<Channel,Error> {
-        ctx.channel_request_id(&self, Method::DELETE).await
-    }
-
-    pub async fn edit<F: FnOnce(ChannelEdit) -> ChannelEdit>(
-        self,
-        ctx: &Context,
-        f: F,
-    ) -> Result<Channel, Error> {
-        let id = self.0;
-        let patch = f(ChannelEdit::default());
-        ctx.request_with_params(Request::new(
-            Permissions::ViewChannel.into(),
-            Method::PATCH,
-            format!("/channels/{id}"),
-        ),
-                                patch
-        ).await?
-    }
-}
-
 impl Context {
-    pub async fn channel_request_id(
+    async fn channel_request_id(
         &self,
-        channel_id: &ChannelId,
+        channel_id: &Id,
         method: Method,
     ) -> Result<Channel, Error> {
         self.empty_request(Request::new(
@@ -64,45 +29,240 @@ impl Context {
             method,
             format!("/channels/{channel_id}"),
         ))
-            .await?
+            .await
+    }
+    #[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel\
+        #get-channel"
+    )]
+    #[doc = http_errors_doc!()]
+    pub async fn get_channel(&self, channel_id: &Id) -> Result<Channel,Error> {
+        self.channel_request_id(&channel_id, Method::GET).await
     }
 
+    #[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/channel\
+        #deleteclose-channel"
+    )]
+    #[doc = http_errors_doc!()]
+    pub async fn channel_delete(&self, channel_id: &Id) -> Result<Channel,Error> {
+        self.channel_request_id(&channel_id, Method::DELETE).await
+    }
+/*
+    pub async fn _edit<F: FnOnce(ChannelEdit) -> ChannelEdit>(
+        self,
+        channel_id: &Id,
+        f: F,
+    ) -> Result<Channel, Error> {
+        let patch = f(ChannelEdit::default());
+        self.request_with_params(Request::new(
+            Permissions::ViewChannel.into(),
+            Method::PATCH,
+            format!("/channels/{channel_id}"),
+        ),
+                                patch
+        ).await
+    }
 
+ */
+    pub async fn edit(
+        self,
+        channel_id: &Id,
+        edit: ChannelEdit,
+    ) -> Result<Channel, Error> {
+        self.request_with_params(Request::new(
+            Permissions::ViewChannel.into(),
+            Method::PATCH,
+            format!("/channels/{channel_id}"),
+        ),
+        edit
+        ).await
+    }
 }
+
 
 /// The little worker people enter the computer and change the channel through here
 /// any data passed through here can be built into new or existing channel (build, patch)
 /// TODO: finish
 #[derive(Default, Debug, Serialize, Deserialize)]
-struct ChannelEdit {
-    pub id: Id,
-    pub channel_type: ChannelType,
-    pub guild_id: Option<Id>,
-    pub position: Option<u16>,
-    pub permission_overwrites: Option<Vec<PermissionOverwrite>>,
+pub struct ChannelEdit {
     pub name: Option<String>,
+    pub channel_type: Option<ChannelType>,
+    pub position: Option<u16>,
     pub topic: Option<String>,
     pub nsfw: Option<bool>,
-    pub last_message_id: Option<Id>,
+    pub rate_limit_per_user: Option<u16>,
     pub bitrate: Option<u32>,
     pub user_limit: Option<u8>,
-    pub rate_limit_per_user: Option<u16>,
-    pub recipients: Option<Vec<User>>,
-    pub icon: Option<String>,
-    pub owner_id: Option<Id>,
-    pub application_id: Option<Id>,
+    pub permission_overwrites: Vec<PermissionOverwrite>,
     pub parent_id: Option<Id>,
-    pub last_pin_timestamp: Option<OffsetDateTime>,
     pub rtc_region: Option<String>,
     pub video_quality_mode: Option<VideoQualityMode>,
-    pub message_count: Option<u32>,
-    pub member_count: Option<u8>,
-    pub thread_metadata: Option<Thread>,
-    pub member: Option<ThreadMember>,
     pub default_auto_archive_duration: Option<u16>,
-    pub permissions: Option<Permissions>,
-    pub flags: Option<ChannelFlags>,
-    pub total_message_sent: Option<u32>,
-    #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
-    pub newly_created: Option<bool>,
+    // pub available_tags: something - presume not included
+    // pub default_reaction_emoji
+    pub default_thread_rate_limit_per_user: Option<u16>
+}
+
+impl ChannelEdit {
+    pub fn name(self, name: &str) -> Self {
+        ChannelEdit {
+            name: Some(name.to_owned()),
+            ..self
+        }
+    }
+    /// Should NOT be used unless in a guild with the NEWS feature. probably remove this as its so limited. TODO
+    pub fn with_type(self, channel_type: ChannelType) -> Self {
+        ChannelEdit {
+            channel_type: Some(channel_type),
+            ..self
+        }
+    }
+    pub fn position(self, position: u16) -> Self {
+        ChannelEdit {
+            position: Some(position),
+            ..self
+        }
+    }
+    pub fn topic(self, topic: &str) -> Self {
+        ChannelEdit {
+            topic: Some(topic.to_owned()),
+            ..self
+        }
+    }
+    pub fn nsfw(self, nsfw: bool) -> Self {
+        ChannelEdit {
+            nsfw: Some(nsfw),
+            ..self
+        }
+    }
+    pub fn rate_limit(self, rate_limit: u16) -> Self {
+        ChannelEdit {
+            rate_limit_per_user: Some(rate_limit),
+            ..self
+        }
+    }
+    pub fn bitrate(self, bitrate: u32) -> Self {
+        ChannelEdit {
+            bitrate: Some(bitrate),
+            ..self
+        }
+    }
+    // TODO: check - can only some params be used with voice/thread/forum/text?
+    pub fn user_limit(self, lim: u8) -> Self {
+        ChannelEdit {
+            user_limit: Some(lim),
+            ..self
+        }
+    }
+    pub fn overwrite_perms(self, v: Vec<PermissionOverwrite>) -> Self {
+        ChannelEdit {
+            permission_overwrites: v,
+            ..self
+        }
+    }
+    pub fn parent(self, parent: Id) -> Self {
+        ChannelEdit {
+            parent_id: Some(parent),
+            ..self
+        }
+    }
+    pub fn region(self, rtc_region: &str) -> Self {
+        ChannelEdit {
+            rtc_region: Some(rtc_region.to_owned()),
+            ..self
+        }
+    }
+    pub fn video_quality(self, quality_mode: VideoQualityMode) -> Self {
+        ChannelEdit {
+            video_quality_mode: Some(quality_mode),
+            ..self
+        }
+    }
+    pub fn archive_duration(self, duration: u16) -> Self {
+        ChannelEdit {
+            default_auto_archive_duration: Some(duration),
+            ..self
+        }
+    }
+    pub fn thread_rate_limit(self, limit: u16) -> Self {
+        ChannelEdit {
+            default_thread_rate_limit_per_user: Some(limit),
+            ..self
+        }
+    }
+    // TODO: we should check on patch if its valid for channel type
+    pub fn validate_text(&self) -> bool {
+        match self {
+            ChannelEdit {
+                bitrate: None,
+                user_limit: None,
+                rtc_region: None,
+                video_quality_mode: None,
+                ..
+            } => true,
+            _ => false,
+        }
+    }
+    pub fn validate_announcement(&self) -> bool {
+        match self {
+            ChannelEdit {
+                rate_limit_per_user: None,
+                bitrate: None,
+                user_limit: None,
+                rtc_region: None,
+                video_quality_mode: None,
+                default_thread_rate_limit_per_user: None,
+                ..
+            } => true,
+            _ => false
+        }
+    }
+    pub fn validate_forum(&self) -> bool {
+        match self {
+            ChannelEdit {
+                channel_type: None,
+                bitrate: None,
+                user_limit: None,
+                rtc_region: None,
+                video_quality_mode: None,
+                default_auto_archive_duration: None,
+                default_thread_rate_limit_per_user: None,
+                ..
+            } => true,
+            _ => false
+        }
+    }
+    pub fn validate_voice(&self) -> bool {
+        match self {
+            ChannelEdit {
+                channel_type: None,
+                topic: None,
+                rate_limit_per_user: None,
+                default_auto_archive_duration: None,
+                default_thread_rate_limit_per_user: None,
+                ..
+            } => true,
+            _ => false,
+        }
+    }
+    pub fn validate_stage(&self) -> bool {
+        match self {
+            ChannelEdit {
+                channel_type: None,
+                topic: None,
+                nsfw: None,
+                rate_limit_per_user: None,
+                user_limit: None,
+                parent_id: None,
+                video_quality_mode: None,
+                default_auto_archive_duration: None,
+                default_thread_rate_limit_per_user: None,
+                ..
+            } => true,
+            _ => false,
+        }
+    }
+
+
 }
