@@ -42,6 +42,7 @@ pub struct Channel {
     pub newly_created: Option<bool>,
 }
 
+
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#channel-object-channel-types"
 )]
