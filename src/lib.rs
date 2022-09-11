@@ -106,11 +106,11 @@ macro_rules! http_errors_doc {
     };
 }
 
-/// Context method on auto moderation
+/// Context methods an auto moderation
 mod auto_moderation;
-// Context method on guild emojis
+/// Context methods on guild emojis and stickers
 mod emoji;
-/// Implementation of the HTTP client to make requests to Discord
+/// Implementation of making requests to Discord
 pub mod http;
 /// Discord objects and (de)serialization implementations on them
 pub mod model;
