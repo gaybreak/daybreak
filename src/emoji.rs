@@ -84,7 +84,7 @@ impl Context {
             Method::DELETE,
             format!("/guilds/{guild_id}/emojis/{emoji_id}"),
         ))
-            .await
+        .await
     }
 }
 
