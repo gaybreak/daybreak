@@ -15,7 +15,8 @@ impl Context {
     #[doc = http_errors_doc!()]
     pub async fn all_emojis(
         &self,
-        guild_id: Id) -> Result<GuildEmojis, Error> {
+        guild_id: Id
+    ) -> Result<GuildEmojis, Error> {
         self.empty_request(Request::new(
             Permissions::empty(),
             Method::GET,
@@ -26,7 +27,11 @@ impl Context {
 
     #[doc = discord_url!("https://discord.com/developers/docs/resources/emoji#get-guild-emoji")]
     #[doc = http_errors_doc!()]
-    pub async fn find(&self, guild_id: Id, emoji_id: Id) -> Result<Emoji, Error> {
+    pub async fn find(
+        &self,
+        guild_id: Id,
+        emoji_id: Id
+    ) -> Result<Emoji, Error> {
         self.empty_request(Request::new(
             Permissions::empty(),
             Method::GET,
