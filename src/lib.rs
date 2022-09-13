@@ -106,8 +106,6 @@ macro_rules! http_errors_doc {
     };
 }
 
-/// Context methods about auto moderation
-mod auto_moderation;
 /// Context methods about guild emojis and stickers
 mod emoji;
 /// Implementation of making requests to Discord
