@@ -88,3 +88,22 @@ pub struct GuildStickers {
     pub guild_id: Id,
     pub stickers: Vec<Sticker>,
 }
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/emoji#create-guild-emoji-json-params"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct CreateEmoji {
+    pub name: String,
+    pub image: String,
+    pub roles: Vec<Id>,
+}
+
+#[doc = discord_url!(
+    "https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EditEmoji {
+    pub name: String,
+    pub roles: Option<Vec<Id>>,
+}
