@@ -1,1 +1,2 @@
-use tokio as _;
+/// Tests about emoji requests
+mod emoji;
