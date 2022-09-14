@@ -145,7 +145,7 @@ impl Context {
     ///     })
     /// });
     ///
-    /// CTX.auto_moderation_rules(Id(1234));
+    /// CTX.emojis(Id(1234));
     /// ```
     #[must_use]
     #[allow(clippy::new_without_default)]
