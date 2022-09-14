@@ -1,4 +1,4 @@
-use enumflags2::bitflags;
+use enumflags2::{bitflags, BitFlags};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
@@ -36,7 +36,7 @@ pub struct Channel {
     pub member: Option<ThreadMember>,
     pub default_auto_archive_duration: Option<u16>,
     pub permissions: Option<Permissions>,
-    pub flags: Option<ChannelFlags>,
+    pub flags: Option<BitFlags<ChannelFlags>>,
     pub total_message_sent: Option<u32>,
     #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#thread-create")]
     pub newly_created: Option<bool>,
@@ -122,12 +122,12 @@ pub struct ThreadSync {
 #[doc = discord_url!(
     "https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure"
 )]
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct PermissionOverwrite {
     pub id: Id,
     pub kind: PermissionOverwriteKind,
-    pub allow: String,
-    pub deny: String,
+    pub allow: BitFlags<Permissions>,
+    pub deny: BitFlags<Permissions>,
 }
 
 #[doc = discord_url!(

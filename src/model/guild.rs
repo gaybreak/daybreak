@@ -1,4 +1,4 @@
-use enumflags2::bitflags;
+use enumflags2::{bitflags, BitFlags};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use time::OffsetDateTime;
@@ -44,7 +44,7 @@ pub struct Guild {
     pub mfa_level: MfaLevel,
     pub application_id: Option<Id>,
     pub system_channel_id: Option<Id>,
-    pub system_channel_flags: SystemChannelFlags,
+    pub system_channel_flags: BitFlags<SystemChannelFlags>,
     pub rules_channel_id: Option<Id>,
     pub max_presences: Option<u32>,
     pub max_members: Option<u32>,

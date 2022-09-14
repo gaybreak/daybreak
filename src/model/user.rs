@@ -8,6 +8,7 @@ use super::{member::Member, Id};
     "https://discord.com/developers/docs/resources/user#user-object-user-structure"
 )]
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq))]
 pub struct User {
     pub id: Id,
     pub username: Option<String>,

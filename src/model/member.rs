@@ -12,6 +12,7 @@ use super::{
     "https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure"
 )]
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq))]
 pub struct Member {
     pub user: Option<User>,
     pub nick: Option<String>,

@@ -7,10 +7,11 @@ use crate::model::{user::User, Id};
     "https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure"
 )]
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[cfg_attr(test, derive(PartialEq))]
 pub struct Emoji {
     pub id: Option<Id>,
     pub name: Option<String>,
-    pub roles: Option<Id>,
+    pub roles: Option<Vec<Id>>,
     pub user: Option<User>,
     pub require_colons: Option<bool>,
     pub managed: Option<bool>,
