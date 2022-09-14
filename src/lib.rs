@@ -117,6 +117,8 @@ pub mod model;
 /// Tests for everything in Daybreak
 #[cfg(test)]
 mod tests;
+/// Message impl
+mod message;
 
 #[derive(Debug)]
 #[allow(clippy::multiple_inherent_impl)]

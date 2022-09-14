@@ -11,20 +11,34 @@ use crate::{
         channel::*,
         permission::Permissions,
         Id, member::ThreadMember,
-        user::User},
+        user::User,
+        message::*
+    },
 };
+use crate::model::message::Message;
+
 enum MessageQueryParams {   // TODO: MessageID
     Around(Id),
     Before(Id),
     After(Id)
 }
+// ids?
+struct ChannelContext<'ctx>(&'ctx Context);
+
 impl Context {
+    /// channel features- passes context into channelcontext
+    pub fn channel(&self) -> ChannelContext {
+        ChannelContext(self)
+    }
+}
+
+impl ChannelContext {
     async fn channel_request_id(
         &self,
         channel_id: &Id,
         method: Method,
     ) -> Result<Channel, Error> {
-        self.empty_request(Request::new(
+        self.0.empty_request(Request::new(
             Permissions::ViewChannel.into(),
             method,
             format!("/channels/{channel_id}"),
@@ -47,6 +61,10 @@ impl Context {
     #[doc = http_errors_doc!()]
     pub async fn channel_delete(&self, channel_id: &Id) -> Result<Channel,Error> {
         self.channel_request_id(&channel_id, Method::DELETE).await
+    }
+
+    pub async fn say(&self, channel_id: &Id) -> Result<Message,Error> {
+        self.0.
     }
 /*
     pub async fn _edit<F: FnOnce(ChannelEdit) -> ChannelEdit>(
@@ -105,37 +123,42 @@ pub struct ChannelEdit {
 }
 
 impl ChannelEdit {
+    /// Change the name of a channel.
     pub fn name(self, name: &str) -> Self {
         ChannelEdit {
             name: Some(name.to_owned()),
             ..self
         }
     }
-    /// Should NOT be used unless in a guild with the NEWS feature. probably remove this as its so limited. TODO
+    /// TODO: limited to specific conversions.
     pub fn with_type(self, channel_type: ChannelType) -> Self {
         ChannelEdit {
             channel_type: Some(channel_type),
             ..self
         }
     }
+    /// Change the position of a channel
     pub fn position(self, position: u16) -> Self {
         ChannelEdit {
             position: Some(position),
             ..self
         }
     }
+    /// Channel topic / description
     pub fn topic(self, topic: &str) -> Self {
         ChannelEdit {
             topic: Some(topic.to_owned()),
             ..self
         }
     }
+    /// True if NSFW.
     pub fn nsfw(self, nsfw: bool) -> Self {
         ChannelEdit {
             nsfw: Some(nsfw),
             ..self
         }
     }
+    /// Sets the rate limit of the channel
     pub fn rate_limit(self, rate_limit: u16) -> Self {
         ChannelEdit {
             rate_limit_per_user: Some(rate_limit),
@@ -191,6 +214,11 @@ impl ChannelEdit {
             ..self
         }
     }
+    /// helper to extend for custom behaviour
+    pub fn by_fn<F: Fn(&Channel, ChannelEdit) -> ChannelEdit>(self, base_channel: &Channel, f:F) -> Self {
+        f(base_channel, self)
+    }
+
     // TODO: we should check on patch if its valid for channel type
     pub fn validate_text(&self) -> bool {
         match self {
@@ -239,6 +267,7 @@ impl ChannelEdit {
                 channel_type: None,
                 topic: None,
                 rate_limit_per_user: None,
+                bitrate: Some(8000..=384000),
                 default_auto_archive_duration: None,
                 default_thread_rate_limit_per_user: None,
                 ..
@@ -253,6 +282,7 @@ impl ChannelEdit {
                 topic: None,
                 nsfw: None,
                 rate_limit_per_user: None,
+                bitrate: Some(8000..=64000),
                 user_limit: None,
                 parent_id: None,
                 video_quality_mode: None,
