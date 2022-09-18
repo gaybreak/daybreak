@@ -70,6 +70,20 @@ pub struct StickerItem {
     pub format_type: StickerFormat,
 }
 
+#[doc = discord_url!("https://discord.com/developers/docs/resources/sticker\
+#sticker-pack-object-sticker-pack-structure"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct StickerPack {
+    pub id: Id,
+    pub stickers: Vec<Sticker>,
+    pub name: String,
+    pub sku_id: Id,
+    pub cover_sticker_id: Option<Id>,
+    pub description: String,
+    pub banner_asset_id: Option<Id>,
+}
+
 #[doc = discord_url!(
     "https://discord.com/developers/docs/topics/gateway\
     #guild-emojis-update-guild-emojis-update-event-fields"
@@ -88,23 +102,4 @@ pub struct GuildEmojis {
 pub struct GuildStickers {
     pub guild_id: Id,
     pub stickers: Vec<Sticker>,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/emoji#create-guild-emoji-json-params"
-)]
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct CreateEmoji {
-    pub name: String,
-    pub image: String,
-    pub roles: Vec<Id>,
-}
-
-#[doc = discord_url!(
-    "https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params"
-)]
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct EditEmoji {
-    pub name: String,
-    pub roles: Option<Vec<Id>>,
 }

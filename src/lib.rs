@@ -108,6 +108,7 @@ macro_rules! http_errors_doc {
 
 /// Context methods about guild emojis and stickers
 mod emoji;
+mod sticker;
 /// Implementation of making requests to Discord
 pub mod http;
 /// Discord objects and (de)serialization implementations on them
@@ -115,6 +116,7 @@ pub mod model;
 /// Tests for everything in Daybreak
 #[cfg(test)]
 mod tests;
+
 
 #[derive(Debug)]
 #[allow(clippy::multiple_inherent_impl)]

@@ -1,12 +1,13 @@
 use anyhow::Error;
 use enumflags2::BitFlag;
 use hyper::Method;
+use serde::{Serialize, Deserialize};
 
 use super::Context;
 use crate::{
     http::Request,
     model::{
-        emoji::{CreateEmoji, EditEmoji, Emoji},
+        emoji::Emoji,
         permission::Permissions,
         Id,
     },
@@ -78,4 +79,23 @@ impl Context {
         ))
         .await
     }
+}
+
+#[doc = discord_url ! (
+"https://discord.com/developers/docs/resources/emoji#create-guild-emoji-json-params"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct CreateEmoji {
+    pub name: String,
+    pub image: String,
+    pub roles: Vec<Id>,
+}
+
+#[doc = discord_url!(
+"https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EditEmoji {
+    pub name: String,
+    pub roles: Option<Vec<Id>>,
 }
