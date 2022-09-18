@@ -1,4 +1,3 @@
-use std::fs::File;
 use anyhow::Error;
 use enumflags2::BitFlag;
 use hyper::Method;
@@ -81,7 +80,7 @@ impl Context {
         self.empty_request(Request::new(
             Permissions::empty(),
             Method::GET,
-            format!("/guilds/{guild_id}/stickers")
+            format!("/guilds/{guild_id}/stickers/{sticker_id}")
         ))
         .await
     }
@@ -154,17 +153,25 @@ impl Default for StickerPacksResponse {
     }
 }
 
-struct CreateSticker {
-    name: String,
-    description: String,
-    tags: String,
-    file: File
+#[doc = discord_url!("https://discord.com/developers/docs/resources/sticker\
+#create-guild-sticker-form-params"
+)]
+#[derive(Serialize, Deserialize, Debug)]
+pub struct CreateSticker {
+    pub name: String,
+    pub description: String,
+    pub tags: String,
+    pub file: String
 }
 
-struct EditSticker {
-    name: Option<String>,
-    description: Option<String>,
-    tags: Option<String>,
+#[doc = discord_url!("https://discord.com/developers/docs/resources/sticker\
+    #modify-guild-sticker-json-params"
+)]
+#[derive(Serialize, Deserialize, Debug)]
+pub struct EditSticker {
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub tags: Option<String>,
 }
 
 impl EditSticker {
