@@ -1,9 +1,11 @@
 use enumflags2::bitflags;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::model::application::Application;
+use crate::model::guild::UnavailableGuild;
 
 use super::{
-    application::Application, guild::UnavailableGuild, presence::UpdatedPresence, user::User, Id,
+    presence::UpdatedPresence, user::User, Id,
 };
 
 #[bitflags]
@@ -86,24 +88,6 @@ pub struct IdentifyConnection {
     pub device: String,
 }
 
-#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#hello-hello-structure")]
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
-pub struct Hello {
-    pub heartbeat_interval: u32,
-}
-
-#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#ready-ready-event-fields")]
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct Ready {
-    pub v: u8,
-    pub user: User,
-    pub guilds: Vec<UnavailableGuild>,
-    pub session_id: String,
-    pub resume_gateway_url: String,
-    pub shard: Option<(u16, u16)>,
-    pub application: Application,
-}
-
 #[doc = discord_url!("https://discord.com/developers/docs/topics/gateway#resume-resume-structure")]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Resume {
@@ -147,3 +131,26 @@ pub struct SessionStartLimit {
     pub reset_after: u32,
     pub max_concurrency: u32,
 }
+
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway\
+        #hello-hello-structure"
+)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+pub struct Hello {
+    pub heartbeat_interval: u32,
+}
+
+#[doc = discord_url!("https://discord.com/developers/docs/topics/gateway\
+        #ready-ready-event-fields"
+)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Ready {
+    pub v: u8,
+    pub user: User,
+    pub guilds: Vec<UnavailableGuild>,
+    pub session_id: String,
+    pub resume_gateway_url: String,
+    pub shard: Option<(u16, u16)>,
+    pub application: Application,
+}
+
